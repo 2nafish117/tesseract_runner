@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4536497257389603688}
   - component: {fileID: 4536497257389603695}
   - component: {fileID: 4536497257389603694}
+  - component: {fileID: 3933876737155030250}
+  - component: {fileID: 7148854551762341663}
   m_Layer: 0
   m_Name: SlideObstacle
   m_TagString: Untagged
@@ -339,8 +341,34 @@ MeshCollider:
   m_GameObject: {fileID: 4536497257389603693}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &3933876737155030250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536497257389603693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086452e9783feaa40a41bca816695648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 1
+--- !u!65 &7148854551762341663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536497257389603693}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.25, z: 0.5}
+  m_Center: {x: -1, y: 1.875, z: 0.25}

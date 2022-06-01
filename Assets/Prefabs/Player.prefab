@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3020799303445870180}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +133,14 @@ MonoBehaviour:
   LaneWidth: 2
   MinLaneIndex: -1
   MaxLaneIndex: 1
+  JumpBufferTime: 0.3
+  JumpColliderHeight: 1
+  JumpColliderOffset: 0.5
+  JumpDuration: 1
+  JumpCamOffset: {x: 0, y: 1.5, z: 0}
+  SlideBufferTime: 0.3
+  SlideColliderHeight: 1
+  SlideColliderOffset: -0.5
+  SlideDuration: 1
+  SlideCamOffset: {x: -0, y: -0.5, z: -0}
+  CamOffset: {x: 0, y: 0.75, z: 0}
