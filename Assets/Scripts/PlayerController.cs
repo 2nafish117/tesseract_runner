@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JMRSDK.InputModule;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ISwipeHandler
 {
 	// export
 	public float LaneWidth = 2.0f;
@@ -62,27 +63,60 @@ public class PlayerController : MonoBehaviour
 
 	States state = States.None;
 
+	public void OnSwipeUp(SwipeEventData eventData, float delta)
+	{
+		Debug.Log("OnSwipeUp");
+		jumpInput = true;
+	}
+	public void OnSwipeDown(SwipeEventData eventData, float delta)
+	{
+		Debug.Log("OnSwipeDown");
+		slideInput = true;
+	}
+	public void OnSwipeLeft(SwipeEventData eventData, float delta)
+	{
+		Debug.Log("OnSwipeLeft");
+		lane -= 1;
+	}
+	public void OnSwipeRight(SwipeEventData eventData, float delta)
+	{
+		Debug.Log("OnSwipeRight");
+		lane += 1;
+	}
+
+	public void OnSwipeStarted(SwipeEventData eventData)
+	{
+		// throw new System.NotImplementedException();
+	}
+
+	public void OnSwipeUpdated(SwipeEventData eventData, Vector2 swipeData)
+	{
+		// throw new System.NotImplementedException();
+	}
+
+	public void OnSwipeCompleted(SwipeEventData eventData)
+	{
+		// throw new System.NotImplementedException();
+	}
+
+	public void OnSwipeCanceled(SwipeEventData eventData)
+	{
+		// throw new System.NotImplementedException();
+	}
+
+
 	private void Update()
 	{
-		// @TODO: JMRSDK input
-		if(Input.GetKeyDown(KeyCode.UpArrow))
+#if true
+		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			jumpInput = true;
 			jumpInputTime = Time.time;
 		}
-		if(Input.GetKeyDown(KeyCode.DownArrow))
+		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			slideInput = true;
 			slideInputTime = Time.time;
-		}
-
-		if(Time.time - jumpInputTime >= JumpBufferTime)
-		{
-			jumpInput = false;
-		}
-		if (Time.time - slideInputTime >= SlideBufferTime)
-		{
-			slideInput = false;
 		}
 
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -93,7 +127,16 @@ public class PlayerController : MonoBehaviour
 		{
 			lane += 1;
 		}
+#endif
 
+		if (Time.time - jumpInputTime >= JumpBufferTime)
+		{
+			jumpInput = false;
+		}
+		if (Time.time - slideInputTime >= SlideBufferTime)
+		{
+			slideInput = false;
+		}
 		lane = Clampi(lane, MinLaneIndex, MaxLaneIndex);
 	}
 
@@ -157,4 +200,6 @@ public class PlayerController : MonoBehaviour
 	{
 		return Mathf.Min(Mathf.Max(val, min), max);
 	}
+
+	
 }
