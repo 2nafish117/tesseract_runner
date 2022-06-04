@@ -14,6 +14,8 @@ public class LevelGenerationManager : MonoBehaviour
 
 	public GameObject Floor;
 
+	public float MoveSpeed = 1.0f;
+
 	public float ObstacleSpawnRate = 0.25f;
 
 	private float obstacleSpawnTime = 0.0f;
@@ -29,7 +31,11 @@ public class LevelGenerationManager : MonoBehaviour
 
 	private void SpawnFloor()
 	{
-		GameObject.Instantiate(Floor, transform);
+		GameObject obj = GameObject.Instantiate(Floor, transform);
+		Mover mover = obj.GetComponent<Mover>();
+		mover.MoveSpeed = MoveSpeed;
+		// set them to destroy when they cross this point
+		mover.DestroyZThreshold = -transform.position.z;
 	}
 
 	private void SpawnRandomObstacle()
@@ -39,7 +45,11 @@ public class LevelGenerationManager : MonoBehaviour
 			obstacleSpawnTime = Time.time;
 			int randomObstacle = Random.Range(0, Obstacles.Length);
 			int randomLane = Random.Range(0, 3);
-			GameObject.Instantiate(Obstacles[randomObstacle], Lanes[randomLane]);
+			GameObject obj = GameObject.Instantiate(Obstacles[randomObstacle], Lanes[randomLane]);
+			Mover mover = obj.GetComponent<Mover>();
+			mover.MoveSpeed = MoveSpeed;
+			// set them to destroy when they cross this point
+			mover.DestroyZThreshold = -transform.position.z;
 		}
 	}
 }
