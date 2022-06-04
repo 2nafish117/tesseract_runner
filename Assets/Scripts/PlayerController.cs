@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using JMRSDK.InputModule;
 
-public class PlayerController : MonoBehaviour, ISwipeHandler
+public class PlayerController : MonoBehaviour
 {
 	// export
 	public float LaneWidth = 2.0f;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour, ISwipeHandler
 	}
 
 	States state = States.None;
-
+/*
 	public void OnSwipeUp(SwipeEventData eventData, float delta)
 	{
 		Debug.Log("OnSwipeUp");
@@ -103,10 +103,37 @@ public class PlayerController : MonoBehaviour, ISwipeHandler
 	{
 		// throw new System.NotImplementedException();
 	}
+*/
 
 
 	private void Update()
 	{
+# if true
+		float swipeUpValue = 0.0f;
+		if(JMRInteraction.GetSwipeUp(out swipeUpValue))
+		{
+			jumpInput = true;
+		}
+
+		float swipeDownValue = 0.0f;
+		if (JMRInteraction.GetSwipeUp(out swipeDownValue))
+		{
+			slideInput = true;
+		}
+
+		float swipeLeftValue = 0.0f;
+		if (JMRInteraction.GetSwipeUp(out swipeLeftValue))
+		{
+			lane -= 1;
+		}
+
+		float swipeRightValue = 0.0f;
+		if (JMRInteraction.GetSwipeUp(out swipeRightValue))
+		{
+			lane += 1;
+		}
+#endif
+
 #if true
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
