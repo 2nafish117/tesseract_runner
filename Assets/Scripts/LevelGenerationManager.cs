@@ -12,6 +12,8 @@ public class LevelGenerationManager : MonoBehaviour
 	[SerializeField]
 	public GameObject[] Obstacles;
 
+	public GameObject Floor;
+
 	public float ObstacleSpawnRate = 0.25f;
 
 	private float obstacleSpawnTime = 0.0f;
@@ -21,7 +23,13 @@ public class LevelGenerationManager : MonoBehaviour
 		if(Time.time - obstacleSpawnTime > 1.0f / ObstacleSpawnRate)
 		{
 			SpawnRandomObstacle();
+			SpawnFloor();
 		}
+	}
+
+	private void SpawnFloor()
+	{
+		GameObject.Instantiate(Floor, transform);
 	}
 
 	private void SpawnRandomObstacle()
