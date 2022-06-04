@@ -2,26 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Mover : MonoBehaviour
 {
 	public float MoveSpeed = 5.0f;
-
-	private void Start()
-	{
-		
-	}
+	public float DestroyZThreshold = -30.0f;
 
 	private void Update()
 	{
 		transform.position += -Vector3.forward * MoveSpeed * Time.deltaTime;
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-		if(other.CompareTag("Player"))
+		if(transform.position.z < DestroyZThreshold)
 		{
-			// @TODO: game over logic
-			Debug.Log("player hit an obstacle");
+			GameObject.Destroy(gameObject);
 		}
 	}
 }
