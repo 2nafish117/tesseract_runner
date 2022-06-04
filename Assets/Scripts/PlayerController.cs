@@ -154,11 +154,13 @@ public class PlayerController : MonoBehaviour, ISwipeHandler
 					{
 						state = States.Jump;
 						jumpTime = Time.time;
+						break;
 					}
 					if (slideInput)
 					{
 						state = States.Slide;
 						slideTime = Time.time;
+						break;
 					}
 					SetColliderShape(defaultColliderHeight, defaultColliderOffset);
 					CamOffset = defaultCamOffset;
@@ -169,6 +171,13 @@ public class PlayerController : MonoBehaviour, ISwipeHandler
 					if (Time.time - jumpTime >= JumpDuration)
 					{
 						state = States.None;
+						break;
+					}
+					if (slideInput)
+					{
+						state = States.Slide;
+						slideTime = Time.time;
+						break;
 					}
 					SetColliderShape(JumpColliderHeight, JumpColliderOffset);
 					CamOffset = JumpCamOffset;
@@ -179,6 +188,13 @@ public class PlayerController : MonoBehaviour, ISwipeHandler
 					if(Time.time - slideTime >= SlideDuration)
 					{
 						state = States.None;
+						break;
+					}
+					if (jumpInput)
+					{
+						state = States.Jump;
+						jumpTime = Time.time;
+						break;
 					}
 					SetColliderShape(SlideColliderHeight, SlideColliderOffset);
 					CamOffset = SlideCamOffset;
