@@ -4,52 +4,103 @@ using UnityEngine;
 
 public class LevelGenerationManager : MonoBehaviour
 {
-	[SerializeField]
-	public Transform[] Lanes;
+	public GameObject ProtoWallPrefab;
+	// @TODO: incomplete right now !!
+	public GameObject[] WallPrefabs;
+	public float WallLength = 100.0f;
+	public int TotalConcurrentWalls = 3;
+	public float WallBeginOffset = 100.0f;
 
-	// @TODO: assign difficulties to each obstacle piece?
-	// @TODO: maybe separate out this so that can cater less random more interiesting level
-	[SerializeField]
-	public GameObject[] Obstacles;
+	public float GlobalMoveSpeed = 50.0f;
+	public float GlobalZThreshold = -200.0f;
 
-	public GameObject Floor;
+	private int PooledWalls = 5;
+	// pooled source of walls
+	private List<GameObject> wallPool;
 
-	public float MoveSpeed = 1.0f;
+	public void Start()
+	{
+		wallPool = new List<GameObject>();
 
-	public float ObstacleSpawnRate = 0.25f;
+		// initialise pool of walls
+		if (WallPrefabs == null || WallPrefabs.Length == 0)
+		{
+			// use the proto prefab instaead
+			for (int i = 0; i < PooledWalls; ++i)
+			{
+				GameObject instance = Instantiate(ProtoWallPrefab, transform);
+				instance.SetActive(false);
+				wallPool.Add(instance);
+			}
+		} else
+		{
+			// init the pool with prefabs
+			foreach(GameObject prefab in WallPrefabs)
+			{
+				int numInstancesPerType = 2;
+				for (int i = 0;i < numInstancesPerType; ++i)
+				{
+					GameObject instance = Instantiate(prefab, transform);
+					instance.SetActive(false);
+					wallPool.Add(instance);
+				}
+			}
+		}
 
-	private float obstacleSpawnTime = 0.0f;
+		PlaceInitialWalls();
+	}
 
 	void Update()
 	{
-		if(Time.time - obstacleSpawnTime > 1.0f / ObstacleSpawnRate)
+		for (int i = 0; i < wallPool.Count; i++)
 		{
-			SpawnRandomObstacle();
-			SpawnFloor();
+			if (wallPool[i].activeInHierarchy)
+			{
+				Vector3 newPosition = wallPool[i].transform.position + Vector3.back * GlobalMoveSpeed * Time.deltaTime;
+				if(newPosition.z < GlobalZThreshold)
+				{
+					RecycleWalls();
+					wallPool[i].SetActive(false);
+				}
+				wallPool[i].transform.position = newPosition;
+			}
 		}
 	}
 
-	private void SpawnFloor()
+	// return first inactive object
+	private GameObject GetPooledWall()
 	{
-		GameObject obj = GameObject.Instantiate(Floor, transform);
-		Mover mover = obj.GetComponent<Mover>();
-		mover.MoveSpeed = MoveSpeed;
-		// set them to destroy when they cross this point
-		mover.DestroyZThreshold = -transform.position.z;
+		Debug.Log("get pooled wall");
+		for (int i = 0; i < wallPool.Count; i++)
+		{
+			if (!wallPool[i].activeInHierarchy)
+			{
+				return wallPool[i];
+			}
+		}
+		return null;
 	}
 
-	private void SpawnRandomObstacle()
+	private void PlaceInitialWalls()
 	{
-		if(Obstacles != null && Obstacles.Length != 0)
+		// use the pool
+		for (int i = 0; i < TotalConcurrentWalls; ++i)
 		{
-			obstacleSpawnTime = Time.time;
-			int randomObstacle = Random.Range(0, Obstacles.Length);
-			int randomLane = Random.Range(0, 3);
-			GameObject obj = GameObject.Instantiate(Obstacles[randomObstacle], Lanes[randomLane]);
-			Mover mover = obj.GetComponent<Mover>();
-			mover.MoveSpeed = MoveSpeed;
-			// set them to destroy when they cross this point
-			mover.DestroyZThreshold = -transform.position.z;
+			GameObject wall = GetPooledWall();
+			wall.SetActive(true);
+			wall.transform.position = new Vector3(0, 0, (TotalConcurrentWalls - i - 1) * WallLength + WallBeginOffset);
 		}
+	}
+
+	private Vector3 GetSpawnPoint()
+	{
+		return new Vector3(0, 0, (TotalConcurrentWalls - 1) * WallLength * 0.5f);
+	}
+
+	private void RecycleWalls()
+	{
+		GameObject wall = GetPooledWall();
+		wall.SetActive(true);
+		wall.transform.position = GetSpawnPoint();
 	}
 }
