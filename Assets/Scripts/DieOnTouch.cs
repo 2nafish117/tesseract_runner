@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class DieOnTouch : MonoBehaviour
 {
+	private void Start()
+	{
+		GetComponent<BoxCollider>().isTrigger = true;
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
