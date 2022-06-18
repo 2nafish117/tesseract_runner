@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public class DieOnTouch : MonoBehaviour
 {
-	private void Start()
+	private void OnCollisionEnter(Collision collision)
 	{
-		GetComponent<BoxCollider>().isTrigger = true;
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
+		GameObject other = collision.gameObject;
 		if (other.CompareTag("Player"))
 		{
-			// @TODO: game over logic
-			Debug.Log("player DIE");
+			Debug.Log("[!!!!!!!!!!] player collision");
+			PlayerDeath playerDeath = other.GetComponent<PlayerDeath>();
+			playerDeath.Die(collision.GetContact(0).point);
 		}
 	}
+
+	//private void OnTriggerEnter(Collider other)
+	//{
+	//	if (other.CompareTag("Player"))
+	//	{
+	//		PlayerDeath playerDeath = other.GetComponent<PlayerDeath>();
+	//		playerDeath.Die();
+	//	}
+	//}
 }

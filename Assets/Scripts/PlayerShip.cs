@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShip : MonoBehaviour
 {
-	public float MoveAcceleration = 1000.0f;
+	public float MoveAcceleration = 600.0f;
 	public float RotationSpeed = 6.0f;
 
 	private Rigidbody rigidBody;
