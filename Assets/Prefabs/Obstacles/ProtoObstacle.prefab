@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3352972783532212118}
-  - component: {fileID: 3519113409644254003}
   - component: {fileID: 3244308097798644544}
+  - component: {fileID: 3519113409644254003}
   - component: {fileID: 6172617190836559963}
   m_Layer: 0
   m_Name: ProtoObstacle
@@ -35,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3244308097798644544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352972783532212113}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.376438, y: 1.6676224, z: 2.0147862}
+  m_Center: {x: -0.02225399, y: -0.12017208, z: 0.24924564}
 --- !u!114 &3519113409644254003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,19 +62,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   DestroyZThreshold: -200
---- !u!65 &3244308097798644544
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3352972783532212113}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6172617190836559963
 MonoBehaviour:
   m_ObjectHideFlags: 0

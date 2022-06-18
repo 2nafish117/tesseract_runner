@@ -37,43 +37,47 @@ public class ObstacleGenerationManager : MonoBehaviour
 			return;
 		}
 
-		if (Time.time - spawnTime > ObstacleSpawnTime)
+		if (Time.time - spawnTime > ObstacleSpawnTime + Random.Range(-ObstacleSpawnTimeRandom, ObstacleSpawnTimeRandom))
 		{
-			Vector3 spawnLoc = new Vector3(
+			SpawnRandomObstacle();
+		}
+	}
+
+	private void SpawnRandomObstacle()
+	{
+		Vector3 spawnLoc = new Vector3(
 				Random.Range(-halfSpawnRegion.x, halfSpawnRegion.x),
 				Random.Range(-halfSpawnRegion.y, halfSpawnRegion.y),
 				Random.Range(-halfSpawnRegion.z, halfSpawnRegion.z)
 			);
-			Vector3 spawnRot = new Vector3(
-				Random.Range(0.0f, 45.0f),
-				Random.Range(-0.0f, 0.0f),
-				Random.Range(0.0f, 360.0f)
-			);
-			spawnTime = Time.time;
+		Vector3 spawnRot = new Vector3(
+			Random.Range(-10.0f, 10.0f),
+			Random.Range(0.0f, 360.0f),
+			Random.Range(-10.0f, 10.0f)
+		);
+		spawnTime = Time.time;
 
-			if(ObstaclePrefabs.Length > 0)
-			{
-				GameObject randomPrefab = ObstaclePrefabs[Random.Range(0, ObstaclePrefabs.Length)];
-				GameObject instance = GameObject.Instantiate(randomPrefab, transform);
-				instance.transform.position = SpawnRegion.transform.position + spawnLoc;
-				instance.transform.localEulerAngles = spawnRot;
+		if (ObstaclePrefabs.Length > 0)
+		{
+			GameObject randomPrefab = ObstaclePrefabs[Random.Range(0, ObstaclePrefabs.Length)];
+			GameObject instance = GameObject.Instantiate(randomPrefab, transform);
+			instance.transform.position = SpawnRegion.transform.position + spawnLoc;
+			instance.transform.localEulerAngles = spawnRot;
 
-				Mover mover = instance.GetComponent<Mover>();
-				mover.DestroyZThreshold = GlobalZThreshold;
-				mover.MoveSpeed = GlobalMoveSpeed;
+			Mover mover = instance.GetComponent<Mover>();
+			mover.DestroyZThreshold = GlobalZThreshold;
+			mover.MoveSpeed = GlobalMoveSpeed;
 
-			} else
-			{
-				GameObject instance = GameObject.Instantiate(ProtoObstaclePrefab, transform);
-				instance.transform.position = SpawnRegion.transform.position + spawnLoc;
-				instance.transform.localEulerAngles = spawnRot;
+		}
+		else
+		{
+			GameObject instance = GameObject.Instantiate(ProtoObstaclePrefab, transform);
+			instance.transform.position = SpawnRegion.transform.position + spawnLoc;
+			instance.transform.localEulerAngles = spawnRot;
 
-				Mover mover = instance.GetComponent<Mover>();
-				mover.DestroyZThreshold = GlobalZThreshold;
-				mover.MoveSpeed = GlobalMoveSpeed;
-			}
-
-			// @TODO rotations
+			Mover mover = instance.GetComponent<Mover>();
+			mover.DestroyZThreshold = GlobalZThreshold;
+			mover.MoveSpeed = GlobalMoveSpeed;
 		}
 	}
 }

@@ -70,7 +70,7 @@ public class LevelGenerationManager : MonoBehaviour
 	// return first inactive object
 	private GameObject GetPooledWall()
 	{
-		Debug.Log("get pooled wall");
+		//Debug.Log("get pooled wall");
 		for (int i = 0; i < wallPool.Count; i++)
 		{
 			if (!wallPool[i].activeInHierarchy)
