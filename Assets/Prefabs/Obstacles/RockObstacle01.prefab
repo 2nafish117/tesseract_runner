@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 410674083875286622}
   m_Layer: 0
   m_Name: rock-formation-01
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 3352972783532212118}
   - component: {fileID: 6172617190836559963}
   - component: {fileID: -6756489943345222}
-  - component: {fileID: 691682952445467034}
   m_Layer: 0
   m_Name: RockObstacle01
   m_TagString: Untagged
@@ -160,17 +159,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   DestroyZThreshold: -400
---- !u!64 &691682952445467034
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3352972783532212113}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -668366883573995450, guid: 70c40eb468f5b70408cb9a7281af6002, type: 3}
