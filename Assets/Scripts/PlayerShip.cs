@@ -11,6 +11,9 @@ public class PlayerShip : MonoBehaviour
 	private Vector3 movement = Vector3.zero;
 	private GameObject pivot = null;
 
+	[HideInInspector]
+	public bool EnableInput = true;
+
 	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.216439515f, 0.976296067f);
 	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.216439515f, 0.976296067f);
 	
@@ -24,24 +27,28 @@ public class PlayerShip : MonoBehaviour
 		rigidBody = GetComponent<Rigidbody>();
 		pivot = transform.GetChild(0).gameObject;
 	}
+
 	private void Update()
 	{
-		movement = Vector3.zero;
-		if(Input.GetKey(KeyCode.UpArrow))
+		if (EnableInput)
 		{
-			movement.y += 1;
-		}
-		if (Input.GetKey(KeyCode.DownArrow))
-		{
-			movement.y -= 1;
-		}
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			movement.x -= 1;
-		}
-		if (Input.GetKey(KeyCode.RightArrow))
-		{
-			movement.x += 1;
+			movement = Vector3.zero;
+			if(Input.GetKey(KeyCode.UpArrow))
+			{
+				movement.y += 1;
+			}
+			if (Input.GetKey(KeyCode.DownArrow))
+			{
+				movement.y -= 1;
+			}
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				movement.x -= 1;
+			}
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				movement.x += 1;
+			}
 		}
 
 		movement.Normalize();
