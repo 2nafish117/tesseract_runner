@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -11,7 +12,14 @@ public class PlayerDeath : MonoBehaviour
 		{
 			Debug.Log("player dead");
 			Die(collision.GetContact(0).point);
+			StartCoroutine(ChangeLevelWithDelay());
 		}
+	}
+
+	IEnumerator ChangeLevelWithDelay()
+	{
+		yield return new WaitForSeconds(1);
+		SceneManager.LoadScene("Main");
 	}
 
 	public void Die(Vector3 position)
