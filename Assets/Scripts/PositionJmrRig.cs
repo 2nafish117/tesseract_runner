@@ -14,18 +14,16 @@ public class PositionJmrRig : MonoBehaviour
 			Debug.LogError("jmrRig not found in the current scene");
 			return;
 		}
+		GameObject jmrRig = objects[0];
+		Debug.Log("set jmrRig position");
+		jmrRig.transform.position = offset;
 
 		GameObject[] ships = GameObject.FindGameObjectsWithTag("Player");
-		if (objects.Length <= 0)
+		if (ships.Length > 0)
 		{
-			Debug.LogError("Player not found in the current scene");
-			return;
+			GameObject ship = ships[0];
+			Debug.Log("set jmrRig target");
+			jmrRig.GetComponent<ObjectFollow>().target = ship.transform;
 		}
-
-		GameObject jmrRig = objects[0];
-		GameObject ship = ships[0];
-
-		jmrRig.transform.position += offset;
-		jmrRig.GetComponent<ObjectFollow>().target = ship.transform;
 	}
 }
