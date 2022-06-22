@@ -11,7 +11,10 @@ public class ObjectFollow : MonoBehaviour
 
 	void LateUpdate()
 	{
-		transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, factor * Time.deltaTime);
-		//transform.position = target.transform.position + offset;
+		if(target != null)
+		{
+			transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, factor * Time.deltaTime);
+			//transform.position = target.transform.position + offset;
+		}
 	}
 }

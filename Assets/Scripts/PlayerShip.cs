@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JMRSDK;
 
 public class PlayerShip : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class PlayerShip : MonoBehaviour
 	{
 		if (EnableInput)
 		{
+			// debugging keyboard movement
 			movement = Vector3.zero;
 			if(Input.GetKey(KeyCode.UpArrow))
 			{
@@ -49,6 +51,39 @@ public class PlayerShip : MonoBehaviour
 			{
 				movement.x += 1;
 			}
+
+			// controller based movement
+			//Vector2 touch = JMRInteraction.GetTouch();
+			//touch.x = (touch.x - 0.5f) * 2;
+			//touch.x = (touch.y - 0.5f) * 2;
+			//movement.x = touch.x;
+			//movement.y = touch.y;
+
+			//Debug.Log(touch);
+
+			// head based movement
+			Transform head = JMRTrackerManager.Instance.GetHeadTransform();
+
+			float threasholdDeg = 6.0f;
+			float up = head.rotation.eulerAngles.x;
+			float right = head.rotation.eulerAngles.y;
+
+			up = (up > 180.0f) ? up - 360.0f : up;
+			right = (right > 180.0f) ? right - 360.0f : right;
+			Debug.Log(new Vector2(right, up));
+
+			if (Mathf.Abs(up) < threasholdDeg)
+			{
+				up = 0.0f;
+			}
+
+			if (Mathf.Abs(right) < threasholdDeg)
+			{
+				right = 0.0f;
+			}
+
+			movement.y = -up;
+			movement.x = right;
 		}
 
 		movement.Normalize();
