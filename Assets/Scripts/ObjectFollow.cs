@@ -9,12 +9,33 @@ public class ObjectFollow : MonoBehaviour
 	[Range(0.1f, 30.0f)]
 	public float factor = 20.0f;
 
+
 	void LateUpdate()
 	{
 		if(target != null)
 		{
 			transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, factor * Time.deltaTime);
 			//transform.position = target.transform.position + offset;
+		}
+	}
+
+	public void OnOriginChanged(Vector3 originDelta)
+	{
+		transform.position += originDelta;
+	}
+
+	public void ResetPosition()
+	{
+		transform.position = offset;
+		GameObject[] ships = GameObject.FindGameObjectsWithTag("Player");
+		if (ships.Length > 0)
+		{
+			GameObject ship = ships[0];
+			Debug.Log("set jmrRig target");
+			target = ship.transform;
+		} else
+		{
+			Debug.LogWarning("JmrRig has no follow target, place ship in scene");
 		}
 	}
 }

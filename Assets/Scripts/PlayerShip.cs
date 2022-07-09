@@ -5,7 +5,8 @@ using JMRSDK;
 
 public class PlayerShip : MonoBehaviour
 {
-	public float MoveAcceleration = 600.0f;
+	public float StrafeAcceleration = 600.0f;
+	public float ForwardAcceleration = 1800.0f;
 	public float RotationSpeed = 6.0f;
 
 	private Rigidbody rigidBody;
@@ -29,65 +30,90 @@ public class PlayerShip : MonoBehaviour
 		pivot = transform.GetChild(0).gameObject;
 	}
 
+	Vector3 GetDebugKeyboardMovement()
+	{
+		// debugging keyboard movement
+		Vector3 move = Vector3.zero;
+		if (Input.GetKey(KeyCode.UpArrow))
+		{
+			move.y += 1;
+		}
+		if (Input.GetKey(KeyCode.DownArrow))
+		{
+			move.y -= 1;
+		}
+		if (Input.GetKey(KeyCode.LeftArrow))
+		{
+			move.x -= 1;
+		}
+		if (Input.GetKey(KeyCode.RightArrow))
+		{
+			move.x += 1;
+		}
+
+		return move;
+	}
+
+	Vector3 GetHeadTrackedMovement()
+	{
+		// head based movement
+		Vector3 move = Vector3.zero;
+		Transform head = JMRTrackerManager.Instance.GetHeadTransform();
+
+		float threasholdDeg = 6.0f;
+		float up = head.rotation.eulerAngles.x;
+		float right = head.rotation.eulerAngles.y;
+
+		// remap to -180 to 180 range
+		up = (up > 180.0f) ? up - 360.0f : up;
+		right = (right > 180.0f) ? right - 360.0f : right;
+
+		if (Mathf.Abs(up) < threasholdDeg)
+		{
+			up = 0.0f;
+		}
+
+		if (Mathf.Abs(right) < threasholdDeg)
+		{
+			right = 0.0f;
+		}
+
+		move.y = -up;
+		move.x = right;
+		return move;
+	}
+
+	Vector3 GetControllerMovement()
+	{
+		Vector3 move = -Vector3.zero;
+
+		// controller based movement
+		Vector2 touch = JMRInteraction.GetTouch();
+		
+		// remap to -1 to 1 range
+		touch.x = (touch.x - 0.5f) * 2;
+		touch.x = (touch.y - 0.5f) * 2;
+		move.x = touch.x;
+		move.y = touch.y;
+
+		//Debug.Log(touch);
+
+		return move;
+	}
+
 	private void Update()
 	{
 		if (EnableInput)
 		{
-			// debugging keyboard movement
-			movement = Vector3.zero;
-			if(Input.GetKey(KeyCode.UpArrow))
-			{
-				movement.y += 1;
-			}
-			if (Input.GetKey(KeyCode.DownArrow))
-			{
-				movement.y -= 1;
-			}
-			if (Input.GetKey(KeyCode.LeftArrow))
-			{
-				movement.x -= 1;
-			}
-			if (Input.GetKey(KeyCode.RightArrow))
-			{
-				movement.x += 1;
-			}
+			movement = GetDebugKeyboardMovement();
 
-			// controller based movement
-			//Vector2 touch = JMRInteraction.GetTouch();
-			//touch.x = (touch.x - 0.5f) * 2;
-			//touch.x = (touch.y - 0.5f) * 2;
-			//movement.x = touch.x;
-			//movement.y = touch.y;
-
-			//Debug.Log(touch);
-
-			// head based movement
-			Transform head = JMRTrackerManager.Instance.GetHeadTransform();
-
-			float threasholdDeg = 6.0f;
-			float up = head.rotation.eulerAngles.x;
-			float right = head.rotation.eulerAngles.y;
-
-			up = (up > 180.0f) ? up - 360.0f : up;
-			right = (right > 180.0f) ? right - 360.0f : right;
-			Debug.Log(new Vector2(right, up));
-
-			if (Mathf.Abs(up) < threasholdDeg)
-			{
-				up = 0.0f;
-			}
-
-			if (Mathf.Abs(right) < threasholdDeg)
-			{
-				right = 0.0f;
-			}
-
-			movement.y = -up;
-			movement.x = right;
+			// movement = GetHeadTrackedMovement();
+			// movement = GetControllerMovement();
 		}
 
 		movement.Normalize();
 		
+		// visual rotation of ship
 		if(movement.x > 0)
 		{
 			Quaternion rot = pivot.transform.rotation;
@@ -128,6 +154,6 @@ public class PlayerShip : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		rigidBody.AddForce(movement * MoveAcceleration);
+		rigidBody.AddForce(movement * StrafeAcceleration + Vector3.forward * ForwardAcceleration);
 	}
 }
