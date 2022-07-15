@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 871121118}
   - component: {fileID: 871121119}
   m_Layer: 0
-  m_Name: ObstacleSpawnRegion
+  m_Name: InitialObstacleSpawnRegion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,16 +90,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e790e35a9e9b0b54c8b3138e2c0ab6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProtoObstaclePrefab: {fileID: 3352972783532212113, guid: dad6395bdb034e246ad59b3240962582, type: 3}
-  ObstaclePrefabs:
-  - {fileID: 3352972783532212113, guid: b5e9462ce78785f49829e8a0242aa494, type: 3}
-  - {fileID: 3352972783532212113, guid: 8e6d5dd9092147842aac737357d00bf7, type: 3}
-  - {fileID: 3352972783532212113, guid: 6be385ea1109be94e8d63abbb1aa6e93, type: 3}
-  - {fileID: 3352972783532212113, guid: 0f267cb10f3e1f840a3eab5613d64830, type: 3}
-  - {fileID: 3352972783532212113, guid: 35eeb9c7151a3b644a0855dc6b2cd635, type: 3}
-  SpawnRegion: {fileID: 871121117}
-  ObstacleBeginOffsetWaitTime: 5
-  GlobalMoveSpeed: 50
-  GlobalZThreshold: -200
-  ObstacleSpawnTime: 1.25
-  ObstacleSpawnTimeRandom: 0.5
+  protoObstaclePrefab: {fileID: 3352972783532212113, guid: dad6395bdb034e246ad59b3240962582, type: 3}
+  obstaclePrefabs: []

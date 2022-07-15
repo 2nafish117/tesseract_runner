@@ -44,10 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fac93e2620290245bfd4d8a6e96cded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProtoWallPrefab: {fileID: 6084973884074527273, guid: 000557cb19d21d94abef43bf1a04511f, type: 3}
-  WallPrefabs: []
-  WallLength: 100
-  TotalConcurrentWalls: 3
-  WallBeginOffset: 200
-  GlobalMoveSpeed: 50
-  GlobalZThreshold: -200
+  protoChunk: {fileID: 2408486845696840682, guid: ff898df7aca22174c84b6c097f0aa66d, type: 3}
+  firstChunk: {fileID: 2408486845696840682, guid: ff898df7aca22174c84b6c097f0aa66d, type: 3}
+  initialSpawnLocation: {fileID: 0}
+  chunkCount: 10

@@ -9,6 +9,8 @@ public class PlayerShip : MonoBehaviour
 	public float ForwardAcceleration = 1800.0f;
 	public float RotationSpeed = 6.0f;
 
+	public TrailRenderer[] trails;
+
 	private Rigidbody rigidBody;
 	private Vector3 movement = Vector3.zero;
 	private GameObject pivot = null;
@@ -16,11 +18,12 @@ public class PlayerShip : MonoBehaviour
 	[HideInInspector]
 	public bool EnableInput = true;
 
-	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.216439515f, 0.976296067f);
-	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.216439515f, 0.976296067f);
+	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.5f, 0.866025388f);
+	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.5f, 0.866025388f);
 	
-	private Quaternion maxUpRotation = new Quaternion(-0.207911685f, 0, 0, 0.978147626f);
-	private Quaternion maxDownRotation = new Quaternion(0.207911685f, 0, 0, 0.978147626f);
+	private Quaternion maxUpRotation = new Quaternion(-0.258819103f, 0, 0, 0.965925813f);
+
+	private Quaternion maxDownRotation = new Quaternion(0.258819103f, 0, 0, 0.965925813f);
 
 	private Quaternion defaultRotation = new Quaternion(0, 0, 0, 1);
 
@@ -149,6 +152,12 @@ public class PlayerShip : MonoBehaviour
 			Quaternion rot = pivot.transform.rotation;
 			rot = Quaternion.Slerp(rot, defaultRotation, RotationSpeed * Time.deltaTime);
 			pivot.transform.rotation = rot;
+		}
+
+		// spawn trails
+		foreach (var trails in trails)
+		{
+			trails.time = Mathf.Lerp(trails.time, movement.magnitude * 0.3f, Time.deltaTime * 6.0f);
 		}
 	}
 

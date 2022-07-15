@@ -1,16 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 
 public class FloatingOrigin : MonoBehaviour
 {
 	public float threshold = 10.0f;
 
-	[System.Serializable]
-	public class OriginChangedEvent : UnityEvent<Vector3> { }
-
-	[SerializeField] private OriginChangedEvent OnOriginChanged;
+	public delegate void OriginChangeAction(Vector3 originDelta);
+	public static event OriginChangeAction OnOriginChanged;
 
 	void LateUpdate()
 	{
@@ -25,10 +22,7 @@ public class FloatingOrigin : MonoBehaviour
 				}
 			}
 
-			if(OnOriginChanged != null)
-			{
-				OnOriginChanged.Invoke(-cameraPosition);
-			}
+			OnOriginChanged?.Invoke(-cameraPosition);
 
 			Debug.LogWarning("recentering, origin delta = " + -cameraPosition);
 		}

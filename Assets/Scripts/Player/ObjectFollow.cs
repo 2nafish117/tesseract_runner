@@ -10,6 +10,16 @@ public class ObjectFollow : MonoBehaviour
 	public float factor = 20.0f;
 
 
+	private void OnEnable()
+	{
+		FloatingOrigin.OnOriginChanged += OnOriginChanged;
+	}
+
+	private void OnDisable()
+	{
+		FloatingOrigin.OnOriginChanged -= OnOriginChanged;
+	}
+
 	void LateUpdate()
 	{
 		if(target != null)

@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1554387202, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585089172, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796416942, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2317075358145192043, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -96,8 +108,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left: {fileID: 8791771547345558842}
   right: {fileID: 8791771546583740928}
-  fieldOfView: 40
-  farClipPlane: 10000
+  head: {fileID: 8791771546614901142}
+  eyeFieldOfView: 60
+  eyeFarClipPlane: 1000
+  headFieldOfView: 60
+  headFarClipPlane: 1000
 --- !u!114 &1727771693479107762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offset: {x: 0, y: 1, z: -18}
+  offset: {x: 0, y: 1, z: -3}
   factor: 6
 --- !u!114 &8559312145527981033
 MonoBehaviour:
@@ -126,10 +141,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 10000
-  jmrRig: {fileID: 0}
+  OnOriginChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!20 &8791771546583740928 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1585089172, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}
+  m_PrefabInstance: {fileID: 8791771547765848212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &8791771546614901142 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1554387202, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}
   m_PrefabInstance: {fileID: 8791771547765848212}
   m_PrefabAsset: {fileID: 0}
 --- !u!20 &8791771547345558842 stripped
