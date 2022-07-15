@@ -31,7 +31,7 @@ public class ObjectFollow : MonoBehaviour
 		if (ships.Length > 0)
 		{
 			GameObject ship = ships[0];
-			Debug.Log("set jmrRig target");
+			Debug.LogWarning("set jmrRig target");
 			target = ship.transform;
 		} else
 		{
