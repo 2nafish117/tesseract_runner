@@ -14,9 +14,10 @@ public class ObstacleGenerationManager : MonoBehaviour
 	public BoxCollider upObstacleRegion;
 	public BoxCollider downObstacleRegion;
 
-	public float obstacleSpawnDuration = 2.0f;
+	public float obstacleSpawnDuration = 1.0f;
 
-	System.Random randomGenerator;
+	private System.Random randomGenerator;
+	private List<BoxCollider> potentialRegions;
 
 	private BoxCollider[] obstacleRegions;
 	private static GameObject player;
@@ -46,6 +47,9 @@ public class ObstacleGenerationManager : MonoBehaviour
 		obstacleRegions[2] = leftObstacleRegion;
 		obstacleRegions[3] = upObstacleRegion;
 		obstacleRegions[4] = downObstacleRegion;
+
+		potentialRegions = new List<BoxCollider>();
+		potentialRegions.Capacity = 5;
 	}
 
 	private void OnEnable()
@@ -67,12 +71,13 @@ public class ObstacleGenerationManager : MonoBehaviour
 		if(Time.time - obstacleSpawnTime >= obstacleSpawnDuration)
 		{
 			SpawnObstacle();
+			obstacleSpawnTime = Time.time;
 		}
 	}
 
 	float RandomFloat(float min, float max)
 	{
-		return (float) randomGenerator.NextDouble() * max - min;
+		return (float) randomGenerator.NextDouble() * (max - min) + min;
 	}
 
 	private Vector3 GetRandomPosition(BoxCollider region)
@@ -97,11 +102,26 @@ public class ObstacleGenerationManager : MonoBehaviour
 		);
 	}
 
-	private BoxCollider PickObstacleRegion()
+	private void GetPotentialObstacleRegions(Obstacle.ObstacleFlag obstacleType)
 	{
-		int r = randomGenerator.Next(0, obstacleRegions.Length);
-		BoxCollider coll = obstacleRegions[r];
-		return coll;
+		potentialRegions.Clear();
+
+		if ((obstacleType & Obstacle.ObstacleFlag.Up) != 0)
+		{
+			potentialRegions.Add(upObstacleRegion);
+		}
+		if ((obstacleType & Obstacle.ObstacleFlag.Down) != 0)
+		{
+			potentialRegions.Add(downObstacleRegion);
+		}
+		if ((obstacleType & Obstacle.ObstacleFlag.Left) != 0)
+		{
+			potentialRegions.Add(leftObstacleRegion);
+		}
+		if ((obstacleType & Obstacle.ObstacleFlag.Right) != 0)
+		{
+			potentialRegions.Add(rightObstacleRegion);
+		}
 	}
 
 	private GameObject PickObstacle()
@@ -117,11 +137,20 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 	private void SpawnObstacle()
 	{
-		BoxCollider region = PickObstacleRegion();
-		Vector3 minRot = new Vector3(-10.0f, 0.0f, -10.0f);
-		Vector3 maxRot = new Vector3(-10.0f, 360.0f, -10.0f);
-
 		GameObject obstacle = PickObstacle();
+
+		Obstacle obstacleComponent = obstacle.GetComponent<Obstacle>();
+		Obstacle.ObstacleFlag obstacleType = obstacleComponent.type;
+
+		GetPotentialObstacleRegions(obstacleType);
+		int r = randomGenerator.Next(potentialRegions.Count);
+		BoxCollider region = potentialRegions[r];
+
+		//Vector3 minRot = new Vector3(-10.0f, 0.0f, -10.0f);
+		//Vector3 maxRot = new Vector3(-10.0f, 360.0f, -10.0f);
+
+		Vector3 minRot = obstacleComponent.minRotation;
+		Vector3 maxRot = obstacleComponent.maxRotation;
 
 		Vector3 position = GetRandomPosition(region);
 		Vector3 rotation = GetRandomRotation(minRot, maxRot);

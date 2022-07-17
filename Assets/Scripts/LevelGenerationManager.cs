@@ -6,7 +6,7 @@ public class LevelGenerationManager : MonoBehaviour
 {
 	public GameObject protoChunk;
 	public GameObject firstChunk;
-	public GameObject[] chunkTypes;
+	public GameObject[] chunkPrefabs;
 	public Transform initialSpawnLocation;
 	public int chunkCount = 10;
 
@@ -14,7 +14,9 @@ public class LevelGenerationManager : MonoBehaviour
 	// @TODO: actually pick random chunk to spawn
 	private GameObject prevChunk;
 
-	private Vector3 spawnLocation = Vector3.forward * 100.0f;
+	private Vector3 spawnLocation = Vector3.forward * 1.0f;
+
+	System.Random randomGenerator;
 
 	private void OnEnable()
 	{
@@ -35,6 +37,7 @@ public class LevelGenerationManager : MonoBehaviour
 			spawnLocation = initialSpawnLocation.position;
 		}
 		prevChunk = firstChunk;
+		randomGenerator = new System.Random(0);
 		SpawnInitialChunks();
 	}
 
@@ -48,6 +51,12 @@ public class LevelGenerationManager : MonoBehaviour
 
 	private GameObject PickChunk()
 	{
+		if (chunkPrefabs.Length > 0)
+		{
+			int r = randomGenerator.Next(chunkPrefabs.Length);
+			return chunkPrefabs[r];
+		}
+
 		return protoChunk;
 	}
 

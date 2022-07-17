@@ -176,6 +176,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
+		movement = Vector3.zero;
 		if (EnableInput)
 		{
 			switch(inputMethod)

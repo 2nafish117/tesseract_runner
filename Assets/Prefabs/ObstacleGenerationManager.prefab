@@ -275,9 +275,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   protoObstaclePrefab: {fileID: 3352972783532212113, guid: dad6395bdb034e246ad59b3240962582, type: 3}
-  obstaclePrefabs: []
+  obstaclePrefabs:
+  - {fileID: 3352972783532212113, guid: b5e9462ce78785f49829e8a0242aa494, type: 3}
+  - {fileID: 3352972783532212113, guid: 8e6d5dd9092147842aac737357d00bf7, type: 3}
+  - {fileID: 3352972783532212113, guid: 6be385ea1109be94e8d63abbb1aa6e93, type: 3}
+  - {fileID: 3352972783532212113, guid: 0f267cb10f3e1f840a3eab5613d64830, type: 3}
+  - {fileID: 3352972783532212113, guid: 35eeb9c7151a3b644a0855dc6b2cd635, type: 3}
   floatingObstacleRegion: {fileID: 871121119}
   rightObstacleRegion: {fileID: 5348552133086343124}
   leftObstacleRegion: {fileID: 1900708980}
   upObstacleRegion: {fileID: 8380478757984093470}
   downObstacleRegion: {fileID: 1879667248}
+  obstacleSpawnDuration: 2
