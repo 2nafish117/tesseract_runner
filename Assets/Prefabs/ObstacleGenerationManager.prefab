@@ -281,9 +281,15 @@ MonoBehaviour:
   - {fileID: 3352972783532212113, guid: 6be385ea1109be94e8d63abbb1aa6e93, type: 3}
   - {fileID: 3352972783532212113, guid: 0f267cb10f3e1f840a3eab5613d64830, type: 3}
   - {fileID: 3352972783532212113, guid: 35eeb9c7151a3b644a0855dc6b2cd635, type: 3}
+  - {fileID: 4647110041126697364, guid: 68c12ca1b4e2cf847b4cac6e4290386b, type: 3}
+  - {fileID: 4647110041126697364, guid: e1b0c7737af6cfe4f87ef258395860ae, type: 3}
+  - {fileID: 4647110041126697364, guid: d615a460b71e2064dba5c4473058f9df, type: 3}
+  - {fileID: 4647110041126697364, guid: a7f8503095959b84b9c1a0fbd410b0cb, type: 3}
+  - {fileID: 4647110041126697364, guid: 126aeeca1340f0c4fbdc407165a82fbc, type: 3}
+  - {fileID: 4647110041126697364, guid: f60321b22113ca54293bdbf5264e3a6e, type: 3}
   floatingObstacleRegion: {fileID: 871121119}
   rightObstacleRegion: {fileID: 5348552133086343124}
   leftObstacleRegion: {fileID: 1900708980}
   upObstacleRegion: {fileID: 8380478757984093470}
   downObstacleRegion: {fileID: 1879667248}
-  obstacleSpawnDuration: 2
+  obstacleSpawnDuration: 0.2

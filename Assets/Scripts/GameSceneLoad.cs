@@ -7,7 +7,7 @@ public class GameSceneLoad : MonoBehaviour
 {
 	[SerializeField] private UnityEvent OnGameSceneLoad;
 
-	private void Start()
+	private void OnEnable()
 	{
 		OnGameSceneLoad?.Invoke();
 	}

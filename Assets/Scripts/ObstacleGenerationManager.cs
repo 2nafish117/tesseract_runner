@@ -122,6 +122,10 @@ public class ObstacleGenerationManager : MonoBehaviour
 		{
 			potentialRegions.Add(rightObstacleRegion);
 		}
+		if ((obstacleType & Obstacle.ObstacleFlag.Floating) != 0)
+		{
+			potentialRegions.Add(floatingObstacleRegion);
+		}
 	}
 
 	private GameObject PickObstacle()
@@ -143,7 +147,11 @@ public class ObstacleGenerationManager : MonoBehaviour
 		Obstacle.ObstacleFlag obstacleType = obstacleComponent.type;
 
 		GetPotentialObstacleRegions(obstacleType);
-		int r = randomGenerator.Next(potentialRegions.Count);
+		int r = randomGenerator.Next(0, potentialRegions.Count);
+		if(r >= potentialRegions.Count)
+		{
+			Debug.LogError("r is shit " + r + " for len" + potentialRegions.Count);
+		}
 		BoxCollider region = potentialRegions[r];
 
 		//Vector3 minRot = new Vector3(-10.0f, 0.0f, -10.0f);

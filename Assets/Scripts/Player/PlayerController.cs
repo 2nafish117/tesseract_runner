@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 			move.x += 1;
 		}
 
-		Debug.LogWarning("keyboard movement:" + move);
+		// Debug.LogWarning("keyboard movement:" + move);
 
 		return move;
 	}
