@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JMRSDK;
+using JMRSDK.InputModule;
 
-public class PlayerShip : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 	public float StrafeAcceleration = 600.0f;
 	public float ForwardAcceleration = 1800.0f;
@@ -18,6 +19,19 @@ public class PlayerShip : MonoBehaviour
 	[HideInInspector]
 	public bool EnableInput = true;
 
+	public delegate void OnPlayerDie();
+	public delegate void OnPlayerSpawn();
+
+	public enum InputMethod
+	{
+		Keyboard,
+		ControllerTouch,
+		HeadOrientation,
+		ControllerOrientation
+	}
+
+	public InputMethod inputMethod = InputMethod.Keyboard;
+
 	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.5f, 0.866025388f);
 	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.5f, 0.866025388f);
 	
@@ -27,13 +41,30 @@ public class PlayerShip : MonoBehaviour
 
 	private Quaternion defaultRotation = new Quaternion(0, 0, 0, 1);
 
+
 	private void Start()
 	{
 		rigidBody = GetComponent<Rigidbody>();
 		pivot = transform.GetChild(0).gameObject;
+		ObstacleGenerationManager.RegisterPlayer(gameObject);
 	}
 
-	Vector3 GetDebugKeyboardMovement()
+	private void OnEnable()
+	{
+		GameManager.player = gameObject;
+	}
+
+	private void OnDisable()
+	{
+		GameManager.player = null;
+	}
+
+	private void OnDestroy()
+	{
+		ObstacleGenerationManager.UnRegisterPlayer();
+	}
+
+	Vector3 GetKeyboardMovement()
 	{
 		// debugging keyboard movement
 		Vector3 move = Vector3.zero;
@@ -54,12 +85,14 @@ public class PlayerShip : MonoBehaviour
 			move.x += 1;
 		}
 
+		Debug.LogWarning("keyboard movement:" + move);
+
 		return move;
 	}
 
-	Vector3 GetHeadTrackedMovement()
+	Vector3 GetHeadOrientationMovement()
 	{
-		// head based movement
+		// head orientation based movement
 		Vector3 move = Vector3.zero;
 		Transform head = JMRTrackerManager.Instance.GetHeadTransform();
 
@@ -83,10 +116,47 @@ public class PlayerShip : MonoBehaviour
 
 		move.y = -up;
 		move.x = right;
+
+		Debug.LogWarning("head orientation movement:" + move);
+
 		return move;
 	}
 
-	Vector3 GetControllerMovement()
+	Vector3 GetControllerOrientationMovement()
+	{
+		// controller orientation based movement
+		IInputSource source = JMRInteractionManager.Instance.GetCurrentSource();
+		Quaternion orientation;
+		source.TryGetPointerRotation(out orientation);
+
+		float thresholdDeg = 6.0f;
+		float up = orientation.eulerAngles.x;
+		float right = orientation.eulerAngles.y;
+
+		// remap to -180 to 180 range
+		up = (up > 180.0f) ? up - 360.0f : up;
+		right = (right > 180.0f) ? right - 360.0f : right;
+
+		if (Mathf.Abs(up) < thresholdDeg)
+		{
+			up = 0.0f;
+		}
+
+		if (Mathf.Abs(right) < thresholdDeg)
+		{
+			right = 0.0f;
+		}
+
+		Vector3 move = Vector3.zero;
+		move.y = -up;
+		move.x = right;
+
+		Debug.LogWarning("controller orientation movement:" + move);
+		
+		return move;
+	}
+
+	Vector3 GetControllerTouchMovement()
 	{
 		Vector3 move = -Vector3.zero;
 
@@ -99,7 +169,7 @@ public class PlayerShip : MonoBehaviour
 		move.x = touch.x;
 		move.y = touch.y;
 
-		//Debug.Log(touch);
+		Debug.LogWarning("controller touch movement:" + move);
 
 		return move;
 	}
@@ -108,13 +178,42 @@ public class PlayerShip : MonoBehaviour
 	{
 		if (EnableInput)
 		{
-			movement = GetDebugKeyboardMovement();
-
-			// movement = GetHeadTrackedMovement();
-			// movement = GetControllerMovement();
+			switch(inputMethod)
+			{
+				case InputMethod.Keyboard:
+					{
+						movement = GetKeyboardMovement();
+					}
+					break;
+				case InputMethod.HeadOrientation:
+					{
+						movement = GetHeadOrientationMovement();
+					}
+					break;
+				case InputMethod.ControllerOrientation:
+					{
+						movement = GetControllerOrientationMovement();
+					}
+					break;
+				case InputMethod.ControllerTouch:
+					{
+						movement = GetControllerTouchMovement();
+					}
+					break;
+				default:
+					{
+						movement = Vector3.zero;
+						Debug.LogError("unknown input method");
+					}
+					break;
+			}
 		}
 
-		movement.Normalize();
+		// clip vector to 0, 1 magnitude
+		if(movement.magnitude > 1.0f)
+		{
+			movement = movement.normalized;
+		}
 		
 		// visual rotation of ship
 		if(movement.x > 0)

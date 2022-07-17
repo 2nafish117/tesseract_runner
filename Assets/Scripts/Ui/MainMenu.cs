@@ -5,19 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+	public UiManager UiManager;
+
 	public void OnStartBtnPressed()
 	{
-		SceneManager.LoadScene("SpaceRunner");
+		UiManager.HideUi();
+		// SceneManager.LoadScene("SpaceRunner");
 	}
 
 	public void OnOptionBtnPressed()
 	{
-
+		UiManager.ShowOptionMenu();
 	}
 
 	public void OnTutorialBtnPressed()
 	{
-
+		UiManager.ShowTutorialMenu();
 	}
 
 	public void OnQuitBtnPressed()

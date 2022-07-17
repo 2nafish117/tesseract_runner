@@ -24,8 +24,13 @@ public class ObjectFollow : MonoBehaviour
 	{
 		if(target != null)
 		{
-			transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, factor * Time.deltaTime);
-			//transform.position = target.transform.position + offset;
+			if(factor * Time.deltaTime >= 1.0f)
+			{
+				transform.position = target.transform.position + offset;
+			} else
+			{
+				transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, factor * Time.deltaTime);
+			}
 		}
 	}
 
