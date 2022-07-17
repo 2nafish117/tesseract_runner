@@ -18,8 +18,8 @@ public class PlayerDeath : MonoBehaviour
 
 	IEnumerator ChangeLevelWithDelay()
 	{
-		yield return new WaitForSeconds(1);
-		SceneManager.LoadScene("Main");
+		yield return new WaitForSeconds(2);
+		SceneManager.LoadScene("SpaceRunner");
 	}
 
 	public void Die(Vector3 position)
