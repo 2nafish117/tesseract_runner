@@ -4,103 +4,73 @@ using UnityEngine;
 
 public class LevelGenerationManager : MonoBehaviour
 {
-	public GameObject ProtoWallPrefab;
-	// @TODO: incomplete right now !!
-	public GameObject[] WallPrefabs;
-	public float WallLength = 100.0f;
-	public int TotalConcurrentWalls = 3;
-	public float WallBeginOffset = 100.0f;
+	public GameObject protoChunk;
+	public GameObject firstChunk;
+	public GameObject[] chunkPrefabs;
+	public Transform initialSpawnLocation;
+	public int chunkCount = 10;
 
-	public float GlobalMoveSpeed = 50.0f;
-	public float GlobalZThreshold = -200.0f;
+	// @TODO: object pooling
+	// @TODO: actually pick random chunk to spawn
+	private GameObject prevChunk;
 
-	private int PooledWalls = 5;
-	// pooled source of walls
-	private List<GameObject> wallPool;
+	private Vector3 spawnLocation = Vector3.forward * 1.0f;
 
-	public void Start()
+	System.Random randomGenerator;
+
+	private void OnEnable()
 	{
-		wallPool = new List<GameObject>();
-
-		// initialise pool of walls
-		if (WallPrefabs == null || WallPrefabs.Length == 0)
-		{
-			// use the proto prefab instaead
-			for (int i = 0; i < PooledWalls; ++i)
-			{
-				GameObject instance = Instantiate(ProtoWallPrefab, transform);
-				instance.SetActive(false);
-				wallPool.Add(instance);
-			}
-		} else
-		{
-			// init the pool with prefabs
-			foreach(GameObject prefab in WallPrefabs)
-			{
-				int numInstancesPerType = 2;
-				for (int i = 0;i < numInstancesPerType; ++i)
-				{
-					GameObject instance = Instantiate(prefab, transform);
-					instance.SetActive(false);
-					wallPool.Add(instance);
-				}
-			}
-		}
-
-		PlaceInitialWalls();
+		Chunk.OnChunkExited += SpawnChunk;
+		FloatingOrigin.OnOriginChanged += OnOriginChanged;
 	}
 
-	void Update()
+	private void OnDisable()
 	{
-		for (int i = 0; i < wallPool.Count; i++)
+		Chunk.OnChunkExited -= SpawnChunk;
+		FloatingOrigin.OnOriginChanged -= OnOriginChanged;
+	}
+
+	private void Start()
+	{
+		if(initialSpawnLocation != null)
 		{
-			if (wallPool[i].activeInHierarchy)
-			{
-				Vector3 newPosition = wallPool[i].transform.position + Vector3.back * GlobalMoveSpeed * Time.deltaTime;
-				if(newPosition.z < GlobalZThreshold)
-				{
-					RecycleWalls();
-					wallPool[i].SetActive(false);
-				}
-				wallPool[i].transform.position = newPosition;
-			}
+			spawnLocation = initialSpawnLocation.position;
+		}
+		prevChunk = firstChunk;
+		randomGenerator = new System.Random(0);
+		SpawnInitialChunks();
+	}
+
+	private void SpawnInitialChunks()
+	{
+		for(int i = 0; i < chunkCount; ++i)
+		{
+			SpawnChunk();
 		}
 	}
 
-	// return first inactive object
-	private GameObject GetPooledWall()
+	private GameObject PickChunk()
 	{
-		//Debug.Log("get pooled wall");
-		for (int i = 0; i < wallPool.Count; i++)
+		if (chunkPrefabs.Length > 0)
 		{
-			if (!wallPool[i].activeInHierarchy)
-			{
-				return wallPool[i];
-			}
+			int r = randomGenerator.Next(chunkPrefabs.Length);
+			return chunkPrefabs[r];
 		}
-		return null;
+
+		return protoChunk;
 	}
 
-	private void PlaceInitialWalls()
+	private void SpawnChunk()
 	{
-		// use the pool
-		for (int i = 0; i < TotalConcurrentWalls; ++i)
-		{
-			GameObject wall = GetPooledWall();
-			wall.SetActive(true);
-			wall.transform.position = new Vector3(0, 0, (TotalConcurrentWalls - i - 1) * WallLength + WallBeginOffset);
-		}
+		GameObject chunk = PickChunk();
+		prevChunk = chunk;
+		Instantiate(chunk, spawnLocation, Quaternion.identity);
+		spawnLocation.z += protoChunk.GetComponent<Chunk>().chunkSize.z;
 	}
 
-	private Vector3 GetSpawnPoint()
+	public void OnOriginChanged(Vector3 originDelta)
 	{
-		return new Vector3(0, 0, (TotalConcurrentWalls - 1) * WallLength * 0.5f);
+		spawnLocation += originDelta;
 	}
 
-	private void RecycleWalls()
-	{
-		GameObject wall = GetPooledWall();
-		wall.SetActive(true);
-		wall.transform.position = GetSpawnPoint();
-	}
 }

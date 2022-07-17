@@ -27,7 +27,6 @@ public class PlayerDeath : MonoBehaviour
 		Rigidbody rigidbody = GetComponent<Rigidbody>();
 		rigidbody.constraints = RigidbodyConstraints.None;
 		rigidbody.useGravity = true;
-		rigidbody.AddExplosionForce(500.0f, position, 10.0f, 0.1f, ForceMode.Impulse);
-		GetComponent<PlayerShip>().EnableInput = false;
+		GetComponent<PlayerController>().EnableInput = false;
 	}
 }
