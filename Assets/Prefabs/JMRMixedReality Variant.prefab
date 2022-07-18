@@ -141,9 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 10000
-  OnOriginChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!20 &8791771546583740928 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1585089172, guid: 633a1e3825e2f6e4c81ef8bf448d11cd, type: 3}

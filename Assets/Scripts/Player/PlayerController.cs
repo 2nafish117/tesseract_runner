@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 		ControllerOrientation
 	}
 
-	public InputMethod inputMethod = InputMethod.Keyboard;
+	public InputMethod inputMethod = InputMethod.ControllerOrientation;
 
 	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.5f, 0.866025388f);
 	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.5f, 0.866025388f);
