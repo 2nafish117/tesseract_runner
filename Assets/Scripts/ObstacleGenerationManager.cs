@@ -93,6 +93,15 @@ public class ObstacleGenerationManager : MonoBehaviour
 			);
 	}
 
+	private Vector3 GetRandomScale(Vector3 minScale, Vector3 maxScale)
+	{
+		return new Vector3(
+				RandomFloat(minScale.x, maxScale.x),
+				RandomFloat(minScale.y, minScale.y),
+				RandomFloat(minScale.z, minScale.z)
+			);
+	}
+
 	private Vector3 GetRandomRotation(Vector3 minRot, Vector3 maxRot)
 	{
 		return new Vector3(
@@ -146,12 +155,9 @@ public class ObstacleGenerationManager : MonoBehaviour
 		Obstacle obstacleComponent = obstacle.GetComponent<Obstacle>();
 		Obstacle.ObstacleFlag obstacleType = obstacleComponent.type;
 
+		// @TODO: make buildings at the top to be pointing down
 		GetPotentialObstacleRegions(obstacleType);
 		int r = randomGenerator.Next(0, potentialRegions.Count);
-		if(r >= potentialRegions.Count)
-		{
-			Debug.LogError("r is shit " + r + " for len" + potentialRegions.Count);
-		}
 		BoxCollider region = potentialRegions[r];
 
 		//Vector3 minRot = new Vector3(-10.0f, 0.0f, -10.0f);
@@ -160,11 +166,19 @@ public class ObstacleGenerationManager : MonoBehaviour
 		Vector3 minRot = obstacleComponent.minRotation;
 		Vector3 maxRot = obstacleComponent.maxRotation;
 
+		Vector3 minScale = obstacleComponent.minScale;
+		Vector3 maxScale = obstacleComponent.maxScale;
+
 		Vector3 position = GetRandomPosition(region);
+
+		// @TODO: configure random scale from obsatcle prefab
+		Vector3 scale = GetRandomScale(Vector3.one, Vector3.one);
+
 		Vector3 rotation = GetRandomRotation(minRot, maxRot);
 
 		GameObject instance = GameObject.Instantiate(obstacle);
 		instance.transform.position = region.transform.position + position;
+		instance.transform.localScale = scale;
 		instance.transform.localEulerAngles = rotation;
 	}
 

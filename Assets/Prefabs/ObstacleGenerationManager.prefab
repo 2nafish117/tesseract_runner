@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871121117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 108.3}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879667246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.86, z: 108.3}
+  m_LocalPosition: {x: 0, y: -5.86, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115,7 +115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900708978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 108.3}
+  m_LocalPosition: {x: -10, y: 0, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,7 +160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6391848157430516483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.86, z: 108.3}
+  m_LocalPosition: {x: 0, y: 5.86, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -205,7 +205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8365553139220002077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 108.3}
+  m_LocalPosition: {x: 10, y: 0, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,9 +287,10 @@ MonoBehaviour:
   - {fileID: 4647110041126697364, guid: a7f8503095959b84b9c1a0fbd410b0cb, type: 3}
   - {fileID: 4647110041126697364, guid: 126aeeca1340f0c4fbdc407165a82fbc, type: 3}
   - {fileID: 4647110041126697364, guid: f60321b22113ca54293bdbf5264e3a6e, type: 3}
+  - {fileID: 3352972783532212113, guid: d1c441575cf432a48ba7b11a884dc2bf, type: 3}
   floatingObstacleRegion: {fileID: 871121119}
   rightObstacleRegion: {fileID: 5348552133086343124}
   leftObstacleRegion: {fileID: 1900708980}
   upObstacleRegion: {fileID: 8380478757984093470}
   downObstacleRegion: {fileID: 1879667248}
-  obstacleSpawnDuration: 0.2
+  obstacleSpawnDuration: 2
