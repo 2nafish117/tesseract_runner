@@ -49,9 +49,15 @@ public class PlayerController : MonoBehaviour
 		ObstacleGenerationManager.RegisterPlayer(gameObject);
 	}
 
+	private void OnDestroy()
+	{
+		ObstacleGenerationManager.UnRegisterPlayer();
+	}
+
 	private void OnEnable()
 	{
 		GameManager.player = gameObject;
+		FindAndConnectJmrRig();
 	}
 
 	private void OnDisable()
@@ -59,9 +65,19 @@ public class PlayerController : MonoBehaviour
 		GameManager.player = null;
 	}
 
-	private void OnDestroy()
+	public void FindAndConnectJmrRig()
 	{
-		ObstacleGenerationManager.UnRegisterPlayer();
+		GameObject[] rigs = GameObject.FindGameObjectsWithTag("JmrRig");
+		if (rigs.Length > 0)
+		{
+			GameObject rig = rigs[0];
+			ObjectFollow follow = rig.GetComponent<ObjectFollow>();
+			follow.target = transform;
+		}
+		else
+		{
+			Debug.LogWarning("JmrRig not found !!");
+		}
 	}
 
 	Vector3 GetKeyboardMovement()

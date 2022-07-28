@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-	public UiManager UiManager;
+	public MainUiManager UiManager;
 
 	public void OnResumeBtnPressed()
 	{

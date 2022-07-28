@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionMenu : MonoBehaviour
+public class TutorialMenu : MonoBehaviour
 {
-	public UiManager UiManager;
+	public MainUiManager UiManager;
 
 	public void OnBackBtnPressed()
 	{

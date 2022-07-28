@@ -41,10 +41,10 @@ public class ObjectFollow : MonoBehaviour
 
 	public void ResetPosition()
 	{
-		transform.position = offset;
 		GameObject[] ships = GameObject.FindGameObjectsWithTag("Player");
 		if (ships.Length > 0)
 		{
+			transform.position = offset;
 			GameObject ship = ships[0];
 			Debug.LogWarning("set jmrRig target");
 			target = ship.transform;
