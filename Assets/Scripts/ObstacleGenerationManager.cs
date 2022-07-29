@@ -18,6 +18,7 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 	private System.Random randomGenerator;
 	private List<BoxCollider> potentialRegions;
+	private List<char> potentialRegionsNamesMap;
 
 	private BoxCollider[] obstacleRegions;
 	private static GameObject player;
@@ -50,6 +51,11 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 		potentialRegions = new List<BoxCollider>();
 		potentialRegions.Capacity = 5;
+
+		potentialRegionsNamesMap = new List<char>();
+		potentialRegionsNamesMap.Capacity = 5;
+
+
 	}
 
 	private void OnEnable()
@@ -82,58 +88,70 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 	private Vector3 GetRandomPosition(BoxCollider region)
 	{
-		float x = region.size.x * 0.5f;
-		float y = region.size.y * 0.5f;
-		float z = region.size.z * 0.5f;
+		float x = region.size.x;
+		float y = region.size.y;
+		float z = region.size.z;
 
 		return new Vector3(
-				RandomFloat(-x, x),
-				RandomFloat(-y, y),
-				RandomFloat(-z, z)
+				RandomFloat(-x/2, x/2),
+				RandomFloat(0, y),
+				RandomFloat(0, z)
 			);
 	}
 
 	private Vector3 GetRandomScale(Vector3 minScale, Vector3 maxScale)
 	{
+		float scaleRand = RandomFloat(minScale.x, maxScale.x);
 		return new Vector3(
-				RandomFloat(minScale.x, maxScale.x),
-				RandomFloat(minScale.y, minScale.y),
-				RandomFloat(minScale.z, minScale.z)
+				scaleRand,
+				scaleRand,
+				scaleRand
 			);
 	}
 
 	private Vector3 GetRandomRotation(Vector3 minRot, Vector3 maxRot)
 	{
 		return new Vector3(
-			RandomFloat(-minRot.x, maxRot.x),
-			RandomFloat(-minRot.y, maxRot.y),
-			RandomFloat(-minRot.z, maxRot.z)
+			RandomFloat(minRot.x, maxRot.x),
+			RandomFloat(minRot.y, maxRot.y),
+			RandomFloat(minRot.z, maxRot.z)
 		);
 	}
 
 	private void GetPotentialObstacleRegions(Obstacle.ObstacleFlag obstacleType)
 	{
 		potentialRegions.Clear();
+		potentialRegionsNamesMap.Clear();
 
 		if ((obstacleType & Obstacle.ObstacleFlag.Up) != 0)
 		{
 			potentialRegions.Add(upObstacleRegion);
+			potentialRegionsNamesMap.Add('u');
 		}
 		if ((obstacleType & Obstacle.ObstacleFlag.Down) != 0)
 		{
 			potentialRegions.Add(downObstacleRegion);
+			potentialRegionsNamesMap.Add('d');
 		}
 		if ((obstacleType & Obstacle.ObstacleFlag.Left) != 0)
 		{
 			potentialRegions.Add(leftObstacleRegion);
+			potentialRegionsNamesMap.Add('l');
 		}
 		if ((obstacleType & Obstacle.ObstacleFlag.Right) != 0)
 		{
 			potentialRegions.Add(rightObstacleRegion);
+			potentialRegionsNamesMap.Add('r');
 		}
 		if ((obstacleType & Obstacle.ObstacleFlag.Floating) != 0)
 		{
 			potentialRegions.Add(floatingObstacleRegion);
+			potentialRegionsNamesMap.Add('f');
+		}
+		if ((obstacleType & Obstacle.ObstacleFlag.Rotate) != 0)
+		{
+			potentialRegions.Add(floatingObstacleRegion);
+			potentialRegionsNamesMap.Add('r');
 		}
 	}
 
@@ -158,28 +176,58 @@ public class ObstacleGenerationManager : MonoBehaviour
 		// @TODO: make buildings at the top to be pointing down
 		GetPotentialObstacleRegions(obstacleType);
 		int r = randomGenerator.Next(0, potentialRegions.Count);
-		BoxCollider region = potentialRegions[r];
 
+		Debug.Log("sidlog potential region count:" + r);
+		Debug.Log("sidlog potential region name:" + potentialRegionsNamesMap[r]);
+		BoxCollider region = potentialRegions[r];
+		char potentialRegionName = potentialRegionsNamesMap[r];
 		//Vector3 minRot = new Vector3(-10.0f, 0.0f, -10.0f);
 		//Vector3 maxRot = new Vector3(-10.0f, 360.0f, -10.0f);
 
 		Vector3 minRot = obstacleComponent.minRotation;
 		Vector3 maxRot = obstacleComponent.maxRotation;
 
+
+		Debug.Log("SIDLOG mix rot:"+minRot+"MAX ROT:"+maxRot);
 		Vector3 minScale = obstacleComponent.minScale;
 		Vector3 maxScale = obstacleComponent.maxScale;
 
 		Vector3 position = GetRandomPosition(region);
+		Debug.Log("sidlog size x"+region.size.x+ "size y"+ region.size.y+"size z"+region.size.z);
 
 		// @TODO: configure random scale from obsatcle prefab
-		Vector3 scale = GetRandomScale(Vector3.one, Vector3.one);
-
+		//Vector3 scale = GetRandomScale(Vector3.one, Vector3.one);
+		Vector3 scale = GetRandomScale(minScale, maxScale);
 		Vector3 rotation = GetRandomRotation(minRot, maxRot);
 
 		GameObject instance = GameObject.Instantiate(obstacle);
-		instance.transform.position = region.transform.position + position;
+		Debug.Log("sidlog region spawn down position" + region.transform.position.x + "|" + region.transform.position.y + "|" + region.transform.position.z);
+		Debug.Log("sidlog offset  down position" + position.x + "|" + position.y + "|" + position.z);
+		instance.transform.position = region.transform.position +position;
 		instance.transform.localScale = scale;
-		instance.transform.localEulerAngles = rotation;
+		if(potentialRegionName == 'u')
+        {
+			Debug.Log("sidlog flipping building");
+			Vector3 rotationFliped = new Vector3(rotation.x, rotation.y, rotation.z+180);
+			instance.transform.localEulerAngles = rotationFliped;
+		}
+		else if (potentialRegionName == 'l')
+		{
+			Debug.Log("sidlog flipping building");
+			Vector3 rotationFliped = new Vector3(rotation.x, rotation.y, rotation.z - 90);
+			instance.transform.localEulerAngles = rotationFliped;
+		}
+		else if (potentialRegionName == 'r')
+		{
+			Debug.Log("sidlog flipping building");
+			Vector3 rotationFliped = new Vector3(rotation.x, rotation.y, rotation.z + 90);
+			instance.transform.localEulerAngles = rotationFliped;
+		}
+		else
+        {
+			instance.transform.localEulerAngles = rotation;
+		}
+		
 	}
 
 	public void OnOriginChanged(Vector3 originDelta)

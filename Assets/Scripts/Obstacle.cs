@@ -11,10 +11,11 @@ public class Obstacle : MonoBehaviour
 		Right = 0x2,
 		Left = 0x4,
 		Up = 0x8,
-		Down = 0x10
+		Down = 0x10,
+		Rotate = 0x20
 	}
 
-	public ObstacleFlag type = ObstacleFlag.Floating | ObstacleFlag.Right | ObstacleFlag.Left | ObstacleFlag.Up | ObstacleFlag.Down;
+	public ObstacleFlag type = ObstacleFlag.Floating | ObstacleFlag.Right | ObstacleFlag.Left | ObstacleFlag.Up | ObstacleFlag.Down |ObstacleFlag.Rotate;
 	public Vector3 minRotation = Vector3.zero;
 	public Vector3 maxRotation = Vector3.zero;
 	public Vector3 minScale = Vector3.zero;
