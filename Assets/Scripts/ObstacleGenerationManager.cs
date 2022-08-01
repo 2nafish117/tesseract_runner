@@ -39,6 +39,7 @@ public class ObstacleGenerationManager : MonoBehaviour
 	{
 		obstacleSpawnTime = 0.0f;
 		int seed = 0;
+		seed = (int) (System.DateTime.Now.Ticks);
 		randomGenerator = new System.Random(seed);
 
 		obstacleRegions = new BoxCollider[5];
