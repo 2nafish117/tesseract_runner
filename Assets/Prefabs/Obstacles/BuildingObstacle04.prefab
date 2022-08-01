@@ -48,6 +48,9 @@ MonoBehaviour:
   type: 16
   minRotation: {x: 0, y: 0, z: 0}
   maxRotation: {x: 0, y: 0, z: 0}
+  minScale: {x: 1, y: 1, z: 1}
+  maxScale: {x: 1, y: 1, z: 1}
+  spawnUpright: 0
 --- !u!1001 &8403764669011766483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,11 +88,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 906822850d2739040a17fde71cf9dc5b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 906822850d2739040a17fde71cf9dc5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 906822850d2739040a17fde71cf9dc5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

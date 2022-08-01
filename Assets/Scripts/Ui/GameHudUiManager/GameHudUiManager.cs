@@ -7,6 +7,11 @@ public class GameHudUiManager : MonoBehaviour
 {
 	public TMP_Text score;
 
+	public void Start()
+	{
+		SetScore(0);
+	}
+
 	public void SetScore(int value)
 	{
 		score.text = value.ToString();

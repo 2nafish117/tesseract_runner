@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using JMRSDK.InputModule;
+using UnityEngine.SceneManagement;
 
 public class GameOverUiManager : MonoBehaviour, IBackHandler
 {
 	public TMP_Text score;
 	public TMP_Text highScore;
+
+	public bool IsActive = false;
 
 	public void SetScore(int value)
 	{
@@ -21,16 +24,19 @@ public class GameOverUiManager : MonoBehaviour, IBackHandler
 
 	public void OnMenuBtnClicked()
 	{
-
+		SceneManager.LoadScene("Main");
 	}
 
 	public void OnRestartBtnClicked()
 	{
-
+		SceneManager.LoadScene("SpaceRunner");
 	}
 
 	public void OnBackAction()
 	{
-		OnMenuBtnClicked();
+		if(IsActive)
+		{
+			OnMenuBtnClicked();
+		}
 	}
 }

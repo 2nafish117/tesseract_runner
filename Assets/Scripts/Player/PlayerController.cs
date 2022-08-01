@@ -6,21 +6,21 @@ using JMRSDK.InputModule;
 
 public class PlayerController : MonoBehaviour
 {
-	public float StrafeAcceleration = 600.0f;
-	public float ForwardAcceleration = 1800.0f;
-	public float RotationSpeed = 6.0f;
+	static public float StrafeAcceleration = 600.0f;
+	static public float ForwardAcceleration = 1800.0f;
+	static public float RotationSpeed = 6.0f;
 
 	public TrailRenderer[] trails;
-
-	private Rigidbody rigidBody;
-	private Vector3 movement = Vector3.zero;
-	private GameObject pivot = null;
+	public ParticleSystem explosion;
 
 	[HideInInspector]
-	public bool EnableInput = true;
+	static public bool EnableInput = true;
 
-	public delegate void OnPlayerDie();
-	public delegate void OnPlayerSpawn();
+	public delegate void PlayerDieEvent();
+	public delegate void PlayerSpawnEvent();
+
+	static public PlayerDieEvent OnPlayerDie;
+	static public PlayerSpawnEvent OnPlayerSpawn;
 
 	public enum InputMethod
 	{
@@ -34,12 +34,13 @@ public class PlayerController : MonoBehaviour
 
 	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.5f, 0.866025388f);
 	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.5f, 0.866025388f);
-	
 	private Quaternion maxUpRotation = new Quaternion(-0.258819103f, 0, 0, 0.965925813f);
-
 	private Quaternion maxDownRotation = new Quaternion(0.258819103f, 0, 0, 0.965925813f);
-
 	private Quaternion defaultRotation = new Quaternion(0, 0, 0, 1);
+	
+	private Rigidbody rigidBody;
+	private Vector3 movement = Vector3.zero;
+	private GameObject pivot = null;
 
 
 	private void Start()
@@ -56,29 +57,31 @@ public class PlayerController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		GameManager.player = gameObject;
-		FindAndConnectJmrRig();
+		//GameManager.player = gameObject;
+		//FindAndConnectJmrRig();
+		OnPlayerSpawn?.Invoke();
+		EnableInput = true;
 	}
 
-	private void OnDisable()
-	{
-		GameManager.player = null;
-	}
+	//private void OnDisable()
+	//{
+	//	GameManager.player = null;
+	//}
 
-	public void FindAndConnectJmrRig()
-	{
-		GameObject[] rigs = GameObject.FindGameObjectsWithTag("JmrRig");
-		if (rigs.Length > 0)
-		{
-			GameObject rig = rigs[0];
-			ObjectFollow follow = rig.GetComponent<ObjectFollow>();
-			follow.target = transform;
-		}
-		else
-		{
-			Debug.LogWarning("JmrRig not found !!");
-		}
-	}
+	//public void FindAndConnectJmrRig()
+	//{
+	//	GameObject[] rigs = GameObject.FindGameObjectsWithTag("JmrRig");
+	//	if (rigs.Length > 0)
+	//	{
+	//		GameObject rig = rigs[0];
+	//		ObjectFollow follow = rig.GetComponent<ObjectFollow>();
+	//		follow.target = transform;
+	//	}
+	//	else
+	//	{
+	//		Debug.LogWarning("JmrRig not found !!");
+	//	}
+	//}
 
 	Vector3 GetKeyboardMovement()
 	{
@@ -142,8 +145,10 @@ public class PlayerController : MonoBehaviour
 	{
 		// controller orientation based movement
 		IInputSource source = JMRInteractionManager.Instance.GetCurrentSource();
-		Quaternion orientation;
-		source.TryGetPointerRotation(out orientation);
+		Quaternion orientation = Quaternion.identity;
+		source?.TryGetPointerRotation(out orientation);
+
+		//Debug.LogWarning("ornetation: " + orientation);
 
 		float thresholdDeg = 6.0f;
 		float up = orientation.eulerAngles.x;
@@ -167,8 +172,8 @@ public class PlayerController : MonoBehaviour
 		move.y = -up;
 		move.x = right;
 
-		Debug.LogWarning("controller orientation movement:" + move);
-		
+		//Debug.LogWarning("controller orientation movement:" + move);
+
 		return move;
 	}
 
@@ -200,23 +205,23 @@ public class PlayerController : MonoBehaviour
 				case InputMethod.Keyboard:
 					{
 						movement = GetKeyboardMovement();
+						break;
 					}
-					break;
 				case InputMethod.HeadOrientation:
 					{
 						movement = GetHeadOrientationMovement();
+						break;
 					}
-					break;
 				case InputMethod.ControllerOrientation:
 					{
 						movement = GetControllerOrientationMovement();
+						break;
 					}
-					break;
 				case InputMethod.ControllerTouch:
 					{
 						movement = GetControllerTouchMovement();
+						break;
 					}
-					break;
 				default:
 					{
 						movement = Vector3.zero;
@@ -232,42 +237,45 @@ public class PlayerController : MonoBehaviour
 			movement = movement.normalized;
 		}
 		
-		// visual rotation of ship
-		if(movement.x > 0)
+		if(EnableInput)
 		{
-			Quaternion rot = pivot.transform.rotation;
-			rot = Quaternion.Slerp(rot, maxRightRotation, RotationSpeed * Time.deltaTime);
-			pivot.transform.rotation = rot;
-		}
-		else if(movement.x < 0)
-		{
-			Quaternion rot = pivot.transform.rotation;
-			rot = Quaternion.Slerp(rot, maxLeftRotation, RotationSpeed * Time.deltaTime);
-			pivot.transform.rotation = rot;
-		} else
-		{
-			Quaternion rot = pivot.transform.rotation;
-			rot = Quaternion.Slerp(rot, defaultRotation, RotationSpeed * Time.deltaTime);
-			pivot.transform.rotation = rot;
-		}
+			// visual rotation of ship
+			if(movement.x > 0)
+			{
+				Quaternion rot = pivot.transform.rotation;
+				rot = Quaternion.Slerp(rot, maxRightRotation, RotationSpeed * Time.deltaTime);
+				pivot.transform.rotation = rot;
+			}
+			else if(movement.x < 0)
+			{
+				Quaternion rot = pivot.transform.rotation;
+				rot = Quaternion.Slerp(rot, maxLeftRotation, RotationSpeed * Time.deltaTime);
+				pivot.transform.rotation = rot;
+			} else
+			{
+				Quaternion rot = pivot.transform.rotation;
+				rot = Quaternion.Slerp(rot, defaultRotation, RotationSpeed * Time.deltaTime);
+				pivot.transform.rotation = rot;
+			}
 
-		if (movement.y > 0)
-		{
-			Quaternion rot = pivot.transform.rotation;
-			rot = Quaternion.Slerp(rot, maxUpRotation, RotationSpeed * Time.deltaTime);
-			pivot.transform.rotation = rot;
-		}
-		else if (movement.y < 0)
-		{
-			Quaternion rot = pivot.transform.rotation;
-			rot = Quaternion.Slerp(rot, maxDownRotation, RotationSpeed * Time.deltaTime);
-			pivot.transform.rotation = rot;
-		}
-		else
-		{
-			Quaternion rot = pivot.transform.rotation;
-			rot = Quaternion.Slerp(rot, defaultRotation, RotationSpeed * Time.deltaTime);
-			pivot.transform.rotation = rot;
+			if (movement.y > 0)
+			{
+				Quaternion rot = pivot.transform.rotation;
+				rot = Quaternion.Slerp(rot, maxUpRotation, RotationSpeed * Time.deltaTime);
+				pivot.transform.rotation = rot;
+			}
+			else if (movement.y < 0)
+			{
+				Quaternion rot = pivot.transform.rotation;
+				rot = Quaternion.Slerp(rot, maxDownRotation, RotationSpeed * Time.deltaTime);
+				pivot.transform.rotation = rot;
+			}
+			else
+			{
+				Quaternion rot = pivot.transform.rotation;
+				rot = Quaternion.Slerp(rot, defaultRotation, RotationSpeed * Time.deltaTime);
+				pivot.transform.rotation = rot;
+			}
 		}
 
 		// spawn trails
@@ -280,5 +288,21 @@ public class PlayerController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		rigidBody.AddForce(movement * StrafeAcceleration + Vector3.forward * ForwardAcceleration);
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		GameObject other = collision.gameObject;
+		if (other.CompareTag("Obstacle"))
+		{
+			Rigidbody rigidbody = GetComponent<Rigidbody>();
+			rigidbody.constraints = RigidbodyConstraints.None;
+			rigidbody.useGravity = true;
+			
+			EnableInput = false;
+			OnPlayerDie?.Invoke();
+			explosion?.Play();
+			GameObject.Destroy(gameObject, 0.5f);
+		}
 	}
 }

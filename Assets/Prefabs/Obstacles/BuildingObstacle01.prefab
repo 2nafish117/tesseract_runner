@@ -48,6 +48,9 @@ MonoBehaviour:
   type: 16
   minRotation: {x: 0, y: 0, z: 0}
   maxRotation: {x: 0, y: 0, z: 0}
+  minScale: {x: 1, y: 1, z: 1}
+  maxScale: {x: 1, y: 1, z: 1}
+  spawnUpright: 0
 --- !u!1001 &8372641605473626883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,15 +72,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4262e78582bfea40aeafb7256312395, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.601859
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4262e78582bfea40aeafb7256312395, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8710483
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4262e78582bfea40aeafb7256312395, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.604041
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4262e78582bfea40aeafb7256312395, type: 3}
       propertyPath: m_LocalRotation.w

@@ -11,21 +11,21 @@ public class Obstacle : MonoBehaviour
 		Right = 0x2,
 		Left = 0x4,
 		Up = 0x8,
-		Down = 0x10,
-		Rotate = 0x20
+		Down = 0x10
 	}
 
-	public ObstacleFlag type = ObstacleFlag.Floating | ObstacleFlag.Right | ObstacleFlag.Left | ObstacleFlag.Up | ObstacleFlag.Down |ObstacleFlag.Rotate;
+	public ObstacleFlag type = ObstacleFlag.Floating | ObstacleFlag.Right | ObstacleFlag.Left | ObstacleFlag.Up | ObstacleFlag.Down;
 	public Vector3 minRotation = Vector3.zero;
 	public Vector3 maxRotation = Vector3.zero;
-	public Vector3 minScale = Vector3.zero;
-	public Vector3 maxScale = Vector3.zero;
+	public Vector3 minScale = Vector3.one;
+	public Vector3 maxScale = Vector3.one;
+	// if true object points towards correct direction any wall it spawns on
+	public bool spawnUpright = false;
 
 	private void OnEnable()
 	{
 		
 		MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
-		// _Color, _EmissionColor
 
 		Material[] mats = meshRenderer.materials;
 
@@ -33,37 +33,21 @@ public class Obstacle : MonoBehaviour
 		{
 			// @TODO: this is shit
 			// @TODO: check this shit: https://docs.unity3d.com/ScriptReference/Random.ColorHSV.html
-			Color randColor = Random.ColorHSV();
+			Color randColor = Random.ColorHSV(0.3f, 1.0f, 0.3f, 1.0f, 0.5f, 1.0f, 1.0f, 1.0f);
 			Color randEmission = randColor;
 
 			mat.SetColor("_Color", randColor);
 			mat.SetColor("_EmissionColor", randEmission);
-
-			//if (mats[0].name == "Building")
-			//{
-			//	meshRenderer.material.SetColor("_Color", randColor);
-			//	meshRenderer.material.SetColor("_EmissionColor", randEmission);
-			//} else if(mats[0].name == "Emission")
-			//{
-			//	meshRenderer.material.SetColor("_Color", randColor);
-			//	meshRenderer.material.SetColor("_EmissionColor", randEmission);
-			//} else if (mats[0].name == "BlinkLight")
-			//{
-				
-			//} else
-			//{
-			//	Debug.LogError("REEEEEEEEEEEEEEEEE wrong mats on obstacles");
-			//}
 		}
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collision collision)
 	{
 		GameObject other = collision.gameObject;
-		if (other.CompareTag("Player"))
+		if (other.CompareTag("DestroyObstacle"))
 		{
-			PlayerDeath playerDeath = other.GetComponent<PlayerDeath>();
-			playerDeath.Die(collision.GetContact(0).point);
+			Debug.LogError("peeee");
+			GameObject.Destroy(gameObject, 1.0f);
 		}
 	}
 }

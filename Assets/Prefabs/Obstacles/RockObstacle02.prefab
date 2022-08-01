@@ -48,6 +48,9 @@ MonoBehaviour:
   type: 30
   minRotation: {x: 0, y: 0, z: 0}
   maxRotation: {x: 0, y: 0, z: 0}
+  minScale: {x: 0, y: 0, z: 0}
+  maxScale: {x: 0, y: 0, z: 0}
+  spawnUpright: 0
 --- !u!1001 &8795821528628152918
 PrefabInstance:
   m_ObjectHideFlags: 0

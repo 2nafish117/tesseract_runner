@@ -13,6 +13,7 @@ public class ObjectFollow : MonoBehaviour
 	private void OnEnable()
 	{
 		FloatingOrigin.OnOriginChanged += OnOriginChanged;
+		PlayerController.OnPlayerDie += OnPlayerDie;
 	}
 
 	private void OnDisable()
@@ -39,14 +40,19 @@ public class ObjectFollow : MonoBehaviour
 		transform.position += originDelta;
 	}
 
+	void OnPlayerDie()
+	{
+		GetComponent<UiManager>().ShowGameOverUi();
+	}
+
 	public void ResetPosition()
 	{
 		GameObject[] ships = GameObject.FindGameObjectsWithTag("Player");
 		if (ships.Length > 0)
 		{
-			transform.position = offset;
 			GameObject ship = ships[0];
 			Debug.LogWarning("set jmrRig target");
+			transform.position = ship.transform.position + offset;
 			target = ship.transform;
 		} else
 		{

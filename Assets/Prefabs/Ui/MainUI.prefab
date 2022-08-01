@@ -5080,9 +5080,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487a26d3ab3b7e147a54d6658e5246fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 7231155856254193629}
-  optionMenu: {fileID: 974045359771555710}
-  tutorialMenu: {fileID: 1984021084734113656}
+  mainMenu: {fileID: 7231155856254193606}
+  optionMenu: {fileID: 8674853367895282532}
+  tutorialMenu: {fileID: 3116488587441549250}
 --- !u!1 &8842455918116371679
 GameObject:
   m_ObjectHideFlags: 0

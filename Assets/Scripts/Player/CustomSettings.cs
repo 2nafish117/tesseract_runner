@@ -8,8 +8,6 @@ public class CustomSettings : MonoBehaviour
 	public Camera right;
 	public Camera head;
 
-	public GameObject highScoreText;
-
 	//public float eyeFieldOfView = 60.0f;
 	//public float eyeFarClipPlane = 1000.0f;
 
@@ -21,7 +19,7 @@ public class CustomSettings : MonoBehaviour
 		if (left != null)
 		{
 			left.fieldOfView = fov;
-			left.farClipPlane = 10000.0f;
+			left.farClipPlane = 1000.0f;
 		}
 
 		if (right != null)
@@ -40,18 +38,9 @@ public class CustomSettings : MonoBehaviour
 		}
 	}
 
-
-	public void SetScoreActive(bool active)
+	private void Start()
 	{
-		if (highScoreText != null)
-		{
-			highScoreText.SetActive(active);
-		}
+		SetEyeCameraSettings(30.0f);
+		SetHeadCameraSettings(30.0f);
 	}
-
-	//private void Start()
-	//{
-	//	SetEyeCameraSettings(40.0f);
-	//	SetHeadCameraSettings(60.0f);
-	//}
 }
