@@ -13,7 +13,7 @@ public class PlayerScore : MonoBehaviour, IBackHandler
 	[HideInInspector]
 	static public int HighScore = 0;
 
-	public static void ResetCurrentScore()
+	public void ResetCurrentScore()
 	{
 		CurrentScore = 0;
 	}

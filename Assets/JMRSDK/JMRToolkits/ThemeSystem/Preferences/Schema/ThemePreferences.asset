@@ -23,7 +23,7 @@ MonoBehaviour:
         examples: 
     colors:
     - name: PrimaryLayer
-      color: '#3333FF'
+      color: '#006400'
     - name: SecondaryLayer
       color: '#FFFFFF'
     - name: HoverLayer

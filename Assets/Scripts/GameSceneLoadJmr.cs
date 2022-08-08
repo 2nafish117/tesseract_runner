@@ -71,14 +71,14 @@ public class GameSceneLoadJmr : MonoBehaviour
 
 	public void MainSceneLoad(Scene scene, LoadSceneMode mode)
 	{
+		GameObject rig = FindJmrRig();
+		rig.GetComponent<PlayerScore>().ResetCurrentScore();
 		if (scene.name != "Main")
 		{
 			return;
 		}
 
 		Debug.LogWarning("MainSceneLoad");
-
-		GameObject rig = FindJmrRig();
 		rig.GetComponent<ObjectFollow>().ResetPosition();
 		rig.GetComponent<UiManager>().ShowMainUi();
 	}
