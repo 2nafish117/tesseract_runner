@@ -57,31 +57,9 @@ public class PlayerController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		//GameManager.player = gameObject;
-		//FindAndConnectJmrRig();
 		OnPlayerSpawn?.Invoke();
 		EnableInput = true;
 	}
-
-	//private void OnDisable()
-	//{
-	//	GameManager.player = null;
-	//}
-
-	//public void FindAndConnectJmrRig()
-	//{
-	//	GameObject[] rigs = GameObject.FindGameObjectsWithTag("JmrRig");
-	//	if (rigs.Length > 0)
-	//	{
-	//		GameObject rig = rigs[0];
-	//		ObjectFollow follow = rig.GetComponent<ObjectFollow>();
-	//		follow.target = transform;
-	//	}
-	//	else
-	//	{
-	//		Debug.LogWarning("JmrRig not found !!");
-	//	}
-	//}
 
 	Vector3 GetKeyboardMovement()
 	{

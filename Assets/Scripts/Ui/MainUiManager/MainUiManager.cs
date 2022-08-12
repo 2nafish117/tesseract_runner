@@ -8,9 +8,17 @@ public class MainUiManager : MonoBehaviour
 	public OptionMenu optionMenu;
 	public TutorialMenu tutorialMenu;
 
+	public UiManager uiManager;
 	private void Start()
 	{
 		ShowMainMenu();
+	}
+
+	public void Awake()
+	{
+		mainMenu.mainUiManager = this;
+		optionMenu.mainUiManager = this;
+		tutorialMenu.mainUiManager = this;
 	}
 
 	public void HideUi()

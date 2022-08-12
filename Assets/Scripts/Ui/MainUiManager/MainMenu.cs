@@ -2,29 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using JMRSDK.InputModule;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour, IBackHandler
 {
-	public MainUiManager UiManager;
+	public MainUiManager mainUiManager;
+	public UiManager uiManager;
+
+	public bool activeUiScreen = false;
+
+	public void OnEnable()
+	{
+		JMRInputManager.Instance.AddGlobalListener(gameObject);
+	}
+
+	public void OnDisable()
+	{
+		JMRInputManager.Instance.RemoveGlobalListener(gameObject);
+	}
 
 	public void OnStartBtnPressed()
 	{
-		UiManager.HideUi();
+		mainUiManager.HideUi();
 		SceneManager.LoadScene("SpaceRunner");
 	}
 
 	public void OnOptionBtnPressed()
 	{
-		UiManager.ShowOptionMenu();
+		mainUiManager.ShowOptionMenu();
 	}
 
 	public void OnTutorialBtnPressed()
 	{
-		UiManager.ShowTutorialMenu();
+		mainUiManager.ShowTutorialMenu();
 	}
 
 	public void OnQuitBtnPressed()
 	{
 		Application.Quit();
+	}
+
+	public void OnBackAction()
+	{
+		
 	}
 }

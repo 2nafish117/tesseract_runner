@@ -10,7 +10,17 @@ public class GameOverUiManager : MonoBehaviour, IBackHandler
 	public TMP_Text score;
 	public TMP_Text highScore;
 
-	public bool IsActive = false;
+	public UiManager uiManager;
+
+	public void OnEnable()
+	{
+		JMRInputManager.Instance.AddGlobalListener(gameObject);
+	}
+
+	public void OnDisable()
+	{
+		JMRInputManager.Instance.RemoveGlobalListener(gameObject);
+	}
 
 	public void SetScore(int value)
 	{
@@ -29,14 +39,12 @@ public class GameOverUiManager : MonoBehaviour, IBackHandler
 
 	public void OnRestartBtnClicked()
 	{
+		uiManager.GameOverUI.SetScore(0);
 		SceneManager.LoadScene("SpaceRunner");
 	}
 
 	public void OnBackAction()
 	{
-		if(IsActive)
-		{
-			OnMenuBtnClicked();
-		}
+		OnMenuBtnClicked();
 	}
 }

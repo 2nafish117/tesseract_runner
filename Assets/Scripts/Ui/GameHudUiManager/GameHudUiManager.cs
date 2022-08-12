@@ -7,6 +7,8 @@ public class GameHudUiManager : MonoBehaviour
 {
 	public TMP_Text score;
 
+	public UiManager uiManager;
+
 	public void Start()
 	{
 		SetScore(0);

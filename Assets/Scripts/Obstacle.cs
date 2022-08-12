@@ -41,7 +41,7 @@ public class Obstacle : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
 	{
 		GameObject other = collision.gameObject;
 		if (other.CompareTag("DestroyObstacle"))

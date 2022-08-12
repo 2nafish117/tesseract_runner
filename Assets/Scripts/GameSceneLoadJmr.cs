@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneLoadJmr : MonoBehaviour
 {
-
-	
 	public void OnEnable()
 	{
 		// dumb shit
@@ -59,6 +57,7 @@ public class GameSceneLoadJmr : MonoBehaviour
 		GameObject rig = FindJmrRig();
 		rig.GetComponent<ObjectFollow>().ResetPosition();
 		rig.GetComponent<UiManager>().HideAllUi();
+		rig.GetComponent<UiManager>().InGame = false;
 	}
 
 	public void SplashSceneUnLoad(Scene scene)
@@ -72,15 +71,17 @@ public class GameSceneLoadJmr : MonoBehaviour
 	public void MainSceneLoad(Scene scene, LoadSceneMode mode)
 	{
 		GameObject rig = FindJmrRig();
-		rig.GetComponent<PlayerScore>().ResetCurrentScore();
+		
 		if (scene.name != "Main")
 		{
 			return;
 		}
 
 		Debug.LogWarning("MainSceneLoad");
+		rig.GetComponent<PlayerScore>().ResetCurrentScore();
 		rig.GetComponent<ObjectFollow>().ResetPosition();
 		rig.GetComponent<UiManager>().ShowMainUi();
+		rig.GetComponent<UiManager>().InGame = false;
 	}
 
 	public void MainSceneUnLoad(Scene scene)
@@ -101,9 +102,11 @@ public class GameSceneLoadJmr : MonoBehaviour
 		Debug.LogWarning("SpaceSceneLoad");
 
 		GameObject rig = FindJmrRig();
+		rig.GetComponent<PlayerScore>().ResetCurrentScore();
 		rig.GetComponent<ObjectFollow>().ResetPosition();
 		rig.GetComponent<UiManager>().HideAllUi();
 		rig.GetComponent<UiManager>().ShowGameHudUi();
+		rig.GetComponent<UiManager>().InGame = true;
 	}
 
 	public void SpaceSceneUnLoad(Scene scene)
