@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using JMRSDK.InputModule;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSceneLoadJmr : MonoBehaviour
 {
+	IEnumerator HitSleep(float duration)
+	{
+
+		yield return new WaitForSecondsRealtime(duration);
+		Time.timeScale = 1f;
+	}
+
+
 	public void OnEnable()
 	{
 		// dumb shit
@@ -76,7 +85,38 @@ public class GameSceneLoadJmr : MonoBehaviour
 		{
 			return;
 		}
+		//switch controls for dive or holoboard
 
+		JMRInteractionManager.InteractionDeviceType deviceType;
+		deviceType = JMRInteractionManager.Instance.GetSupportedInteractionDeviceType();
+
+		Debug.Log("swaptut enable device type:" + deviceType.ToString());
+
+
+
+		/*
+		
+		if (deviceType == JMRInteractionManager.InteractionDeviceType.JIOGLASS_CONTROLLER)
+		{
+			Debug.Log("swaptut jiopro");
+			gameObject.GetComponent<RawImage>().texture = JioGlassProTutImg;
+		}
+		else if (deviceType == JMRInteractionManager.InteractionDeviceType.VIRTUAL_CONTROLLER)
+		{
+			Debug.Log("swaptut jiolite");
+			gameObject.GetComponent<RawImage>().texture = JioGlassLiteTutImg;
+		}
+		else if (deviceType == JMRInteractionManager.InteractionDeviceType.)
+		{
+			Debug.Log("swaptut jiolite");
+			gameObject.GetComponent<RawImage>().texture = JioGlassLiteTutImg;
+		}
+		else
+		{
+			Debug.Log("swaptut noConfig");
+		}
+
+		*/
 		Debug.LogWarning("MainSceneLoad");
 		rig.GetComponent<PlayerScore>().ResetCurrentScore();
 		rig.GetComponent<ObjectFollow>().ResetPosition();
@@ -107,6 +147,16 @@ public class GameSceneLoadJmr : MonoBehaviour
 		rig.GetComponent<UiManager>().HideAllUi();
 		rig.GetComponent<UiManager>().ShowGameHudUi();
 		rig.GetComponent<UiManager>().InGame = true;
+
+
+		//initial pause
+	
+		Time.timeScale = 0f;
+		StartCoroutine(HitSleep(3));
+	
+		//play video 
+		rig.GetComponent<UiManager>().jetSetGo.Play();
+		//unpause
 	}
 
 	public void SpaceSceneUnLoad(Scene scene)

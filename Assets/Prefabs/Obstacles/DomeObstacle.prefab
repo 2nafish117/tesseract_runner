@@ -48,8 +48,8 @@ MonoBehaviour:
   type: 30
   minRotation: {x: 0, y: 0, z: 0}
   maxRotation: {x: 0, y: 0, z: 0}
-  minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 3, y: 3, z: 3}
+  minScale: {x: 1, y: 0, z: 0}
+  maxScale: {x: 3, y: 0, z: 0}
   spawnUpright: 1
 --- !u!1001 &4952116729901571910
 PrefabInstance:

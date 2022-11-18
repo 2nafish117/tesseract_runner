@@ -35,6 +35,29 @@ public class JMRKeyboardSpawner : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Custom overloaded method to spawn keyboard for supporting webApps
+    /// </summary>
+    /// <param name="keyboardPosition">Position for spawning the position</param>
+    /// <param name="keyboardOffset">offset if necessary</param>
+    /// <returns></returns>
+    public bool SpawnKeyboard(Transform keyboardPosition, Vector3 keyboardOffset = default(Vector3))
+    {
+        if (!keyboardPrefab && !supportV2Keyboard)
+        {
+            return false;
+        }
+        else if (!keyboardV2Prefab && supportV2Keyboard)
+        {
+            return false;
+        }
+
+        JMRVirtualKeyBoard obj = Instantiate(supportV2Keyboard ? keyboardV2Prefab : keyboardPrefab).GetComponent<JMRVirtualKeyBoard>();
+        SetRaycastCameraToCanvas(obj.GetComponent<Canvas>());
+        obj.ShowKeyboard(keyboardPosition, keyboardOffset);
+        return true;
+    }
+
     private void SetRaycastCameraToCanvas(Canvas j_Canvas)
     {
         if (!j_Canvas)

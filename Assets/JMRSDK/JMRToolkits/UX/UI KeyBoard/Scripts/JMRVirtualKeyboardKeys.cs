@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 namespace JMRSDK.Toolkit.UI
 {
 
-    public class JMRVirtualKeyboardKeys : MonoBehaviour, IMessageHandler, IPointerDownHandler, IFocusable
+    public class JMRVirtualKeyboardKeys : MonoBehaviour, IMessageHandler, IPointerDownHandler, IFocusable, IPointerUpHandler
     {
         #region SERIALIZED FIELDS
         [SerializeField]
@@ -126,6 +126,12 @@ namespace JMRSDK.Toolkit.UI
             string res = isAction ? content : keyText.text;
             keyBoard.HandleMessage(res);
             j_animator.SetTrigger("Pressed");
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            string res = isAction ? content : keyText.text;
+            keyBoard.KeyUp(res);
         }
 
         #endregion

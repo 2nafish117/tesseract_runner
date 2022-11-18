@@ -44,6 +44,9 @@ namespace JMRSDK.Toolkit.UI
         private bool showInputfieldTxt = false;
         private bool isKeyBoardOpenedFirstTime = true;
         private bool isAllCaps = false;
+        private bool isBackSpacePressed = false;
+        private float backSpacePressTimer = 0f;
+        private char[] speechResultTrimChars = new char[] { '.', ',', '?' };
         #endregion
 
         #region PUBLIC FIELDS
@@ -68,6 +71,7 @@ namespace JMRSDK.Toolkit.UI
                 j_ThisTransform = transform;
             JMRInputManager.Instance.AddGlobalListener(gameObject);
             clearBtn.OnClick.AddListener(OnClearButtonClicked);
+            JMRInteractionManager.OnDisconnected += OnControllerDisconnected;
         }
 
         private void OnDisable()
@@ -77,6 +81,7 @@ namespace JMRSDK.Toolkit.UI
                 JMRInputManager.Instance.RemoveGlobalListener(gameObject);
             }
             clearBtn.OnClick.RemoveAllListeners();
+            JMRInteractionManager.OnDisconnected -= OnControllerDisconnected;
         }
 
         private string prevText = "";
@@ -89,12 +94,20 @@ namespace JMRSDK.Toolkit.UI
             {
                 j_counter += Time.deltaTime;
             }
-
+            if (isBackSpacePressed)
+            {
+                backSpacePressTimer += Time.deltaTime;
+                if (backSpacePressTimer >= 1.0f)
+                {
+                    OnClearButtonClicked();
+                    isBackSpacePressed = false;
+                }
+            }
             string suggestText = "";
             ellipsistext = "";
             if (j_input != null)
             {
-                if(isCleared)
+                if (isCleared)
                 {
                     suggestText = "";
                     isCleared = false;
@@ -128,7 +141,7 @@ namespace JMRSDK.Toolkit.UI
             else
             {
                 HideKeyBoard();
-              
+
             }
             j_prevButton = "";
         }
@@ -157,13 +170,13 @@ namespace JMRSDK.Toolkit.UI
             {
                 return;
             }
-           
+
             if (eventData.selectedObject == null || eventData.selectedObject.transform.root.GetComponent<JMRVirtualKeyBoard>() == null)
             {
-              
+
                 if (eventData.selectedObject == null || (eventData.selectedObject.tag != "Search" && (eventData.selectedObject.GetComponent<IKeyboardInput>() == null || eventData.selectedObject.GetComponent<IKeyboardInput>() != j_input)) && (eventData.selectedObject.tag != "Clear" && (eventData.selectedObject.GetComponent<IKeyboardInput>() == null || eventData.selectedObject.GetComponent<IKeyboardInput>() != j_input)))
                 {
-                        HideKeyBoard();
+                    HideKeyBoard();
                 }
             }
         }
@@ -183,23 +196,21 @@ namespace JMRSDK.Toolkit.UI
         }
         public void ShowKeyBoard(IKeyboardInput j_InputField)
         {
-            
             if (j_InputField == j_input)
             {
-              
+
                 return;
             }
-          
+
             if (!isListeningForVoiceCommand)
             {
                 JMRVoiceManager.OnSpeechResults += OnSpeechResult;
                 JMRVoiceManager.OnSpeechError += OnSpeechError;
                 JMRVoiceManager.OnSpeechCancelled += OnSpeechCancelled;
             }
-            
+
             if (!gameObject.activeInHierarchy)
             {
-         
                 gameObject.SetActive(true);
                 EnableKeyBoard(j_InputField);
             }
@@ -207,51 +218,50 @@ namespace JMRSDK.Toolkit.UI
             {
                 EnableKeyBoard(j_InputField);
             }
-            
+
 
 
             if (j_InputField != null && j_InputField != j_input)
             {
                 if (j_input != null)
                 {
-                    Debug.Log("VK==> Calling ONDESELCT 7777777777777777777777777777777777777 ");
                     j_input.OnDeselect();
                 }
 
                 MonoBehaviour inputField = (MonoBehaviour)j_InputField;
                 if (j_InputField.j_KeyboardPosition != null)
                 {
-                    if(j_InputField.isVirtualKeyBoard())
+                    if (j_InputField.isVirtualKeyBoard())
                     {
-                       
+
                         transform.position = j_InputField.v_KeyboardPosition.position;
                         transform.rotation = j_InputField.v_KeyboardPosition.rotation;
-                      
+
                     }
                     else
                     {
                         transform.position = j_InputField.j_KeyboardPosition.position;
                         transform.rotation = j_InputField.j_KeyboardPosition.rotation;
                     }
-                    
+
                 }
                 else
                 {
-                   
-                        
-                        if (inputField.transform.position.y >= 0)
-                        {
 
-                            transform.position = inputField.transform.position + Vector3.down * 0.4f;
-                            transform.rotation = inputField.transform.rotation;
-                        }
-                        else
-                        {
-                            transform.position = inputField.transform.position + Vector3.up * 0.4f;
-                            transform.rotation = inputField.transform.rotation;
-                        }
-                    
-                   
+
+                    if (inputField.transform.position.y >= 0)
+                    {
+
+                        transform.position = inputField.transform.position + Vector3.down * 0.4f;
+                        transform.rotation = inputField.transform.rotation;
+                    }
+                    else
+                    {
+                        transform.position = inputField.transform.position + Vector3.up * 0.4f;
+                        transform.rotation = inputField.transform.rotation;
+                    }
+
+
                 }
 
                 this.j_input = j_InputField;
@@ -265,6 +275,41 @@ namespace JMRSDK.Toolkit.UI
                 showInputfieldTxt = true;
             }
         }
+
+        /// <summary>
+        /// Custom overloaded method to show keyboard for webApps
+        /// </summary>
+        /// <param name="keyboardTransform">Transform of keyboard</param>
+        /// <param name="keyboardOffset">offset if necessary</param>
+        /// <returns></returns>
+        public void ShowKeyboard(Transform keyboardTransform, Vector3 keyboardOffset = default(Vector3))
+        {
+
+            if (!gameObject.activeInHierarchy)
+            {
+                VirtualKeyboardNotification.SetActive(false);
+                gameObject.SetActive(true);
+                Keyboard.SetActive(true);
+            }
+
+            //Not listening right now yet subscribing to voice commands
+            if (!isListeningForVoiceCommand)
+            {
+                JMRVoiceManager.OnSpeechResults += OnSpeechResult;
+                JMRVoiceManager.OnSpeechError += OnSpeechError;
+                JMRVoiceManager.OnSpeechCancelled += OnSpeechCancelled;
+            }
+
+            suggestedText.text = prevText = "";
+            if (keyboardTransform.position != null)
+            {
+                transform.position = keyboardTransform.position + keyboardOffset;
+                transform.rotation = keyboardTransform.rotation;
+            }
+            isShown = true;
+            HandleMessage(Constants.CASE_TAP);
+        }
+
         public void ResetPosition(MonoBehaviour inputField)
         {
             Debug.LogError(inputField.GetComponent<RectTransform>().rect.width);
@@ -286,7 +331,6 @@ namespace JMRSDK.Toolkit.UI
                 j_input.EditEnd();
                 if (!hideWithoutDeselect)
                 {
-                    Debug.Log("VK==> Calling ONDESELCT 888888888888888888888888888888 ");
                     j_input.OnDeselect();
                 }
             }
@@ -296,7 +340,6 @@ namespace JMRSDK.Toolkit.UI
                 voiceCommandField.EditEnd();
                 if (!hideWithoutDeselect)
                 {
-                    Debug.Log("VK==> Calling ONDESELCT 9999999999999999999999999999999999999999 ");
                     voiceCommandField.OnDeselect();
                 }
             }
@@ -304,7 +347,6 @@ namespace JMRSDK.Toolkit.UI
             {
                 if (!hideWithoutDeselect)
                 {
-                    Debug.Log("VK==> Calling ONDESELCT 1001010101010101001001010101111111111111 ");
                     j_input.OnDeselect();
                 }
             }
@@ -320,7 +362,7 @@ namespace JMRSDK.Toolkit.UI
             {
                 this.j_input = null;
             }
-            else if(hideWitoutNotify)
+            else if (hideWitoutNotify)
             {
                 this.j_input = null;
             }
@@ -337,7 +379,7 @@ namespace JMRSDK.Toolkit.UI
             gameObject.SetActive(false);
             OnHideKeyboard?.Invoke();
         }
-        
+
 
         /// <summary>
         /// Register New Key.
@@ -354,8 +396,8 @@ namespace JMRSDK.Toolkit.UI
         /// <param name="command"></param>
         public void HandleMessage(string command)
         {
-            if(!isUpperCase)
-                j_counter =0;
+            if (!isUpperCase)
+                j_counter = 0;
 
             switch (command)
             {
@@ -383,7 +425,7 @@ namespace JMRSDK.Toolkit.UI
                     }
                     else
                     {
-                        if(isKeyBoardOpenedFirstTime)
+                        if (isKeyBoardOpenedFirstTime)
                         {
                             isUpperCase = isTempUpper = true;
                         }
@@ -396,25 +438,17 @@ namespace JMRSDK.Toolkit.UI
                     }
 
                     string cntrl = isTempUpper ? Constants.CASE_UPPER : Constants.CASE_LOWER;
-                    
+
                     if (j_handler != null)
                         j_handler(cntrl);
                     break;
                 case Constants.BACK_SPACE:
                     if (j_input == null || j_input.Text.Length <= 0)
                         break;
-                    if (j_prevButton == command && j_counter < j_doubleTapDelay)
-                    {
-                        j_input.Text = "";
-                        suggestedText.text = cachedTex = "";
-                        ellipsistext = "";
-                    }
-                    else
-                    {
-                        j_input.Text = j_input.Text.Substring(0, j_input.Text.Length - 1);
-                        if (j_input.Text.Length < cachedTex.Length)
-                            cachedTex = j_input.Text;// j_input.Text.Substring(cachedTex.Length, j_input.Text.Length - cachedTex.Length);
-                    }
+                    isBackSpacePressed = true;
+                    j_input.Text = j_input.Text.Substring(0, j_input.Text.Length - 1);
+                    if (j_input.Text.Length < cachedTex.Length)
+                        cachedTex = j_input.Text;// j_input.Text.Substring(cachedTex.Length, j_input.Text.Length - cachedTex.Length);
                     break;
                 case Constants.ALPHABETS:
                     if (alphabets.activeInHierarchy)
@@ -422,7 +456,7 @@ namespace JMRSDK.Toolkit.UI
                     special_characters.SetActive(false);
                     alphabets.gameObject.SetActive(true);
                     special_charactersText.SetActive(false);
-                    alphabetsText.gameObject.SetActive(true); 
+                    alphabetsText.gameObject.SetActive(true);
                     break;
                 case Constants.SPECIAL_CHARACTERS:
                     if (special_characters.activeInHierarchy)
@@ -441,7 +475,7 @@ namespace JMRSDK.Toolkit.UI
                 case Constants.ENTER:
                     j_input.HandleKeyboardEnterKey();
                     HideKeyBoard();
-                   
+
                     break;
                 case Constants.NEWLINE:
                     if (j_input.isMultiLineSupported())
@@ -456,7 +490,7 @@ namespace JMRSDK.Toolkit.UI
                         voiceCommandField = j_input;
                         isListeningForVoiceCommand = true;
                         HideKeyBoard(true, true);
-                      
+
                     }
                     break;
                 default:
@@ -493,9 +527,9 @@ namespace JMRSDK.Toolkit.UI
                 if (obj == "ERROR_NO_MATCH")
                 {
                     HideKeyBoard();
-                  
+
                 }
-                
+
                 else
                     ShowKeyBoard(voiceCommandField);
             }
@@ -509,7 +543,7 @@ namespace JMRSDK.Toolkit.UI
             {
                 isListeningForVoiceCommand = false;
                 HideKeyBoard();
-               
+
             }
             voiceCommandField = null;
         }
@@ -519,13 +553,30 @@ namespace JMRSDK.Toolkit.UI
             JMRVoiceManager.Instance.HideVoiceToolkit();
             if (isListeningForVoiceCommand && voiceCommandField != null)
             {
-                prevText = voiceCommandField.Text = command;
+                prevText = voiceCommandField.Text = command.Trim(speechResultTrimChars);
                 isListeningForVoiceCommand = false;
                 HideKeyBoard(false, false, true);
 
             }
             voiceCommandField = null;
         }
+
+        private void OnControllerDisconnected(JMRInteractionManager.InteractionDeviceType deviceType, int id, string s)
+        {
+            if (deviceType == JMRInteractionManager.InteractionDeviceType.VIRTUAL_CONTROLLER)
+            {
+                if (VirtualKeyboardNotification.activeSelf)
+                {
+                    VirtualKeyboardNotification.SetActive(false);
+                    if (j_input != null)
+                    {
+                        j_input.OnDeselect();
+                        j_input = null;
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// Handle Virtual Keyboard Actions.
@@ -541,6 +592,19 @@ namespace JMRSDK.Toolkit.UI
         /// <param name="listener"></param>
         public void OnSearch(UnityAction listener)
         {
+        }
+
+        public void KeyUp(string command)
+        {
+            switch (command)
+            {
+                case Constants.BACK_SPACE:
+                    isBackSpacePressed = false;
+                    backSpacePressTimer = 0f;
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion        
@@ -564,7 +628,7 @@ namespace JMRSDK.Toolkit.UI
 
             // Set the parameters for LookAtConstraint for the Keyboard to look at Camera.
             j_LookAtSource.sourceTransform = JMRCameraUtility.Main.transform;
-             lookAt.SetSource(0, j_LookAtSource);
+            lookAt.SetSource(0, j_LookAtSource);
             lookAt.constraintActive = false;
 
             isUpperCase = isTempUpper = true;

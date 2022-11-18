@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JMRSDK.InputModule;
+using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour, IBackHandler, IHomeHandler
 {
@@ -9,6 +11,7 @@ public class UiManager : MonoBehaviour, IBackHandler, IHomeHandler
 	public GamePauseUiManager GamePauseUI;
 	public GameOverUiManager GameOverUI;
 	public GameHudUiManager GameHudUI;
+	public VideoPlayer jetSetGo;
 
 	public bool InGame = false;
 	public bool GamePaused = false;
@@ -30,11 +33,13 @@ public class UiManager : MonoBehaviour, IBackHandler, IHomeHandler
 
 	public void OnEnable()
 	{
+		Debug.LogWarning("adding listener uimgr");
 		JMRInputManager.Instance.AddGlobalListener(gameObject);
 	}
 
 	public void OnDisable()
 	{
+		Debug.LogWarning("removing listener uimgr");
 		JMRInputManager.Instance.RemoveGlobalListener(gameObject);
 	}
 
@@ -88,9 +93,9 @@ public class UiManager : MonoBehaviour, IBackHandler, IHomeHandler
 			return;
 
 		ShowGamePauseUi();
-		Time.timeScale = 0f;
+		Time.timeScale = 0.001f;
 		GamePaused = true;
-		Debug.LogWarning("paused");
+		Debug.LogWarning("sid paused");
 	}
 
 	public void Unpause()
@@ -101,22 +106,28 @@ public class UiManager : MonoBehaviour, IBackHandler, IHomeHandler
 		HideAllUi();
 		Time.timeScale = 1f;
 		GamePaused = false;
-		Debug.LogWarning("unpaused");
+		Debug.LogWarning("sid unpaused");
 	}
 
 	public void OnBackAction()
 	{
+		Debug.LogWarning("sid OnBackAction");
+
 		if (GamePaused)
 		{
-			Unpause();
+			Debug.LogWarning("sid Unpause");
+			//Unpause();
 		} else
 		{
+			Debug.LogWarning("sid Pause");
 			Pause();
 		}
+		
 	}
 
 	public void OnHomeAction()
 	{
-		Pause();
+		Debug.LogWarning("sid OnHomeAction");
+		SceneManager.LoadScene("Main");
 	}
 }

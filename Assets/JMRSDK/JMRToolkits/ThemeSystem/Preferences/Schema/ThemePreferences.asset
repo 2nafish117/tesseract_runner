@@ -23,7 +23,7 @@ MonoBehaviour:
         examples: 
     colors:
     - name: PrimaryLayer
-      color: '#FF4C4C'
+      color: '#3333FF'
     - name: SecondaryLayer
       color: '#FFFFFF'
     - name: HoverLayer
@@ -39,11 +39,11 @@ MonoBehaviour:
     - name: SecondaryDisabledLayer
       color: '#D8D8D8'
     - name: PrimaryTextLayer
-      color: '#D9D9D9'
+      color: '#FFFFFF'
     - name: SecondaryTextLayer
       color: '#24242F'
     - name: BackgroundTextLayer
-      color: '#000000'
+      color: '#FFFFFF'
     - name: ErrorTextLayer
       color: '#F2F2F2'
     - name: SurfaceTextLayer

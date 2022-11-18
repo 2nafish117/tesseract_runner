@@ -5,18 +5,20 @@ using JMRSDK.InputModule;
 
 public class PlayerScore : MonoBehaviour
 {
-	public int IncrementAmount = 10;
-	public float IncrementDuration = 1.0f;
+	public float IncrementAmount = 0.3f;
+	public float IncrementDuration = 0.1f;
 
 	[HideInInspector]
-	static public int CurrentScore = 0;
+	static public float CurrentScore = 0;
 	[HideInInspector]
-	static public int HighScore = 0;
-
+	static public float HighScore = 0;
+	private bool keepIncrement = false;
 	public void OnEnable()
 	{
 		PlayerController.OnPlayerDie += OnPlayerDied;
 		PlayerController.OnPlayerSpawn += OnPlayerSpawn;
+		PlayerPrefs.SetFloat("HighScore", 0);
+		keepIncrement = true;
 	}
 
 	public void OnDisable()
@@ -27,6 +29,7 @@ public class PlayerScore : MonoBehaviour
 
 	public void ResetCurrentScore()
 	{
+		keepIncrement = true;
 		CurrentScore = 0;
 		GetComponent<UiManager>().GameOverUI.SetScore(0);
 	}
@@ -36,17 +39,28 @@ public class PlayerScore : MonoBehaviour
 	private void Update()
 	{
 
-		if (Time.time - incrementTime > IncrementDuration)
+		if (Time.time - incrementTime > IncrementDuration && keepIncrement)
 		{
 			CurrentScore += IncrementAmount;
+		
 			incrementTime = Time.time;
-			GetComponent<UiManager>().GameHudUI.SetScore(CurrentScore);
+			GetComponent<UiManager>().GameHudUI.SetScore((int)CurrentScore);
 		}
 	}
 
 	private void OnPlayerDied()
 	{
-		GetComponent<UiManager>()?.GameOverUI.SetScore(CurrentScore);
+		keepIncrement = false;
+		GetComponent<UiManager>()?.GameOverUI.SetScore((int)CurrentScore);
+		HighScore = PlayerPrefs.GetFloat("HighScore");
+
+		if (HighScore < CurrentScore)
+        {
+			HighScore = CurrentScore;
+			PlayerPrefs.SetFloat("HighScore", HighScore);
+			GetComponent<UiManager>()?.GameOverUI.SetHighScore((int)HighScore);
+
+		}
 	}
 
 	private void OnPlayerSpawn()

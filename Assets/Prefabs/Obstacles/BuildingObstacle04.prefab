@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4647110041126697364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7088324, z: 0, w: 0.705377}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 8298605845748501304}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.28, z: 0}
 --- !u!114 &381342061037708059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ca99dcffe2b474f96b13f14d7d026a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 16
-  minRotation: {x: 0, y: 0, z: 0}
-  maxRotation: {x: 0, y: 0, z: 0}
-  minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 1, y: 1, z: 1}
+  type: 24
+  minRotation: {x: 0, y: -180, z: 0}
+  maxRotation: {x: 0, y: 180, z: 0}
+  minScale: {x: 0.6, y: 0, z: 0}
+  maxScale: {x: 1.2, y: 0, z: 0}
   spawnUpright: 0
 --- !u!1001 &8403764669011766483
 PrefabInstance:

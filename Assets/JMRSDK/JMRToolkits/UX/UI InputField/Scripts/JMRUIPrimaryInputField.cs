@@ -141,7 +141,7 @@ namespace JMRSDK.Toolkit.UI
 
         protected int j_CaretSelectPositionInternal { get { return j_CaretSelectPosition + j_CompositionString.Length; } set { j_CaretSelectPosition = value; ClampCaretPos(ref j_CaretSelectPosition); } }
         protected int j_StringSelectPositionInternal { get { return j_StringSelectPosition + j_CompositionString.Length; } set { j_StringSelectPosition = value; ClampStringPos(ref j_StringSelectPosition); } }
-        
+
         private bool isFieldSelected;
         #endregion
 
@@ -629,8 +629,8 @@ namespace JMRSDK.Toolkit.UI
 
         //[SerializeField]
         protected Scrollbar verticalScrollbar;
-       // [SerializeField]
-      //  private GameObject VirtualKeyboardNote;
+        // [SerializeField]
+        //  private GameObject VirtualKeyboardNote;
         //[SerializeField]
         protected TMP_ScrollbarEventHandler verticalScrollbarEventHandler;
         public Transform j_KeyboardPosition { get => KeyboardSpawnPoint; set => KeyboardSpawnPoint = value; }
@@ -938,11 +938,11 @@ namespace JMRSDK.Toolkit.UI
             //Debug.Log("*** OnEnable() *** - " + this.name);
 
             base.OnEnable();
-            if(isVirtualKeyBoard())
+            if (isVirtualKeyBoard())
             {
                 clearButton.gameObject.SetActive(false);
             }
-         //   onSelectionInputField += OnSelectionInputField;
+            //   onSelectionInputField += OnSelectionInputField;
             if (clearButton == null && GetComponentInChildren<JMRUIPrimaryButton>())
             {
                 clearButton = GetComponentInChildren<JMRUIPrimaryButton>();
@@ -1005,8 +1005,13 @@ namespace JMRSDK.Toolkit.UI
                 // Cache reference to Vertical Scrollbar RectTransform and add listener.
                 if (verticalScrollbar != null)
                 {
-                    // textComponent.ignoreRectMaskCulling = true;
+#if UNITY_2020_1_OR_NEWER
+
                     verticalScrollbar.onValueChanged.AddListener(OnScrollbarValueChange);
+#elif UNITY_2019
+                    //textComponent.ignoreRectMaskCulling = true;
+                    verticalScrollbar.onValueChanged.AddListener(OnScrollbarValueChange);
+#endif
                 }
 
                 UpdateLabel();
@@ -1014,9 +1019,8 @@ namespace JMRSDK.Toolkit.UI
             if (clearButton != null)
             {
                 clearButton.OnClick.AddListener(onClearButtonClicked);
-                Debug.Log("here2");
-                if(!isVirtualKeyBoard())
-                clearButton.gameObject.SetActive(textComponent.text.Length > 1);
+                if (!isVirtualKeyBoard())
+                    clearButton.gameObject.SetActive(textComponent.text.Length > 1);
             }
             // Subscribe to event fired when text object has been regenerated.
             TMPro_EventManager.TEXT_CHANGED_EVENT.Add(ON_TEXT_CHANGED);
@@ -1043,7 +1047,7 @@ namespace JMRSDK.Toolkit.UI
         private void OnSoftKeyboardDismissed(int toSource, int deviceType)
         {
             JMRVirtualKeyBoard.Instance.HideKeyBoard();
-            
+
         }
         public void SoftKeyboardTextInput(string textValue)
         {
@@ -1055,7 +1059,7 @@ namespace JMRSDK.Toolkit.UI
         }
         public void SetSoftKeyboardTextInput(string text)
         {
-           JMRInteractionManager.Instance.setSoftKeyboardTextInput(text);
+            JMRInteractionManager.Instance.setSoftKeyboardTextInput(text);
         }
         public int GetContentType()
         {
@@ -1101,25 +1105,25 @@ namespace JMRSDK.Toolkit.UI
             }
             return false;
         }
-        
+
         #endregion
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
-          
+
             if (!isSelected)
             {
-             
+
                 if (IsVirtualKeyBoardConncted())
-                {                   
-                  
+                {
+
                     if (eventData.selectedObject == null || eventData.selectedObject.tag == "Clear")
                     {
-                      
+
                         return;
                     }
                     else
                     {
-                       
+
                         base.OnSelectClicked(eventData);
                         ActivateInputFieldInternal();
                         SubscribeSoftKeyboardCallbacks();
@@ -1128,37 +1132,37 @@ namespace JMRSDK.Toolkit.UI
                 }
                 else
                 {
-                   
+
                     base.OnSelectClicked(eventData);
                     ActivateInputFieldInternal();
                 }
 
-                if(!isVirtualKeyBoard())
-                clearButton.gameObject.SetActive(textComponent.text.Length > 1);
+                if (!isVirtualKeyBoard())
+                    clearButton.gameObject.SetActive(textComponent.text.Length > 1);
             }
- 
-         
+
+
         }
-            /*  public void DeselectPreviousInputField(SelectClickEventData eventData)
+        /*  public void DeselectPreviousInputField(SelectClickEventData eventData)
+    {
+
+        if (lastInputField != null)
         {
-            
-            if (lastInputField != null)
+            JMRUIPrimaryInputField previousIF = (JMRUIPrimaryInputField)lastInputField;
+
+            if (lastInputField != this )
             {
-                JMRUIPrimaryInputField previousIF = (JMRUIPrimaryInputField)lastInputField;
-               
-                if (lastInputField != this )
-                {
-                    previousIF.OnDeselect();
-                }
+                previousIF.OnDeselect();
             }
-           
-            onSelectionInputField?.Invoke(this);
-        }*/
+        }
+
+        onSelectionInputField?.Invoke(this);
+    }*/
         protected override void OnDisable()
         {
             // the coroutine will be terminated, so this will ensure it restarts when we are next activated
             base.OnDisable();
-            
+
             j_BlinkCoroutine = null;
 
             DeactivateInputField();
@@ -1196,8 +1200,8 @@ namespace JMRSDK.Toolkit.UI
         // TODO: Make LateUpdate a coroutine instead. Allows us to control the update to only be when the field is active.
         private void LateUpdate()
         {
-           
-         
+
+
 
             if (!InteractableActive())
                 return;
@@ -1217,7 +1221,7 @@ namespace JMRSDK.Toolkit.UI
             {
                 if (!Focused)
                 {
-                   // ActivateInputFieldInternal();
+                    // ActivateInputFieldInternal();
                     j_ShouldActivateNextUpdate = false;
                     return;
                 }
@@ -1268,7 +1272,7 @@ namespace JMRSDK.Toolkit.UI
                         SendTouchScreenKeyboardStatusChanged();
                     }
                 }
-              
+
                 OnDeselect();
                 return;
             }
@@ -1303,7 +1307,6 @@ namespace JMRSDK.Toolkit.UI
                             j_SoftKeyboard.text = text;
 
                             OnSubmit(null);
-                            Debug.LogError("Calling From Late Update22222");
                             OnDeselect();
                             return;
                         }
@@ -1344,8 +1347,6 @@ namespace JMRSDK.Toolkit.UI
             {
                 if (j_SoftKeyboard.status == TouchScreenKeyboard.Status.Canceled)
                     j_WasCanceled = true;
-
-                Debug.LogError("Calling From Late Update33333");
                 OnDeselect();
             }
         }
@@ -1581,7 +1582,7 @@ namespace JMRSDK.Toolkit.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            
+
 
             if (!InteractableActive())
                 return;
@@ -1848,39 +1849,29 @@ namespace JMRSDK.Toolkit.UI
         }
         public void OnSelect(BaseEventData eventData)
         {
-            
+
             if (!InteractableActive())
                 return;
 
             //base.OnSelect(eventData);
 
             SendOnFocus();
-            
+
             ActivateInputField();
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-           Debug.LogError("OnPointerClick");
-            
             if (!InteractableActive())
                 return;
-            
-          
 
-            if (true)//Bhumit
+            if (JMRVirtualKeyBoard.Instance)
             {
-                if (JMRVirtualKeyBoard.Instance)
-                {
-                    JMRVirtualKeyBoard.Instance.ShowKeyBoard(this);
-                }
-                else
-                {
-                    if (!JMRKeyboardSpawner.Instance.SpawnKeyboard(this))
-                            Debug.LogError("Cant find keyboard prefab");
-                    
-                }
-
-
+                JMRVirtualKeyBoard.Instance.ShowKeyBoard(this);
+            }
+            else
+            {
+                if (!JMRKeyboardSpawner.Instance.SpawnKeyboard(this))
+                    Debug.LogError("Cant find keyboard prefab");
             }
 
             if (eventData.button != PointerEventData.InputButton.Left)
@@ -2257,9 +2248,9 @@ namespace JMRSDK.Toolkit.UI
         {
             if (clearButton != null)
             {
-                if(isFieldSelected && !isVirtualKeyBoard())
+                if (isFieldSelected && !isVirtualKeyBoard())
                 {
-                clearButton.gameObject.SetActive(textComponent.text.Length > 1);
+                    clearButton.gameObject.SetActive(textComponent.text.Length > 1);
                 }
             }
 
@@ -4031,7 +4022,7 @@ namespace JMRSDK.Toolkit.UI
         {
             return IsVirtualKeyBoardConncted();
         }
-        
+
         public void OnDeselect()
         {
             if (!InteractableActive())
@@ -4040,14 +4031,11 @@ namespace JMRSDK.Toolkit.UI
             if (isSelected)
             {
                 base.OnSelectClicked(null);
-                
+
                 if (IsVirtualKeyBoardConncted())
                 {
                     UnSubscribeSoftKeyboardCallbacks();
-                }
-                if(!isVirtualKeyBoard())
-                {
-                clearButton.gameObject.SetActive(false);
+                    clearButton.gameObject.SetActive(false);
                 }
             }
             DeactivateInputField();

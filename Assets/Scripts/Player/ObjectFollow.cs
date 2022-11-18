@@ -9,6 +9,12 @@ public class ObjectFollow : MonoBehaviour
 	[Range(0.1f, 30.0f)]
 	public float factor = 20.0f;
 
+	IEnumerator waitGameOverUI(float waitTime)
+	{ //creating a function
+		yield return new WaitForSeconds(waitTime); //tell unity to wait!!
+		GetComponent<UiManager>().ShowGameOverUi();
+
+	}
 
 	private void OnEnable()
 	{
@@ -42,7 +48,8 @@ public class ObjectFollow : MonoBehaviour
 
 	void OnPlayerDie()
 	{
-		GetComponent<UiManager>().ShowGameOverUi();
+		StartCoroutine(waitGameOverUI(2));
+
 	}
 
 	public void ResetPosition()

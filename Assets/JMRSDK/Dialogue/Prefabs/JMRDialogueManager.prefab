@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 1080419910, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 2513651572665337633, guid: a436474695823ed4286db14359b6dee4,
+  dialogue: {fileID: 1930247339834105835, guid: 26e70f0a49b54ef489c98d43805ea798,
     type: 3}
+  head: {fileID: 0}
 --- !u!1001 &6747692436407214606
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ca99dcffe2b474f96b13f14d7d026a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 16
-  minRotation: {x: 0, y: 0, z: 0}
-  maxRotation: {x: 0, y: 0, z: 0}
-  minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 1, y: 1, z: 1}
+  type: 24
+  minRotation: {x: 0, y: -180, z: 0}
+  maxRotation: {x: 0, y: 180, z: 0}
+  minScale: {x: 0.6, y: 0, z: 0}
+  maxScale: {x: 1.2, y: 0, z: 0}
   spawnUpright: 1
 --- !u!1001 &8551213816032821290
 PrefabInstance:

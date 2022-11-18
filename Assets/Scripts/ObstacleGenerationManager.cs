@@ -24,7 +24,25 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 	// spawn rates variables
 	private float obstacleSpawnTime = 0.0f;
+	private int obstacleRangeLimit = 0;
+	private int scoreTarget = 5;
 
+	public GameObject FindJmrRig()
+	{
+		GameObject[] rigs = GameObject.FindGameObjectsWithTag("JmrRig");
+		GameObject rig = null;
+
+		if (rigs.Length > 0)
+		{
+			rig = rigs[0];
+		}
+		else
+		{
+			Debug.LogWarning("JmrRig not found !!");
+		}
+
+		return rig;
+	}
 	public static void RegisterPlayer(GameObject obj)
 	{
 		player = obj;
@@ -98,19 +116,20 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 	private Vector3 GetRandomScale(Vector3 minScale, Vector3 maxScale)
 	{
+		float randScale = RandomFloat(minScale.x, maxScale.x);
 		return new Vector3(
-				RandomFloat(minScale.x, maxScale.x),
-				RandomFloat(minScale.y, minScale.y),
-				RandomFloat(minScale.z, minScale.z)
+				randScale,
+				randScale,
+				randScale
 			);
 	}
 
 	private Vector3 GetRandomRotation(Vector3 minRot, Vector3 maxRot)
 	{
 		return new Vector3(
-			RandomFloat(-minRot.x, maxRot.x),
-			RandomFloat(-minRot.y, maxRot.y),
-			RandomFloat(-minRot.z, maxRot.z)
+			RandomFloat(minRot.x, maxRot.x),
+			RandomFloat(minRot.y, maxRot.y),
+			RandomFloat(minRot.z, maxRot.z)
 		);
 	}
 
@@ -142,9 +161,20 @@ public class ObstacleGenerationManager : MonoBehaviour
 
 	private GameObject PickObstacle()
 	{
-		if(obstaclePrefabs.Length > 0)
+		
+		Debug.Log("sidscore scoreTarget:" + scoreTarget + "CurrentScore:" + PlayerScore.CurrentScore + "obstacleRangeLimit:" + obstacleRangeLimit + "obstaclePrefabs.Length:" + obstaclePrefabs.Length);
+		if (PlayerScore.CurrentScore > scoreTarget && obstacleRangeLimit < obstaclePrefabs.Length)
+        {
+			
+			scoreTarget = scoreTarget + 10;
+			obstacleRangeLimit++;
+
+		}
+		
+
+		if (obstaclePrefabs.Length > 0)
 		{
-			int r = randomGenerator.Next(0, obstaclePrefabs.Length);
+			int r = randomGenerator.Next(0, obstacleRangeLimit);
 			return obstaclePrefabs[r];
 		}
 
@@ -172,37 +202,44 @@ public class ObstacleGenerationManager : MonoBehaviour
 		Vector3 position = GetRandomPosition(region);
 
 		Vector3 scale = GetRandomScale(minScale, maxScale);
+		//Debug.LogWarning("sidlog minrot and mxrot" + minRot+" "+ maxRot);
 
 		Vector3 rotation = GetRandomRotation(minRot, maxRot);
 
 		GameObject instance = GameObject.Instantiate(obstacle);
 		instance.transform.position = region.transform.position + position;
 		instance.transform.localScale = scale;
+		
+		//Debug.LogWarning("sidlog rot"+rotation);
 		instance.transform.localEulerAngles = rotation;
-
 		if (spawnUpright)
 		{
 			if (region == rightObstacleRegion)
 			{
-				instance.transform.LookAt(instance.transform.position + Vector3.down, Vector3.right);
-				//Debug.LogWarning("right");
+				Vector3 rotationFliped = new Vector3(rotation.x, rotation.y, rotation.z + 90);
+				instance.transform.localEulerAngles = rotationFliped;
+				Debug.LogWarning("right");
 			}
 			if (region == leftObstacleRegion)
 			{
-				instance.transform.LookAt(instance.transform.position + Vector3.up, Vector3.right);
-				//Debug.LogWarning("left");
+				Vector3 rotationFliped = new Vector3(rotation.x, rotation.y, rotation.z - 90);
+				instance.transform.localEulerAngles = rotationFliped;
+				Debug.LogWarning("left");
 			}
 			if (region == upObstacleRegion)
 			{
-				instance.transform.LookAt(instance.transform.position + Vector3.back, Vector3.up);
-				//Debug.LogWarning("up");
+				Vector3 rotationFliped = new Vector3(rotation.x, rotation.y, rotation.z + 180);
+				instance.transform.localEulerAngles = rotationFliped;
+				Debug.LogWarning("up");
 			}
 			if (region == downObstacleRegion)
 			{
-				instance.transform.LookAt(instance.transform.position + Vector3.forward, Vector3.up);
-				//Debug.LogWarning("down");
+				instance.transform.LookAt(instance.transform.position + Vector3.forward, Vector3.down);
+				Debug.LogWarning("down");
 			}
 		}
+
+		
 
 	}
 

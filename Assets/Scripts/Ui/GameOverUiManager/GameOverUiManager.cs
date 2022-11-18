@@ -14,20 +14,20 @@ public class GameOverUiManager : MonoBehaviour, IBackHandler
 
 	public void OnEnable()
 	{
-		JMRInputManager.Instance.AddGlobalListener(gameObject);
+		//JMRInputManager.Instance.AddGlobalListener(gameObject);
 	}
 
 	public void OnDisable()
 	{
-		JMRInputManager.Instance.RemoveGlobalListener(gameObject);
+		//JMRInputManager.Instance.RemoveGlobalListener(gameObject);
 	}
 
-	public void SetScore(int value)
+	public void SetScore(float value)
 	{
 		score.text = value.ToString();
 	}
 
-	public void SetHighScore(int value)
+	public void SetHighScore(float value)
 	{
 		highScore.text = value.ToString();
 	}

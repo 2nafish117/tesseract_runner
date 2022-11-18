@@ -276,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2097646184649963691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -599,6 +599,7 @@ MonoBehaviour:
   global: 0
   showAppearAnimation: 0
   text: {fileID: 8776839096430649628}
+  textTMP: {fileID: 0}
   onClick:
     m_PersistentCalls:
       m_Calls: []
@@ -977,8 +978,15 @@ MonoBehaviour:
   HeaderIcon: {fileID: 2097646184649963684}
   Header: {fileID: 3844024602939091470}
   Body: {fileID: 2108580945897153687}
+  HeaderTMP: {fileID: 0}
+  BodyTMP: {fileID: 0}
   YesButton: {fileID: 7179419591879290452}
   NoButton: {fileID: 843088666462753228}
+  CAIcon: {fileID: 0}
+  OSIcon: {fileID: 0}
+  AppIcon: {fileID: 0}
+  redWarning: {fileID: 0}
+  ExitWarning: {fileID: 21300000, guid: 1e71cd2d8872d2242ae1ffc654cbffea, type: 3}
 --- !u!1 &3600469512775909629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,6 +1802,7 @@ MonoBehaviour:
   global: 0
   showAppearAnimation: 0
   text: {fileID: 7775170493121990129}
+  textTMP: {fileID: 0}
   onClick:
     m_PersistentCalls:
       m_Calls: []

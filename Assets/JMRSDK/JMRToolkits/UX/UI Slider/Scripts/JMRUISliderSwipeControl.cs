@@ -13,6 +13,8 @@ namespace JMRSDK.Toolkit.UI
         [SerializeField]
         private float j_SwipeDelay;
         public bool supportStep = false;
+        [SerializeField]
+        private bool invertSwipe = false;
         private Slider j_Slider;
         private Slider.Direction j_SlDirection;
         private int j_SwipeDirectionCntrl;
@@ -48,7 +50,14 @@ namespace JMRSDK.Toolkit.UI
             }
 
             j_Timer = 0;
-            ProcessSwipe(Direction.Vertical, supportStep? step:value * cntrl);
+            if (invertSwipe)
+            {
+                ProcessSwipe(Direction.Vertical, -1f * (supportStep ? step : value * cntrl));
+            }
+            else
+            {
+                ProcessSwipe(Direction.Vertical, supportStep ? step : value * cntrl);
+            }
         }
 
         public void OnSwipeDown(SwipeEventData eventData, float value)
@@ -59,7 +68,14 @@ namespace JMRSDK.Toolkit.UI
             }
 
             j_Timer = 0;
-            ProcessSwipe(Direction.Vertical, supportStep ? -step : value * cntrl);
+            if (invertSwipe)
+            {
+                ProcessSwipe(Direction.Vertical, -1f * (supportStep ? -step : value * cntrl));
+            }
+            else
+            {
+                ProcessSwipe(Direction.Vertical, supportStep ? -step : value * cntrl);
+            }
         }
 
         public void OnSwipeLeft(SwipeEventData eventData, float value)
@@ -70,7 +86,15 @@ namespace JMRSDK.Toolkit.UI
             }
 
             j_Timer = 0;
-            ProcessSwipe(Direction.Horizontal, supportStep ? -step : value * cntrl);
+            if (invertSwipe)
+            {
+                ProcessSwipe(Direction.Horizontal, -1f * (supportStep ? -step : value * cntrl));
+            }
+            else
+            {
+                ProcessSwipe(Direction.Horizontal, supportStep ? -step : value * cntrl);
+            }
+
         }
 
         public void OnSwipeRight(SwipeEventData eventData, float value)
@@ -81,7 +105,15 @@ namespace JMRSDK.Toolkit.UI
             }
 
             j_Timer = 0;
-            ProcessSwipe(Direction.Horizontal, supportStep ? step : value * cntrl);
+            if (invertSwipe)
+            {
+                ProcessSwipe(Direction.Horizontal, -1f * (supportStep ? step : value * cntrl));
+            }
+            else
+            {
+                ProcessSwipe(Direction.Horizontal, supportStep ? step : value * cntrl);
+            }
+
         }
 
         public void OnSwipeStarted(SwipeEventData eventData)
@@ -124,7 +156,7 @@ namespace JMRSDK.Toolkit.UI
         {
             base.Update();
 
-            if(prevInteractable != j_Slider.interactable)
+            if (prevInteractable != j_Slider.interactable)
             {
                 interactable = j_Slider.interactable;
             }
@@ -145,7 +177,7 @@ namespace JMRSDK.Toolkit.UI
 
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
-            
+
         }
 
         private void CalculateNewStep()

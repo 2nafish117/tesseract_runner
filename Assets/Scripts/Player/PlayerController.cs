@@ -7,12 +7,12 @@ using JMRSDK.InputModule;
 public class PlayerController : MonoBehaviour
 {
 	static public float StrafeAcceleration = 600.0f;
-	static public float ForwardAcceleration = 1800.0f;
+	static public float ForwardAcceleration = 2*1800.0f;
 	static public float RotationSpeed = 6.0f;
 
 	public TrailRenderer[] trails;
 	public ParticleSystem explosion;
-
+	public TextMesh textmesh;
 	[HideInInspector]
 	static public bool EnableInput = true;
 
@@ -30,8 +30,9 @@ public class PlayerController : MonoBehaviour
 		ControllerOrientation
 	}
 
-	public InputMethod inputMethod = InputMethod.ControllerOrientation;
-
+	//public InputMethod inputMethod = InputMethod.ControllerOrientation;
+	
+	public InputMethod inputMethod = InputMethod.Keyboard;
 	private Quaternion maxRightRotation = new Quaternion(0, 0, -0.5f, 0.866025388f);
 	private Quaternion maxLeftRotation = new Quaternion(0, 0, 0.5f, 0.866025388f);
 	private Quaternion maxUpRotation = new Quaternion(-0.258819103f, 0, 0, 0.965925813f);
@@ -59,6 +60,15 @@ public class PlayerController : MonoBehaviour
 	{
 		OnPlayerSpawn?.Invoke();
 		EnableInput = true;
+		if(JMRPointerManager.Instance.PrefferedPointingSource == JMRPointerManager.PointingSource.Head)
+        {
+			inputMethod = InputMethod.HeadOrientation;
+		} else if (JMRPointerManager.Instance.PrefferedPointingSource == JMRPointerManager.PointingSource.JioGlassController)
+        {
+			inputMethod = InputMethod.ControllerOrientation;
+		}
+
+
 	}
 
 	Vector3 GetKeyboardMovement()
@@ -82,7 +92,7 @@ public class PlayerController : MonoBehaviour
 			move.x += 1;
 		}
 
-		// Debug.LogWarning("keyboard movement:" + move);
+		Debug.LogWarning("keyboard movement:" + move);
 
 		return move;
 	}
@@ -126,16 +136,16 @@ public class PlayerController : MonoBehaviour
 		Quaternion orientation = Quaternion.identity;
 		source?.TryGetPointerRotation(out orientation);
 
-		//Debug.LogWarning("ornetation: " + orientation);
+		Debug.LogWarning("ornetation: " + orientation);
 
 		float thresholdDeg = 6.0f;
 		float up = orientation.eulerAngles.x;
 		float right = orientation.eulerAngles.y;
-
+		Debug.LogWarning("sidcontroller eulaer angles: up" + up + "  right:" + right); 
 		// remap to -180 to 180 range
 		up = (up > 180.0f) ? up - 360.0f : up;
+		//right = (right > 180.0f) ? right - 360.0f : right;
 		right = (right > 180.0f) ? right - 360.0f : right;
-
 		if (Mathf.Abs(up) < thresholdDeg)
 		{
 			up = 0.0f;
@@ -150,7 +160,7 @@ public class PlayerController : MonoBehaviour
 		move.y = -up;
 		move.x = right;
 
-		//Debug.LogWarning("controller orientation movement:" + move);
+		Debug.LogWarning("controller orientation movement:" + move);
 
 		return move;
 	}
@@ -175,6 +185,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
+
 		movement = Vector3.zero;
 		if (EnableInput)
 		{
@@ -203,7 +214,7 @@ public class PlayerController : MonoBehaviour
 				default:
 					{
 						movement = Vector3.zero;
-						Debug.LogError("unknown input method");
+						Debug.LogError("unknown input movement method");
 					}
 					break;
 			}
@@ -270,6 +281,7 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		
 		GameObject other = collision.gameObject;
 		if (other.CompareTag("Obstacle"))
 		{
@@ -280,7 +292,8 @@ public class PlayerController : MonoBehaviour
 			EnableInput = false;
 			OnPlayerDie?.Invoke();
 			explosion?.Play();
-			GameObject.Destroy(gameObject, 0.5f);
+			GameObject.Destroy(gameObject, 01f);
 		}
+		
 	}
 }

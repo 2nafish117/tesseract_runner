@@ -38,10 +38,6 @@ namespace JMRSDK.Toolkit
                 {
                     gameObjects.AddRange(GameObject.FindGameObjectsWithTag(Tag));
                 }
-                foreach (var go in gameObjects)
-                {
-                    go.tag = "Finish";
-                }
 
 
                 //Step2 Add Prefab If Not Exsist 

@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 30
-  minRotation: {x: 0, y: 0, z: 0}
-  maxRotation: {x: 0, y: 0, z: 0}
+  minRotation: {x: 0, y: -180, z: 0}
+  maxRotation: {x: 0, y: 180, z: 0}
+  minScale: {x: 0.6, y: 0, z: 0}
+  maxScale: {x: 1.2, y: 0, z: 0}
+  spawnUpright: 0
 --- !u!1001 &8137239582419130445
 PrefabInstance:
   m_ObjectHideFlags: 0

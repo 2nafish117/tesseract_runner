@@ -20,11 +20,34 @@ public class OptionMenu : MonoBehaviour, IBackHandler
 
 	public void OnMusicToggleChanged(bool value)
 	{
+        if (value)
+        {
+			AudioListener.volume = 1;
 
+		}
+        else
+        {
+			AudioListener.volume = 0;
+		}
+		 
 	}
 
+	public void OnGameInputToggleChanged(bool value)
+	{
+		Debug.Log("toggle  OnGameInputToggleChanged value");
+		JMRPointerManager.Instance.SwitchPointingSource();
+	}
 	public void OnGameAudioToggleChanged(bool value)
 	{
+		Debug.Log("toggle OnGameAudioToggleChanged value:" + value);
+		if (value)
+		{
+			AudioListener.volume = 1;
+		}
+		else
+		{
+			AudioListener.volume = 0;
+		}
 
 	}
 

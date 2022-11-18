@@ -625,8 +625,8 @@ namespace JMRSDK.Toolkit.UI
         protected Graphic placeholder;
 
         public bool supportMultiLine = false;
-        [SerializeField]
-        private GameObject VirtualKeyboardNote;
+        //[SerializeField]
+        //private GameObject VirtualKeyboardNote;
         //[SerializeField]
         protected Scrollbar verticalScrollbar;
 
@@ -997,8 +997,13 @@ namespace JMRSDK.Toolkit.UI
                 // Cache reference to Vertical Scrollbar RectTransform and add listener.
                 if (verticalScrollbar != null)
                 {
-                    // textComponent.ignoreRectMaskCulling = true;
+#if UNITY_2020_1_OR_NEWER
+                    //textComponent.ignoreRectMaskCulling = true;
                     verticalScrollbar.onValueChanged.AddListener(OnScrollbarValueChange);
+#elif UNITY_2019
+                    //textComponent.ignoreRectMaskCulling = true;
+                    verticalScrollbar.onValueChanged.AddListener(OnScrollbarValueChange);
+#endif
                 }
 
                 UpdateLabel();
@@ -1015,7 +1020,6 @@ namespace JMRSDK.Toolkit.UI
                 base.OnSelectClicked(eventData);
                  if (IsVirtualKeyBoardConncted())
                 {
-                    Debug.LogError("requesting");
                     SubscribeSoftKeyboardCallbacks();
                     RequestSoftInput();
                 }
@@ -1213,9 +1217,9 @@ namespace JMRSDK.Toolkit.UI
         }
 
 
-        #endregion
+#endregion
 
-        #region PUBLIC METHODS
+#region PUBLIC METHODS
         /// <summary>
         /// Set Input field's current text value without invoke onValueChanged. This is not necessarily the same as what is visible on screen.
         /// </summary>
@@ -1754,7 +1758,7 @@ namespace JMRSDK.Toolkit.UI
             MarkGeometryAsDirty();
            
         }
-        #region  Virtual Keyboard
+#region  Virtual Keyboard
         private void SubscribeSoftKeyboardCallbacks()
         {
             JMRInteractionManager.onSoftInputDismissed += OnSoftKeyboardDismissedCallback;
@@ -1830,7 +1834,7 @@ namespace JMRSDK.Toolkit.UI
             return false;
         }
         
-    #endregion
+#endregion
         public void DeactivateInputField(bool clearSelection = false)
         {
             if (!InteractableActive())
@@ -1943,9 +1947,9 @@ namespace JMRSDK.Toolkit.UI
             return false;
         }
 
-        #endregion
+#endregion
 
-        #region DEFAULT METHODS
+#region DEFAULT METHODS
         void SetText(string value, bool sendCallback = true)
         {
             if (this.Text == value)
@@ -2164,9 +2168,9 @@ namespace JMRSDK.Toolkit.UI
             characterValidation = CharacterValidation.CustomValidator;
         }
 
-        #endregion
+#endregion
 
-        #region PRIVATE METHODS
+#region PRIVATE METHODS
 
         private bool InteractableActive()
         {
@@ -3662,9 +3666,9 @@ namespace JMRSDK.Toolkit.UI
             SetTextComponentWrapMode();
         }
 
-        #endregion
+#endregion
 
-        #region PROTECTED METHODS
+#region PROTECTED METHODS
 
         protected void ClampStringPos(ref int pos)
         {
@@ -4230,9 +4234,9 @@ namespace JMRSDK.Toolkit.UI
         }
 
 
-        #endregion
+#endregion
 
-        #region IENUMERATORS
+#region IENUMERATORS
         IEnumerator CaretBlink()
         {
             // Always ensure caret is initially visible since it can otherwise be confusing for a moment.
@@ -4300,7 +4304,7 @@ namespace JMRSDK.Toolkit.UI
         {
             return supportMultiLine;
         }
-        #endregion
+#endregion
 
         Transform ICanvasElement.transform => null;
     }

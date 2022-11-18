@@ -4,7 +4,8 @@ allprojects {
     buildscript {
         repositories {**ARTIFACTORYREPOSITORY**
             google()
-            mavenCentral()
+			  mavenCentral()
+            jcenter()
 			
         }
 
@@ -20,7 +21,8 @@ allprojects {
 
     repositories {**ARTIFACTORYREPOSITORY**
         google()
-        mavenCentral()
+		  mavenCentral()
+        jcenter()
 		maven {
             url 'https://pkgs.dev.azure.com/tesseractimg/MediaPlayer/_packaging/android-mediaplayer/maven/v1'
             credentials {

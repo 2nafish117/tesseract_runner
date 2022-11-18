@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour
 	public AudioClip[] clips;
 	public AudioSource audioSource;
 	private int currentClipIdx = -1;
-	
+
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
@@ -15,13 +15,13 @@ public class MusicManager : MonoBehaviour
 
 	private void Awake()
 	{
-		GameObject.DontDestroyOnLoad(gameObject);
+
 	}
 
 	private AudioClip getRandomClip()
 	{
 		int randomClipIdx = Random.Range(0, clips.Length);
-		while(randomClipIdx == currentClipIdx)
+		while (randomClipIdx == currentClipIdx)
 		{
 			randomClipIdx = Random.Range(0, clips.Length);
 		}
@@ -32,12 +32,14 @@ public class MusicManager : MonoBehaviour
 
 	void Update()
 	{
+
 		if (!audioSource.isPlaying)
 		{
 			Debug.Log("new clip loaded");
 			audioSource.clip = getRandomClip();
 			audioSource.Play();
 		}
-		
+
 	}
 }
+
