@@ -13,6 +13,8 @@ namespace ScreenCasting
 {
     public class ScreenCastHandler : MonoBehaviour
     {
+        [Tooltip("Only set True when need to check logs")]
+        private const bool isDebug = false;
 
         private readonly float BackgroundFOV = 60f;
         private readonly float CameraFOV = 25f;
@@ -69,11 +71,7 @@ namespace ScreenCasting
         CancellationToken cancellationToken;
 
         Skybox skyboxBg;
-        string[] skyboxUrls = { "https://scscloud-common-cdn-dev.azureedge.net/background/shutterstock.jpg",
-             "https://scscloud-common-cdn-dev.azureedge.net/background/School4.jpg",
-             "https://scscloud-common-cdn-dev.azureedge.net/background/image3.png",
-             "https://scscloud-common-cdn-dev.azureedge.net/background/profile4.png"
-        };
+
 
         void Start()
         {
@@ -83,10 +81,12 @@ namespace ScreenCasting
 
             if (ScreenCastCameraPreview == null)
             {
-                Debug.LogError("POV CAMERA IS NULL");
+                if(isDebug)
+                    Debug.LogError("POV CAMERA IS NULL");
                 if (ScreenCastCameraPreview == null)
                 {
-                    Debug.LogError("POV CAMERA IS STILL NULL");
+                    if (isDebug)
+                        Debug.LogError("POV CAMERA IS STILL NULL");
                     return;
                 }
             }
@@ -120,8 +120,8 @@ namespace ScreenCasting
                 //Check if Internet is working
                 //If yes screen share else
                 //retry screen share
-
-                //HandleInternetConnection();
+                if(isDebug)
+                    HandleInternetConnection();
             }
         }
 
@@ -165,7 +165,8 @@ namespace ScreenCasting
         /// </summary>
         void OnApplicationPause(bool isPaused)
         {
-            Debug.Log("On Application Pause");
+            if (isDebug)
+                Debug.Log("On Application Pause");
             if (isPaused)
             {
                 time = 0f;
@@ -273,8 +274,11 @@ namespace ScreenCasting
             {
                 if (isConnected)
                 {
-                    Debug.Log("Current Background Type :" + currentScreenBackgroundType);
-                    Debug.Log("Current Background :" + Background.ToString());
+                    if (isDebug)
+                    {
+                        Debug.Log("Current Background Type :" + currentScreenBackgroundType);
+                        Debug.Log("Current Background :" + Background.ToString());
+                    }
                     if (castCamera == null)
                     {
                         var camera = GameObject.Find("POV Camera");
@@ -293,7 +297,8 @@ namespace ScreenCasting
                         {
                             castCamera.fieldOfView = CameraFOV;
                         }
-                        Debug.Log("ScreenCastV2: StartCameraPreview");
+                        if (isDebug)
+                            Debug.Log("ScreenCastV2: StartCameraPreview");
                         StartCameraPreview();
                     }
                     else
@@ -319,7 +324,8 @@ namespace ScreenCasting
                 }
                 else
                 {
-                    Debug.LogError("No Internet Connection available");
+                    if (isDebug)
+                        Debug.LogError("No Internet Connection available");
 
                 //Notify services about the error, send error code and error state.
                     NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_NO_INTERNET);
@@ -350,7 +356,8 @@ namespace ScreenCasting
         /// </summary>
         void LeaveChanel(JMRScreenCastBackground backgroundID)
         {
-            Debug.Log("On Disable leave the channel");
+            if (isDebug)
+                Debug.Log("On Disable leave the channel");
 
             if (mRtcEngine != null && isScreenSharing)
             {
@@ -358,8 +365,8 @@ namespace ScreenCasting
                 mRtcEngine.LeaveChannel();
                 // deregister video frame observers in native-c code
                 mRtcEngine.DisableVideoObserver();
-
-                Debug.Log("Stopped Screen sharing");
+                if (isDebug)
+                    Debug.Log("Stopped Screen sharing");
             }
 
             isScreenSharing = false;
@@ -376,7 +383,8 @@ namespace ScreenCasting
             }
             catch
             {
-                Debug.Log("Async Tasks cancelled");
+                if (isDebug)
+                    Debug.Log("Async Tasks cancelled");
             }
             finally
             {
@@ -389,7 +397,8 @@ namespace ScreenCasting
         /// </summary>
         public void UnloadEngine()
         {
-            Debug.Log("calling unloadEngine");
+            if (isDebug)
+                Debug.Log("calling unloadEngine");
 
             // delete
             if (mRtcEngine != null)
@@ -431,7 +440,8 @@ namespace ScreenCasting
                 //Setting maximum resolution of camera
                 //List<FrameSize> previewResolutionsList = JMRCameraManager.Instance.GetPreviewResolutions();
                 //JMRCameraManager.Instance.SetPreviewResolution(previewResolutionsList[previewResolutionsList.Count - 1]);
-                Debug.Log("Start Camera Preview");
+                if (isDebug)
+                    Debug.Log("Start Camera Preview");
                 if (JMRCameraManager.Instance.BindCameraTexture(cameraFeed))
                 {
                     //Start camera preview
@@ -440,7 +450,8 @@ namespace ScreenCasting
             }
             else
             {
-                Debug.LogError("Camera Preview Image/RawImage is null");
+                if (isDebug)
+                    Debug.LogError("Camera Preview Image/RawImage is null");
                 NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_ERROR);
             }
         }
@@ -456,7 +467,8 @@ namespace ScreenCasting
             }
             else
             {
-                Debug.LogError("Camera Manager instance is null");
+                if (isDebug)
+                    Debug.LogError("Camera Manager instance is null");
             }
         }
 
@@ -467,7 +479,8 @@ namespace ScreenCasting
         {
             RenderTexture.active = ScreenCastCameraPreview.targetTexture;
 
-            Debug.Log("ScreenShare Activated");
+            if (isDebug)
+                Debug.Log("ScreenShare Activated");
 
             if (ConnectWithToken)
             {
@@ -496,7 +509,8 @@ namespace ScreenCasting
             // Joins a channel
             if (ConnectWithToken)
             {
-                Debug.LogError("Screen Cast Join Room with Key");
+                if (isDebug)
+                    Debug.LogError("Screen Cast Join Room with Key");
                 if (TestInEditor)
                 {
                     mRtcEngine.JoinChannelByKey(Token, channelName, "", UUID);
@@ -527,13 +541,14 @@ namespace ScreenCasting
             {
                 cameraFeed.enabled = true;
             }
-
-            Debug.Log("ScreenCastV2: StartShareScreen Completed");
+            if (isDebug)
+                Debug.Log("ScreenCastV2: StartShareScreen Completed");
         }
 
         void OnScreenCastingRequested(RoomCreds rc, JMRScreenCastBackground background)
         {
-            Debug.Log("ScreenCastV2: OnScreenCastingRequested");
+            if (isDebug)
+                Debug.Log("ScreenCastV2: OnScreenCastingRequested");
             Background = background;
             currentScreenBackgroundType = JMRScreenCastManager.Instance.GetCurrentBackground();
 
@@ -548,23 +563,24 @@ namespace ScreenCasting
 
 
             Setup();
-
-            Debug.LogError("Screen Cast : Load Environment");
+            if (isDebug)
+                Debug.LogError("Screen Cast : Load Environment");
 
             //currentScreenBackground = background.type;
-            
 
-            Debug.LogError("Screen Cast : Loading Environment");
+            if (isDebug)
+                Debug.LogError("Screen Cast : Loading Environment");
 
             
             LoadEnvironment(Background);
-
-            Debug.LogError("Screen Cast : Environment Loaded");
+            if (isDebug)
+                Debug.LogError("Screen Cast : Environment Loaded");
         }
 
         void OnUserJoined(uint uuid, int elapse)
         {
-            Debug.LogError($"UUID : {UUID} : Elapsed : {elapse}");
+            if (isDebug)
+                Debug.LogError($"UUID : {UUID} : Elapsed : {elapse}");
         }
 
         /// <summary>
@@ -651,42 +667,46 @@ namespace ScreenCasting
 
         void HandleInternetConnection()
         {
-            StartCoroutine(CheckInternetConnection(isConnected =>
+            if (!Application.isEditor)
             {
-                if (isConnected)
+                StartCoroutine(CheckInternetConnection(isConnected =>
                 {
-                    if (TestInEditor)
+                    if (isConnected)
                     {
-                        StartScreenShare();
+                        if (TestInEditor)
+                        {
+                            StartScreenShare();
+                        }
+                        else
+                        {
+                            if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
+                            {
+                                CheckCastingStateIfInternet();
+                            }
+                            else if (!isScreenSharing && JMRScreenCastManager.Instance.GetCastingState() == JMRScreenCastManager.Instance.STATE_CASTING_ERROR)
+                            {
+                                if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND)
+                                {
+                                    cameraFeed.enabled = false;
+                                }
+
+                                StartScreenShare();
+                            }
+                        }
                     }
                     else
                     {
-                        if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
-                        {
-                            CheckCastingStateIfInternet();
-                        }
-                        else if (!isScreenSharing && JMRScreenCastManager.Instance.GetCastingState() == JMRScreenCastManager.Instance.STATE_CASTING_ERROR)
-                        {
-                            if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND)
-                            {
-                                cameraFeed.enabled = false;
-                            }
+                        if (isDebug)
+                            Debug.LogError("No Internet Connection available : HandleInternet");
 
-                            StartScreenShare();
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogError("No Internet Connection available : HandleInternet");
-
-                    LeaveChanel(Background);
-                    StopCameraPreview(Background);
+                        LeaveChanel(Background);
+                        StopCameraPreview(Background);
                     //NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_NO_INTERNET);
 
                 }
 
-            }));
+                }));
+            }
         }
 
         private void CheckCastingStateIfInternet()
@@ -718,7 +738,8 @@ namespace ScreenCasting
             }
             else
             {
-                Debug.Log("Internet Connected : Success");
+                if (isDebug)
+                    Debug.Log("Internet Connected : Success");
                 action(true);
             }
         }
@@ -726,7 +747,8 @@ namespace ScreenCasting
         #region Loading Environment
         IEnumerator DownloadBackground(JMRScreenCastBackground background)
         {
-            Debug.Log("DownloadBackground " + background.link);
+            if (isDebug)
+                Debug.Log("DownloadBackground " + background.link);
             
             UnityWebRequest www = UnityWebRequestTexture.GetTexture(background.link);
             yield return www.SendWebRequest();
@@ -743,7 +765,8 @@ namespace ScreenCasting
                     defaultEnvironmentModel = null;
                 }
                 defaultEnvironmentModel = ((DownloadHandlerTexture)www.downloadHandler).texture;
-                Debug.Log("defaultEnvironmentModel " + defaultEnvironmentModel.name);
+                if (isDebug)
+                    Debug.Log("defaultEnvironmentModel " + defaultEnvironmentModel.name);
                 //UpdateBackground(index);
                 UpdateBackground(background);
             }
@@ -753,27 +776,12 @@ namespace ScreenCasting
 
         public void LoadEnvironment(JMRScreenCastBackground screenCast)
         {
-            /*
-            Debug.LogError("Screen Cast : Loading Environment : " + screenCast);
-            
-            if (screenCast - 1 < 0)
-            {
-                //environmentTitle.text = "Casting Environment: No background for this index: " + (screenCast - 1);
-                Debug.LogError("Casting Environment: No background for this index: " + (screenCast - 1));
-                return;
-            }
-
-            defaultEnvironment = (ScreenCastModelEnum)screenCast;
-
-            if(screenCast > 2 && screenCast < 7 && skyboxBg != null)
-            {
-                StartCoroutine(DownloadBackground(skyboxUrls[screenCast - 3], screenCast));
-            }
-            */
-            Debug.LogError("Screen Cast : Background Type: " + screenCast.type);
+            if (isDebug)
+                Debug.LogError("Screen Cast : Background Type: " + screenCast.type);
             if (screenCast.type == JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND)
             {
-                Debug.LogError("Casting Environment: No background for this index: " + screenCast.type);
+                if (isDebug)
+                    Debug.LogError("Casting Environment: No background for this index: " + screenCast.type);
                 UpdateBackground(screenCast);
                 return;
             }
@@ -791,38 +799,38 @@ namespace ScreenCasting
         /// <param name="index"></param>
         private void UpdateBackground(JMRScreenCastBackground background)
         {
-            /*ScreenCastModelEnum modelEnum = defaultEnvironment;*/
 
-            Debug.Log(" defaultEnvironmentModel " + defaultEnvironmentModel == null);
-            //Debug.Log("UpdateBackground :" + index);
+            if (isDebug)
+                Debug.Log(" defaultEnvironmentModel " + defaultEnvironmentModel == null);
+
 
             if (defaultEnvironmentModel != null)
             {
-                Debug.Log(" castCamera " + castCamera == null);
+                if (isDebug)
+                {
+                    Debug.Log(" castCamera " + castCamera == null);
+                    Debug.Log(" skyboxBg " + skyboxBg == null);
+                    Debug.Log(" skyboxBg.material " + skyboxBg.material == null);
+
+                }
                 castCamera.clearFlags = CameraClearFlags.Skybox;
-                Debug.Log(" skyboxBg " + skyboxBg == null);
-                Debug.Log(" skyboxBg.material " + skyboxBg.material == null);
                 skyboxBg.material.SetTexture("_MainTex", defaultEnvironmentModel);
                 //RenderSettings.skybox.SetTexture("_MainTex", defaultEnvironmentModel);
             }
             else
             {
-                Debug.Log("UpdateBackground defaultEnvironmentModel is null");
+                if (isDebug)
+                    Debug.Log("UpdateBackground defaultEnvironmentModel is null");
                 castCamera.clearFlags = CameraClearFlags.SolidColor;
             }
             
-            // directionalLight.SetActive(false);
-            /*
-            if (index == 7)
-            {
-                ClearBackground();
-            }
-            */
+
             if (background.type == JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND)
             {
                 ClearBackground();
             }
-            Debug.Log("Environment Updated to :" + background.type);
+            if (isDebug)
+                Debug.Log("Environment Updated to :" + background.type);
         }
 
         private void ClearBackground()

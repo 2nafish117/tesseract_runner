@@ -27,9 +27,9 @@ MonoBehaviour:
   prefabType: 1
   behaviourType: 0
   priority: 3
-  headertext: Controller Disconnected\n <size=65%>Switching to gaze
-  headerIconPath: Art/ControllerRed
-  bodyText: 
+  headertext: Controller Disconnected
+  headerIconPath: Art/ControllerRedDisconnected
+  bodyText: Switching to gaze
   bodyInfoGraphicPath: 
   interactions: []
   isAutoClose: 0

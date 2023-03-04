@@ -19,9 +19,10 @@ MonoBehaviour:
   prefabType: 1
   behaviourType: 0
   priority: 4
-  headertext: Phone Battery Low
+  headertext: Battery Low (10%)
   headerIconPath: Art/Battery
-  bodyText: Please charge your phone to continue using\n JioGlass uninterrupted.
+  bodyText: Please charge your Smartphone for\n uninterrupted service.
+  bodyInfoGraphicPath: 
   interactions: []
   isAutoClose: 0
   followBehaviours: 0

@@ -27,9 +27,9 @@ MonoBehaviour:
   prefabType: 1
   behaviourType: 0
   priority: 3
-  headertext: Controller Connected\n <size=65%>Switching to controller
+  headertext: Controller Connected
   headerIconPath: Art/ControllerGreen
-  bodyText: 
+  bodyText: Switching to controller
   bodyInfoGraphicPath: 
   interactions: []
   isAutoClose: 0

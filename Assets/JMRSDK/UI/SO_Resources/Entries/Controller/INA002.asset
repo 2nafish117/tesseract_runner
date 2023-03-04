@@ -23,10 +23,9 @@ MonoBehaviour:
   prefabType: 1
   behaviourType: 0
   priority: 5
-  headertext: JioGlass Controller Battery Low
+  headertext: Controller Battery Low (20%)
   headerIconPath: Art/Controller20%
-  bodyText: Please replace batteries to avoid your JioGlass \n Controller from getting
-    disconnected.
+  bodyText: Please replace your Controller battery \n for uninterrupted services.
   bodyInfoGraphicPath: 
   interactions: []
   isAutoClose: 0

@@ -1,1 +1,1 @@
-Jio Mixed Reality SDK v4.1.1
+Jio Mixed Reality SDK v4.32.0

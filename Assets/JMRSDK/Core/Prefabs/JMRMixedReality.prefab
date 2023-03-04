@@ -211,7 +211,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &307621763
 MonoBehaviour:
@@ -812,6 +812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1620411066}
+  - component: {fileID: 2723511826761785109}
   m_Layer: 0
   m_Name: JMRRenderer
   m_TagString: Untagged
@@ -834,6 +835,19 @@ Transform:
   m_Father: {fileID: 7684239096590941966}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2723511826761785109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620411065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c036eda486d199448443d0ed0843ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backButtonTexture: {fileID: 2800000, guid: a803262407957ed4c966bc684be70f3e, type: 3}
 --- !u!1 &1695920110
 GameObject:
   m_ObjectHideFlags: 0
@@ -8841,6 +8855,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2420020828247402861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246269474220385833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &574440999439527994
 GameObject:
   m_ObjectHideFlags: 0
@@ -8871,7 +8897,7 @@ Transform:
   m_Children:
   - {fileID: 24354013325088716}
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &574440999439527996
 MonoBehaviour:
@@ -8941,6 +8967,18 @@ MonoBehaviour:
   SWIPE_LEFT: 99
   SWIPE_RIGHT: 98
   VOICE_BTN: 122
+--- !u!114 &3540522627069096183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470549512381924380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1527557960634239275
 GameObject:
   m_ObjectHideFlags: 0
@@ -8971,7 +9009,7 @@ Transform:
   m_Children:
   - {fileID: 1710970624}
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4577687594268772502
 MonoBehaviour:
@@ -9219,6 +9257,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31530ed5566a2924d9bf61eac7b3230f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6997208838482224962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891819957674150947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2113064042822698385
 GameObject:
   m_ObjectHideFlags: 0
@@ -9387,7 +9437,7 @@ Transform:
   - {fileID: 2113064042822698386}
   - {fileID: 8762202506998033163}
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2113064044053076408
 MonoBehaviour:
@@ -9415,6 +9465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectPointerSource: 1
+  selectDefaultGazeMode: 0
   LaserPointerPrefab: {fileID: 5681829879247841818, guid: 5eeec3e7c7f44ef41a521572690cfae9,
     type: 3}
   CursorPrefab: {fileID: 1000012072213228, guid: d1a11cc6c01ae5342b39f0d124981075,
@@ -9760,6 +9811,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6432493393671431144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159916157496761500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &768403262941553881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165612790039227392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4171804651763149788
 GameObject:
   m_ObjectHideFlags: 0
@@ -10201,6 +10276,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3931417550390926388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5058510416808195334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7158470142252686178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135360806475167421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5582312179342308177
 GameObject:
   m_ObjectHideFlags: 0
@@ -10379,7 +10478,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1520786146063543010
 AudioSource:
@@ -10492,6 +10591,30 @@ MonoBehaviour:
   pointerClick: {fileID: 8300000, guid: 153627b25098f6443acab3b39f76d475, type: 3}
   ManipulationStarted: {fileID: 8300000, guid: abc450cdadfc34f2e8fb08cc84ac3898, type: 3}
   ManipulationStopped: {fileID: 8300000, guid: 4b32d366680a84c15b63c451e8dcb45e, type: 3}
+--- !u!114 &7626175068042797076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6154836876012676821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4652196042685202970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203295718768279783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6228471335223660076
 GameObject:
   m_ObjectHideFlags: 0
@@ -10521,7 +10644,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4810533533329020973
 MonoBehaviour:
@@ -10533,6 +10656,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 704545635, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1925330786588921209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702284175623315680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2662167803284215464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6885360457975547378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7581607427609206042
@@ -10727,7 +10874,7 @@ Transform:
   - {fileID: 1620411066}
   - {fileID: 1758820988983730148}
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7686620441106946287
 MonoBehaviour:
@@ -10814,7 +10961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5408697002199889627
 MonoBehaviour:
@@ -11429,7 +11576,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3738879141627463824}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7992571462941701252
 MonoBehaviour:
@@ -11441,6 +11588,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 124723071, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7759602038470716812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9135286111617708833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9184605373608753297
@@ -11471,6 +11630,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.13, z: 0.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4853497601141781316}
   - {fileID: 2113064044053076404}
   - {fileID: 7564014849337734642}
   - {fileID: 7684239096590941966}
@@ -11517,7 +11677,7 @@ PrefabInstance:
     - target: {fileID: 7574524755156063386, guid: 93eab5e10d9a27640b5ad8395989042d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7574524755156063386, guid: 93eab5e10d9a27640b5ad8395989042d,
         type: 3}
@@ -11592,7 +11752,7 @@ PrefabInstance:
     - target: {fileID: 3031284756301304820, guid: e7fffc771eebcad438ece0401fe5eec9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3031284756301304820, guid: e7fffc771eebcad438ece0401fe5eec9,
         type: 3}
@@ -11667,7 +11827,7 @@ PrefabInstance:
     - target: {fileID: 40117840427322404, guid: 6d59df86eac1b284dbe218ef030ba07d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 40117840427322404, guid: 6d59df86eac1b284dbe218ef030ba07d,
         type: 3}
@@ -11888,7 +12048,7 @@ PrefabInstance:
     - target: {fileID: 61680769851286399, guid: 97328df3cab92854096f5b8dd69c59e1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 61680769851286399, guid: 97328df3cab92854096f5b8dd69c59e1,
         type: 3}
@@ -11948,6 +12108,151 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3594503767258253800}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3729512670802801828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3738879141627463824}
+    m_Modifications:
+    - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843130754019484937, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843130754019484937, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193373899588454870, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_Name
+      value: JMRSystemDockManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
+--- !u!4 &4853497601141781316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+    type: 3}
+  m_PrefabInstance: {fileID: 3729512670802801828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6593757117825085281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11955,10 +12260,89 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3738879141627463824}
     m_Modifications:
+    - target: {fileID: 261348508, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+      propertyPath: popUpConfigContainer_Json
+      value: '{"popupConfigData":[{"popUpId":"DES001","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"Service
+        Bind Failed","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug
+        your JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DES002","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"Service
+        Killed","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug your
+        JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DES004","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"No
+        Companion App","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug
+        your JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA000","dismiss_popUpIds":["INA001","INA002","INA003","INA004","INA006","INA007","INA008","INA009","INA010","INA011"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Controller
+        Connected","headerIconPath":"Art/ControllerGreen","bodyText":"Switching to
+        controller","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA001","dismiss_popUpIds":["INA002","INA003","INA004","INA000","INA005","INA006","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Controller
+        Disconnected","headerIconPath":"Art/ControllerRedDisconnected","bodyText":"Switching
+        to gaze","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA002","dismiss_popUpIds":["INA003","INA004","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":0,"priority":5,"headertext":"Controller
+        Battery Low (20%)","headerIconPath":"Art/Controller20%","bodyText":"Please
+        replace your Controller battery \\n for uninterrupted services.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA003","dismiss_popUpIds":["INA002","INA004","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":2,"priority":5,"headertext":"Controller
+        Battery Too Low (10%)","headerIconPath":"Art/Controller10%","bodyText":"Please
+        replace your Controller battery \\n for uninterrupted services.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA004","dismiss_popUpIds":["INA002","INA003","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":3,"priority":5,"headertext":"Controller
+        Battery Critically Low (5%)","headerIconPath":"Art/ControllerRed","bodyText":"Please
+        replace your Controller battery \\n for uninterrupted services.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DEA016","dismiss_popUpIds":[],"prefabType":1,"behaviourType":3,"priority":1,"headertext":"JioGlass
+        Non-Genuine","headerIconPath":"Art/JioGlassNotify","bodyText":"Unable to
+        verify that this JioGlass is genuine.\\n Please buy genuine JioGlass device
+        only.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DEA032","dismiss_popUpIds":[],"prefabType":1,"behaviourType":3,"priority":1,"headertext":"Authentication
+        Failed","headerIconPath":"Art/WarningRed","bodyText":"Please make sure you
+        are logged in and\\n have completed device setup.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DEA064","dismiss_popUpIds":[],"prefabType":1,"behaviourType":3,"priority":1,"headertext":"Firmware
+        Update Required","headerIconPath":"Art/WarningRed","bodyText":"Please update
+        your firmware.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DEA128","dismiss_popUpIds":[],"prefabType":1,"behaviourType":3,"priority":1,"headertext":"Internet
+        Connection Required","headerIconPath":"Art/JioGlassNotify","bodyText":"Please
+        ensure that you are connected to an active\\nInternet connection to complete
+        setting up your\\nJioGlass.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DEA002","dismiss_popUpIds":[],"prefabType":1,"behaviourType":3,"priority":1,"headertext":"Could
+        Not Connect JioGlass","headerIconPath":"Art/JioGlassNotify","bodyText":"Please
+        try replugging your JioGlass.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"PLA000","dismiss_popUpIds":["PLA001","PLA002"],"prefabType":1,"behaviourType":0,"priority":4,"headertext":"Battery
+        Low (10%)","headerIconPath":"Art/Battery","bodyText":"Please charge your
+        Smartphone for\\n uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":0,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA001","dismiss_popUpIds":["PLA000","PLA002"],"prefabType":1,"behaviourType":2,"priority":4,"headertext":"Battery
+        Too Low (5%)","headerIconPath":"Art/BatteryLow","bodyText":"Please charge
+        your Smartphone for\\n uninterrupted service.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA002","dismiss_popUpIds":["PLA000","PLA001"],"prefabType":1,"behaviourType":3,"priority":4,"headertext":"Battery
+        Critically Low","headerIconPath":"Art/BatteryVeryLow","bodyText":"Please
+        charge your Smartphone for\\n uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA003","dismiss_popUpIds":["PLA004","PLA005"],"prefabType":1,"behaviourType":0,"priority":4,"headertext":"Compute
+        Unit Battery \\n Low","headerIconPath":"Art/Battery","bodyText":"Please charge
+        your Compute Unit to continue using\\n JioGlass uninterrupted.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA004","dismiss_popUpIds":["PLA003","PLA005"],"prefabType":1,"behaviourType":2,"priority":4,"headertext":"Compute
+        Unit Battery \\n Too Low","headerIconPath":"Art/BatteryLow","bodyText":"Please
+        charge your Compute Unit to continue using\\n JioGlass uninterrupted.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA005","dismiss_popUpIds":["PLA003","PLA004"],"prefabType":1,"behaviourType":3,"priority":4,"headertext":"Compute
+        Unit Battery \\n Critically Low","headerIconPath":"Art/BatteryVeryLow","bodyText":"We
+        have paused your JioGlass experience so that you can charge your \\ndevice
+        and start using device again.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"TRA004","dismiss_popUpIds":[],"prefabType":1,"behaviourType":3,"priority":1,"headertext":"Tracking
+        Lost","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug your
+        JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA005","dismiss_popUpIds":["INA006","INA007","INA008","INA009","INA010"],"prefabType":5,"behaviourType":1,"priority":6,"headertext":"Reset
+        Pointer","headerIconPath":"","bodyText":"Point your controller forward and
+        \\n hold <sprite name=\"SelectButton\"> button to recenter.\\n\\nPress Okay
+        once calibrated.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA006","dismiss_popUpIds":["INA005","INA007","INA008","INA009","INA010"],"prefabType":5,"behaviourType":2,"priority":6,"headertext":"Reset
+        Pointer","headerIconPath":"","bodyText":"Your ray pointer is away from viewing
+        area.\\n\\n Point your JioGlass controller forward and hold the highlighted
+        button for one second to recenter.","bodyInfoGraphicPath":"Art/JG_Controller","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false},{"type":3,"interactionString":"","interactionKey":"Don''t
+        show this again ","dismiss":false,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA007","dismiss_popUpIds":["INA000","INA001","INA005","INA006","INA009","INA002","INA003","INA004"],"prefabType":2,"behaviourType":2,"priority":6,"headertext":"Reset
+        Pointer","headerIconPath":"","bodyText":"Your ray pointer is away from viewing
+        area.\\n\\nHold your phone facing up and pointing forwards. Please press
+        highlighted button for one second to recenter.","bodyInfoGraphicPath":"Art/MobileImage","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false},{"type":3,"interactionString":"","interactionKey":"Don''t
+        show this again ","dismiss":false,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA008","dismiss_popUpIds":["INA000","INA001","INA005","INA002","INA006","INA003","INA004","INA007","INA009","INA010","INA011"],"prefabType":0,"behaviourType":0,"priority":3,"headertext":"Controlpad
+        successfully connected.","headerIconPath":"Art/GreenDots","bodyText":"","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA009","dismiss_popUpIds":["INA000","INA001","INA005","INA006","INA007","INA002","INA003","INA004"],"prefabType":2,"behaviourType":2,"priority":3,"headertext":"Reset
+        Pointer","headerIconPath":"","bodyText":"\\n\\nYour ray pointer is away from
+        viewing area.\\n\\nHold your phone facing up and pointing forwards. Please
+        press \\n highlighted button for one second to reset the pointer.\\n\\n","bodyInfoGraphicPath":"Art/RecenterMobile","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false},{"type":3,"interactionString":"","interactionKey":"Don''t
+        show this again ","dismiss":false,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA010","dismiss_popUpIds":["INA000","INA001","INA005","INA006","INA002","INA003","INA004","INA007","INA008","INA009"],"prefabType":3,"behaviourType":0,"priority":3,"headertext":"Virtual
+        Controller Unavailable","headerIconPath":"","bodyText":"Please run the Virtual
+        Controller on your phone\\n as shown below to continue.","bodyInfoGraphicPath":"Art/VC_Disconnected_Image","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA011","dismiss_popUpIds":["INA002","INA003","INA004","INA005","INA006","INA007","INA009","INA010"],"prefabType":4,"behaviourType":1,"priority":6,"headertext":"Switched
+        to Gaze Control","headerIconPath":"","bodyText":"Look around to move the
+        pointer and hold to select","bodyInfoGraphicPath":"Art/pointer_head_small","interactions":[],"isAutoClose":true,"followBehaviours":1,"popUpVisibleDuration":3.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA012","dismiss_popUpIds":["INA002","INA003","INA004","INA005","INA006","INA007","INA009","INA013"],"prefabType":0,"behaviourType":0,"priority":3,"headertext":"Switched
+        to Gaze pointer","headerIconPath":"Art/Head_Icon","bodyText":"","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":true,"followBehaviours":1,"popUpVisibleDuration":3.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA013","dismiss_popUpIds":["INA002","INA003","INA004","INA005","INA006","INA007","INA009","INA010","INA011","INA012"],"prefabType":0,"behaviourType":0,"priority":3,"headertext":"Switched
+        to Controller Pointer","headerIconPath":"Art/Controller_Icon","bodyText":"","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":true,"followBehaviours":1,"popUpVisibleDuration":3.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"INA014","dismiss_popUpIds":["INA002","INA003","INA004","INA000","INA005","INA006","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Reset
+        View","headerIconPath":"Art/ResetViewVC","bodyText":"Hold down Home button
+        on controller to reset your view.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":1000.0,"transitionData":{"useCommon":false,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":1000.0}},{"popUpId":"INA015","dismiss_popUpIds":["INA002","INA003","INA004","INA000","INA005","INA006","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Reset
+        View","headerIconPath":"Art/ResetViewController","bodyText":"Hold down Home
+        button on controller to reset your view.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":1000.0,"transitionData":{"useCommon":false,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":1000.0}},{"popUpId":"INA016","dismiss_popUpIds":["INA002","INA003","INA004","INA000","INA005","INA006","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Reset
+        View","headerIconPath":"Art/ResetViewGazeAndClick","bodyText":"Point and
+        Click the Recenter button on Dock.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":1000.0,"transitionData":{"useCommon":false,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":1000.0}},{"popUpId":"INA017","dismiss_popUpIds":["INA002","INA003","INA004","INA000","INA005","INA006","INA007","INA008","INA009","INA010"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Reset
+        View","headerIconPath":"Art/ResetViewGazeAndDwell","bodyText":"Point and
+        Hold the Recenter button on Dock.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":1000.0,"transitionData":{"useCommon":false,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":1000.0}},{"popUpId":"INA018","dismiss_popUpIds":["INA002","INA003","INA004","INA000","INA005","INA006","INA007","INA008","INA009","INA010"],"prefabType":4,"behaviourType":1,"priority":3,"headertext":"Controller
+        Required","headerIconPath":"","bodyText":"Please connect your controller
+        to access WebApp.","bodyInfoGraphicPath":"Art/ControllerRequired","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":3.0,"transitionData":{"useCommon":false,"startPosition":{"x":0.0,"y":510.0,"z":2.4000000953674318},"targetPosition":{"x":0.0,"y":0.0,"z":2.4000000953674318},"transitionDuration":1.0,"waitDuration":3.0}}]}'
+      objectReference: {fileID: 0}
     - target: {fileID: 34860211911891008, guid: c47b512b1a3339b4780c45791c6faa6e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 34860211911891008, guid: c47b512b1a3339b4780c45791c6faa6e,
         type: 3}
@@ -12117,11 +12501,95 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 33f6c73a269232644aa7ac75938020c8,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5935650008444902423, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 8985105701270369508, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 514481716449524441, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 166361341389725381, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 5937866780928584001, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 1659073571676065592, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 2428827010316717690, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 3563900252546810806, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 1060861770889822156, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 3431045323991205445, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 8283429057882891913, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+    - {fileID: 314998487710129387, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c47b512b1a3339b4780c45791c6faa6e, type: 3}
+--- !u!1 &6702284175623315680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 469202136074620801, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5135360806475167421 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2073287882344274396, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5058510416808195334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2139996272606435943, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1891819957674150947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4737966113131029314, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9135286111617708833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2686033756982254656, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6885360457975547378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 291623412916136595, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &246269474220385833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6407311522615740744, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4165612790039227392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7083742109298475873, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6154836876012676821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1075204375156033972, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6627717572104517409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34860211911891008, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1470549512381924380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5758357712799591293, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4159916157496761500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7078328882288030717, guid: c47b512b1a3339b4780c45791c6faa6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6593757117825085281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6203295718768279783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 979308340193030022, guid: c47b512b1a3339b4780c45791c6faa6e,
     type: 3}
   m_PrefabInstance: {fileID: 6593757117825085281}
   m_PrefabAsset: {fileID: 0}
@@ -12135,7 +12603,7 @@ PrefabInstance:
     - target: {fileID: 3705401253452049349, guid: 7cf413e3a12205f4cb076cebb00735bf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3705401253452049349, guid: 7cf413e3a12205f4cb076cebb00735bf,
         type: 3}
@@ -12226,7 +12694,7 @@ PrefabInstance:
     - target: {fileID: 6441545968057407852, guid: 1f5d2a55cf9462a4997f6df355dea70c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6441545968057407852, guid: 1f5d2a55cf9462a4997f6df355dea70c,
         type: 3}

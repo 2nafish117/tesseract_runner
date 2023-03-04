@@ -7,9 +7,9 @@
 Shader "JMRSDK/BarrelDistortion" {
     Properties{
         _MainTex("MainTex", 2D) = "white" {} //Texture
-        _distortion("distortion", range(-3, 3)) = 0.5 // Total distortion Coeffient
-        _cubicDistortion("cubicDistortion", range(0, 3)) = 0.4 // The cubicDistortion Coeffient
-        _scale("scale", range(0, 3)) = 0.87 //Scale of the Distorted Texture
+        _distortion("distortion", range(-3, 3)) = 0.101 // Total distortion Coeffient
+        _cubicDistortion("cubicDistortion", range(0, 3)) = 0.0981 // The cubicDistortion Coeffient
+        _scale("scale", range(0, 3)) = 1.0 //Scale of the Distorted Texture
          screenResolution("screenResolution",Vector) = (1920,1080,0,0)
         ipdOffset("ipdOffset",Vector) = (0,0,0,0)        
         _offset("offset",Vector)=(0,0,0,0)
