@@ -60,10 +60,12 @@ public class PlayerController : MonoBehaviour
 	{
 		OnPlayerSpawn?.Invoke();
 		EnableInput = true;
-		if(JMRPointerManager.Instance.PrefferedPointingSource == JMRPointerManager.PointingSource.Head)
+		Debug.LogWarning("sidlog Enable: PrefferedPointingSource:" + JMRPointerManager.Instance.PrefferedPointingSource);
+		Debug.LogWarning("sidlog Enable: GetSupportedInteractionDeviceType:" + JMRInteractionManager.Instance.GetSupportedInteractionDeviceType()); 
+		if (JMRInteractionManager.Instance.GetSupportedInteractionDeviceType() == JMRInteractionManager.InteractionDeviceType.GAZE_AND_CLICK || JMRInteractionManager.Instance.GetSupportedInteractionDeviceType() == JMRInteractionManager.InteractionDeviceType.GAZE_AND_DWELL)
         {
 			inputMethod = InputMethod.HeadOrientation;
-		} else if (JMRPointerManager.Instance.PrefferedPointingSource == JMRPointerManager.PointingSource.JioGlassController)
+		} else if (JMRInteractionManager.Instance.GetSupportedInteractionDeviceType() == JMRInteractionManager.InteractionDeviceType.JIOGLASS_CONTROLLER)
         {
 			inputMethod = InputMethod.ControllerOrientation;
 		}
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
 		Vector3 move = Vector3.zero;
 		Transform head = JMRTrackerManager.Instance.GetHeadTransform();
 
-		float threasholdDeg = 6.0f;
+		float threasholdDeg = 3.0f;
 		float up = head.rotation.eulerAngles.x;
 		float right = head.rotation.eulerAngles.y;
 
