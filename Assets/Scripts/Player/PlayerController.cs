@@ -6,6 +6,7 @@ using JMRSDK.InputModule;
 
 public class PlayerController : MonoBehaviour
 {
+	public AudioClip crashClip;
 	static public float StrafeAcceleration = 600.0f;
 	static public float ForwardAcceleration = 2*1800.0f;
 	static public float RotationSpeed = 6.0f;
@@ -191,7 +192,8 @@ public class PlayerController : MonoBehaviour
 		movement = Vector3.zero;
 		if (EnableInput)
 		{
-			switch(inputMethod)
+			//inputMethod = InputMethod.Keyboard;
+			switch (inputMethod)
 			{
 				case InputMethod.Keyboard:
 					{
@@ -287,6 +289,8 @@ public class PlayerController : MonoBehaviour
 		GameObject other = collision.gameObject;
 		if (other.CompareTag("Obstacle"))
 		{
+			GetComponent<AudioSource>().PlayOneShot(crashClip);
+
 			Rigidbody rigidbody = GetComponent<Rigidbody>();
 			rigidbody.constraints = RigidbodyConstraints.None;
 			rigidbody.useGravity = true;
