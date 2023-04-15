@@ -178,12 +178,14 @@ namespace JMRSDK.EditorScript
 
         private const string xmlMetaDataNotePath = "//manifest/application/meta-data";
         private const string attributeKey_PRO_LITE = "com.jiotesseract.platform";
+        private const string attributeKey_CATEGORY = "com.jiotesseract.mr.category";
         private const string AndroidValue = "android:value";
         private const string AndroidName = "android:name";
         private const string PRO = "PRO";
         private const string LITE = "LITE";
         private const string HOLOBOARD = "HOLOBOARD";
         private const string CARDBOARD = "CARDBOARD";
+        private static string[] CATEGORIES = {"0", "1", "2", "3", "4", "5", "6", "7"};
         private const string ALL = PRO + "|" + LITE  + "|" + HOLOBOARD + "|" + CARDBOARD;
 
         public static void DisableRecentHistoryAttributes()
@@ -224,6 +226,54 @@ namespace JMRSDK.EditorScript
         {
             UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CARDBOARD, AndroidName, attributeKey_PRO_LITE);
             SM_Setup();
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Entertainment")]
+        public static void ConfigCategory_Entertainment()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[0], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Gaming")]
+        public static void ConfigCategory_Gaming()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[1], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Learning")]
+        public static void ConfigCategory_Learning()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[2], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Productivity")]
+        public static void ConfigCategory_Productivity()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[3], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Utilities")]
+        public static void ConfigCategory_Utilities()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[4], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Health And Wellness")]
+        public static void ConfigCategory_HealthAndWellness()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[5], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Shopping")]
+        public static void ConfigCategory_Shopping()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[6], AndroidName, attributeKey_CATEGORY);
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Category/Miscellaneous")]
+        public static void ConfigCategory_Miscellaneous()
+        {
+            UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[7], AndroidName, attributeKey_CATEGORY);
         }
 
         /// <summary>

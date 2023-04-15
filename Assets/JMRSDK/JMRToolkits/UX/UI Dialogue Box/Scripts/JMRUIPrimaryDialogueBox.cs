@@ -18,10 +18,18 @@ namespace JMRSDK.Toolkit
         [SerializeField]
         private UnityEvent onYes;
         private UnityEvent OnYesEvent;
+
+        /// <summary>
+        /// On Yes Event Listner
+        /// </summary>
         public UnityEvent OnYes { get { if (OnYesEvent == null) { OnYesEvent = new UnityEvent(); }return OnYesEvent;   }  private set { OnYesEvent = value; } }
         [SerializeField]
         private UnityEvent onNo;
         private UnityEvent OnNoEvent;
+
+        /// <summary>
+        /// On No Event Listner
+        /// </summary>
         public UnityEvent OnNo { get { if (OnNoEvent == null) { OnNoEvent = new UnityEvent(); }return OnNoEvent;   }  private set { OnNoEvent = value; } }
 
         public override void Awake()
@@ -33,6 +41,10 @@ namespace JMRSDK.Toolkit
             noButton.OnDeselect.AddListener(() => { onNo?.Invoke();OnNo?.Invoke(); gameObject.SetActive(false); });
         }
 
+        /// <summary>
+        /// Handle Interactable Change
+        /// </summary>
+        /// <param name="isInteractable"></param>
         public override void OnInteractableChange(bool isInteractable)
         {
             base.OnInteractableChange(isInteractable);
@@ -40,6 +52,10 @@ namespace JMRSDK.Toolkit
             noButton.interactable = isInteractable;
         }
 
+        /// <summary>
+        /// Show Primary Dialogue Box
+        /// </summary>
+        /// <param name="message"></param>
         public void Show(string message)
         {
             messageText.text = message;

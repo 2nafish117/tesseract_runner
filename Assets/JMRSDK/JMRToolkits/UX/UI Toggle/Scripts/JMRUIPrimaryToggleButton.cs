@@ -21,6 +21,10 @@ namespace JMRSDK.Toolkit
         [SerializeField]
         public UnityEvent OnSelect, OnDeselect;
         private UnityEventBool valueChanged;
+
+        /// <summary>
+        /// On Value Changed Event Listner
+        /// </summary>
         public UnityEventBool OnValueChanged { get { if (valueChanged == null) valueChanged = new UnityEventBool(); return valueChanged; } set { valueChanged = value; } }
         public bool hasParent { get; set; }
 
@@ -47,6 +51,9 @@ namespace JMRSDK.Toolkit
             }
         }
 
+        /// <summary>
+        /// Handle Object Select Event
+        /// </summary>
         protected override void OnObjectSelect()
         {
             IsOn = isSelected;
@@ -56,6 +63,9 @@ namespace JMRSDK.Toolkit
             SetDynamicValueChange(true);
         }
 
+        /// <summary>
+        /// Handle Object Deselect Event
+        /// </summary>
         protected override void OnObjectDeselect()
         {
             IsOn = isSelected;
@@ -65,6 +75,10 @@ namespace JMRSDK.Toolkit
             SetDynamicValueChange(false);
         }
 
+        /// <summary>
+        /// Handle Select Clicked
+        /// </summary>
+        /// <param name="eventData"></param>
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
             if (!hasParent)
@@ -73,6 +87,10 @@ namespace JMRSDK.Toolkit
             }
         }
 
+        /// <summary>
+        /// Set Dynamic Value to true/false
+        /// </summary>
+        /// <param name="value"></param>
         private void SetDynamicValueChange(bool value)
         {
             if (onValueChanged != null)
@@ -83,6 +101,8 @@ namespace JMRSDK.Toolkit
                 }
             }
             OnValueChanged?.Invoke(value);
+            if (JMRAnalyticsManager.Instance != null)
+                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_TOGGLE);
         }
     }
 }

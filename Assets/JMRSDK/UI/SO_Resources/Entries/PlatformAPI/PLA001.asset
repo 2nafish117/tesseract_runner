@@ -17,20 +17,15 @@ MonoBehaviour:
   - PLA000
   - PLA002
   prefabType: 1
-  behaviourType: 2
+  behaviourType: 0
   priority: 4
   headertext: Battery Too Low (5%)
   headerIconPath: Art/BatteryLow
-  bodyText: Please charge your Smartphone for\n uninterrupted service.
+  bodyText: Please charge your Smartphone \n for uninterrupted service.
   bodyInfoGraphicPath: 
-  interactions:
-  - type: 0
-    interactionString: Okay
-    interactionKey: 
-    dismiss: 1
-    showButtonAppearAnimation: 0
+  interactions: []
   isAutoClose: 0
-  followBehaviours: 2
+  followBehaviours: 0
   popUpVisibleDuration: 0
   transitionData:
     useCommon: 1

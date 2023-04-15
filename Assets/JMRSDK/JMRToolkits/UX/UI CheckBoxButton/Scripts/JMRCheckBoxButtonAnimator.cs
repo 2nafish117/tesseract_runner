@@ -34,11 +34,18 @@ namespace JMRSDK.Toolkit.UI
                 themeAnimator.SetTrigger("Disabled");
         }
 
+        /// <summary>
+        /// Handle Enable Change
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnEnableChange(bool obj)
         {
             isEnable = obj;
         }
 
+        /// <summary>
+        /// Handle Pointer Up
+        /// </summary>
         private void OnPointerUp()
         {
             if (!isEnable)
@@ -49,6 +56,9 @@ namespace JMRSDK.Toolkit.UI
             onPointerUp?.Invoke();
         }
 
+        /// <summary>
+        /// Handle Pointer Down
+        /// </summary>
         private void OnPointerDown()
         {
             if (!isEnable)
@@ -61,6 +71,9 @@ namespace JMRSDK.Toolkit.UI
             themeAnimator.SetTrigger("Pressed");
         }
 
+        /// <summary>
+        /// Handle Focus Exit
+        /// </summary>
         private void OnFocusExit()
         {
             if (!isEnable)
@@ -72,6 +85,9 @@ namespace JMRSDK.Toolkit.UI
             Debug.Log("OnFocusExit = " + name);
         }
 
+        /// <summary>
+        /// Handle Focus Enter
+        /// </summary>
         private void OnFocusEnter()
         {
             if (!isEnable)

@@ -21,7 +21,7 @@ MonoBehaviour:
   priority: 4
   headertext: Battery Critically Low
   headerIconPath: Art/BatteryVeryLow
-  bodyText: Please charge your Smartphone for\n uninterrupted service.
+  bodyText: Please charge your Smartphone \n for uninterrupted service.
   bodyInfoGraphicPath: 
   interactions: []
   isAutoClose: 0

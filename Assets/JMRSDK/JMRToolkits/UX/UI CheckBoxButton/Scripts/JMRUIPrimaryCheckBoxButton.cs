@@ -16,6 +16,10 @@ namespace JMRSDK.Toolkit
         [SerializeField]
         public UnityEvent OnSelect, OnDeselect;
         private UnityEventBool valueChanged;
+
+        /// <summary>
+        /// Checkbox Event Listner
+        /// </summary>
         public UnityEventBool OnValueChanged { get { if (valueChanged == null) valueChanged = new UnityEventBool(); return valueChanged; } set { valueChanged = value; } }
 
         public override void Awake()
@@ -33,6 +37,9 @@ namespace JMRSDK.Toolkit
             }
         }
 
+        /// <summary>
+        /// Handle Object Select
+        /// </summary>
         protected override void OnObjectSelect()
         {
             IsOn = isSelected;
@@ -41,6 +48,9 @@ namespace JMRSDK.Toolkit
             SetDynamicValueChange(true);
         }
 
+        /// <summary>
+        /// Handle Object Deselect
+        /// </summary>
         protected override void OnObjectDeselect()
         {
             IsOn = isSelected;
@@ -49,6 +59,10 @@ namespace JMRSDK.Toolkit
             SetDynamicValueChange(false);
         }
 
+        /// <summary>
+        /// Set Dynamic Value to true/false
+        /// </summary>
+        /// <param name="value"></param>
         private void SetDynamicValueChange(bool value)
         {
             if (onValueChanged != null)
@@ -59,6 +73,8 @@ namespace JMRSDK.Toolkit
                 }
             }
             OnValueChanged?.Invoke(value);
+            if (JMRAnalyticsManager.Instance != null)
+                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_CHECKBOX);
         }
     }
 }

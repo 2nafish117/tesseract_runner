@@ -120,6 +120,10 @@ namespace JMRSDK.Toolkit.UI
             j_animator.SetTrigger("Default");
         }
 
+        /// <summary>
+        /// Handle Pointer Down Event
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
             RestTriggers();
@@ -128,6 +132,10 @@ namespace JMRSDK.Toolkit.UI
             j_animator.SetTrigger("Pressed");
         }
 
+        /// <summary>
+        /// Handle Pointer Up Event
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerUp(PointerEventData eventData)
         {
             string res = isAction ? content : keyText.text;

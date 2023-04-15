@@ -12118,52 +12118,77 @@ PrefabInstance:
     - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 870155461999781067, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: -44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129547555220386979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360967182590772163, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4843130754019484937, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 264
       objectReference: {fileID: 0}
     - target: {fileID: 4843130754019484937, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642030644885179872, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_text
+      value: Lets you go back to any screen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642030644885179872, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642030644885179872, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 7052284900939797979, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -44
       objectReference: {fileID: 0}
     - target: {fileID: 8114064146397448160, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
@@ -12223,29 +12248,40 @@ PrefabInstance:
     - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 132
       objectReference: {fileID: 0}
     - target: {fileID: 8116878840661784970, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -44
       objectReference: {fileID: 0}
     - target: {fileID: 8193373899588454870, guid: 100fdfc8ed1679d49a97ef7925f1d425,
         type: 3}
       propertyPath: m_Name
       value: JMRSystemDockManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8249509009244076962, guid: 100fdfc8ed1679d49a97ef7925f1d425,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 379184687522983692, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
+    - {fileID: 1491671794075920840, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
+    - {fileID: 2252000198961800658, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
+    - {fileID: 7581697449926042579, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
+    - {fileID: 4852795942542753700, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
+    - {fileID: 6687387520082965212, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 100fdfc8ed1679d49a97ef7925f1d425, type: 3}
 --- !u!4 &4853497601141781316 stripped
 Transform:
@@ -12264,9 +12300,9 @@ PrefabInstance:
       propertyPath: popUpConfigContainer_Json
       value: '{"popupConfigData":[{"popUpId":"DES001","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"Service
         Bind Failed","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug
-        your JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DES002","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"Service
-        Killed","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug your
-        JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DES004","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"No
+        your JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DES002","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"An
+        Error Occurred","headerIconPath":"Art/WarningRed","bodyText":"JioImmerse
+        has stopped working. Please restart the app.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"DES004","dismiss_popUpIds":["INA002","INA003","INA004"],"prefabType":1,"behaviourType":3,"priority":0,"headertext":"No
         Companion App","headerIconPath":"Art/JioGlassNotify","bodyText":"Please replug
         your JioGlass and try again.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"INA000","dismiss_popUpIds":["INA001","INA002","INA003","INA004","INA006","INA007","INA008","INA009","INA010","INA011"],"prefabType":1,"behaviourType":0,"priority":3,"headertext":"Controller
         Connected","headerIconPath":"Art/ControllerGreen","bodyText":"Switching to
@@ -12292,11 +12328,11 @@ PrefabInstance:
         Not Connect JioGlass","headerIconPath":"Art/JioGlassNotify","bodyText":"Please
         try replugging your JioGlass.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":0.0,"z":0.0},"targetPosition":{"x":0.0,"y":0.0,"z":0.0},"transitionDuration":0.0,"waitDuration":0.0}},{"popUpId":"PLA000","dismiss_popUpIds":["PLA001","PLA002"],"prefabType":1,"behaviourType":0,"priority":4,"headertext":"Battery
         Low (10%)","headerIconPath":"Art/Battery","bodyText":"Please charge your
-        Smartphone for\\n uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":0,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA001","dismiss_popUpIds":["PLA000","PLA002"],"prefabType":1,"behaviourType":2,"priority":4,"headertext":"Battery
+        Smartphone \\n for uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":0,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA001","dismiss_popUpIds":["PLA000","PLA002"],"prefabType":1,"behaviourType":0,"priority":4,"headertext":"Battery
         Too Low (5%)","headerIconPath":"Art/BatteryLow","bodyText":"Please charge
-        your Smartphone for\\n uninterrupted service.","bodyInfoGraphicPath":"","interactions":[{"type":0,"interactionString":"Okay","interactionKey":"","dismiss":true,"showButtonAppearAnimation":false}],"isAutoClose":false,"followBehaviours":2,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA002","dismiss_popUpIds":["PLA000","PLA001"],"prefabType":1,"behaviourType":3,"priority":4,"headertext":"Battery
+        your Smartphone \\n for uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":0,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA002","dismiss_popUpIds":["PLA000","PLA001"],"prefabType":1,"behaviourType":3,"priority":4,"headertext":"Battery
         Critically Low","headerIconPath":"Art/BatteryVeryLow","bodyText":"Please
-        charge your Smartphone for\\n uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA003","dismiss_popUpIds":["PLA004","PLA005"],"prefabType":1,"behaviourType":0,"priority":4,"headertext":"Compute
+        charge your Smartphone \\n for uninterrupted service.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA003","dismiss_popUpIds":["PLA004","PLA005"],"prefabType":1,"behaviourType":0,"priority":4,"headertext":"Compute
         Unit Battery \\n Low","headerIconPath":"Art/Battery","bodyText":"Please charge
         your Compute Unit to continue using\\n JioGlass uninterrupted.","bodyInfoGraphicPath":"","interactions":[],"isAutoClose":false,"followBehaviours":1,"popUpVisibleDuration":0.0,"transitionData":{"useCommon":true,"startPosition":{"x":0.0,"y":510.0,"z":2.5},"targetPosition":{"x":0.0,"y":0.0,"z":2.5},"transitionDuration":1.0,"waitDuration":3.0}},{"popUpId":"PLA004","dismiss_popUpIds":["PLA003","PLA005"],"prefabType":1,"behaviourType":2,"priority":4,"headertext":"Compute
         Unit Battery \\n Too Low","headerIconPath":"Art/BatteryLow","bodyText":"Please
@@ -12343,6 +12379,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 34860211911891008, guid: c47b512b1a3339b4780c45791c6faa6e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 34860211911891008, guid: c47b512b1a3339b4780c45791c6faa6e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 34860211911891008, guid: c47b512b1a3339b4780c45791c6faa6e,
         type: 3}

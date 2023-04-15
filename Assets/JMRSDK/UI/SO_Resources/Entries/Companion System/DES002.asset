@@ -20,14 +20,11 @@ MonoBehaviour:
   prefabType: 1
   behaviourType: 3
   priority: 0
-  headertext: Service Killed
-  headerIconPath: Art/JioGlassNotify
-  bodyText: Please replug your JioGlass and try again.
-  interactions:
-  - type: 0
-    interactionString: Okay
-    dismiss: 1
-    showButtonAppearAnimation: 0
+  headertext: An Error Occurred
+  headerIconPath: Art/WarningRed
+  bodyText: JioImmerse has stopped working. Please restart the app.
+  bodyInfoGraphicPath: 
+  interactions: []
   isAutoClose: 0
   followBehaviours: 1
   popUpVisibleDuration: 0

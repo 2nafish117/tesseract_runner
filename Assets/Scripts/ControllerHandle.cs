@@ -39,6 +39,10 @@ public class ControllerHandle : MonoBehaviour
     {
         if (pauseStatus == false)
         {
+			if(_jmrSystemDockManager == null)
+			{
+				_jmrSystemDockManager = GetComponent<JMRSystemDockManager>();
+			}
             StopCoroutine(HandleSystemDock());
             StartCoroutine(HandleSystemDock());
         }

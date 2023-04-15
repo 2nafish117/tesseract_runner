@@ -88,6 +88,10 @@ namespace JMRSDK.Toolkit
             }
         }
 
+        /// <summary>
+        /// Set Animator End Events
+        /// </summary>
+        /// <returns></returns>
         IEnumerator SetEndAnimatorEvents()
         {
             if (jmrThemeAnimator.runtimeAnimatorController == null)
@@ -135,6 +139,9 @@ namespace JMRSDK.Toolkit
             }
         }
 
+        /// <summary>
+        /// Load Animator State
+        /// </summary>
         private void LoadState()
         {
             if (isClicked)
@@ -173,6 +180,9 @@ namespace JMRSDK.Toolkit
             }
         }
 
+        /// <summary>
+        /// Handle On Animation End Event
+        /// </summary>
         private void OnAnimationEnd()
         {
             if (!interactable)
@@ -182,6 +192,9 @@ namespace JMRSDK.Toolkit
             LoadState();
         }
 
+        /// <summary>
+        /// Handle On Focus Enter Event
+        /// </summary>
         public virtual void OnFocusEnter()
         {
             isFocused = true;
@@ -192,6 +205,9 @@ namespace JMRSDK.Toolkit
             LoadState();
         }
 
+        /// <summary>
+        /// Handle Focus Exit Event
+        /// </summary>
         public virtual void OnFocusExit()
         {
             isFocused = false;
@@ -202,6 +218,10 @@ namespace JMRSDK.Toolkit
             LoadState();
         }
 
+        /// <summary>
+        /// Handle Select Clicked Event
+        /// </summary>
+        /// <param name="eventData"></param>
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
             if (!interactable)
@@ -222,6 +242,10 @@ namespace JMRSDK.Toolkit
             LoadState();
         }
 
+        /// <summary>
+        /// Change Selectable State
+        /// </summary>
+        /// <param name="state"></param>
         private void ChangeSelectableState(JMRConstantThemeSystem.SelectableState state)
         {
             if (jmrCurrentSelectableState == JMRConstantThemeSystem.SelectableState.Hover && !isFocused)
@@ -262,21 +286,33 @@ namespace JMRSDK.Toolkit
             jmrCurrentSelectableState = state;
         }
 
+        /// <summary>
+        /// Change Animator State to Appear
+        /// </summary>
         protected virtual void ChangeToAppear()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.APPEAR);
         }
 
+        /// <summary>
+        /// Change Animator State to Disappear
+        /// </summary>
         protected virtual void ChangeToDisappear()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.DISAPPEAR);
         }
 
+        /// <summary>
+        /// Change Animator State to Default
+        /// </summary>
         protected virtual void ChangeToDefault()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.DEFAULT);
         }
 
+        /// <summary>
+        /// Change Animator State to Hover
+        /// </summary>
         protected virtual void ChangeToHover()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.HOVER);
@@ -284,26 +320,41 @@ namespace JMRSDK.Toolkit
             //JMRInteractionManager.Instance.TriggerHaptics(JMRInteractionManager.Instance.HAPTICS_HOVER, JMRInteractionManager.Instance.HAPTICS_INTENSITY_MEDIUM, 0);
         }
 
+        /// <summary>
+        /// Change Animator State to Disabled
+        /// </summary>
         protected virtual void ChangeToDisabled()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.DISABLED);
         }
 
+        /// <summary>
+        /// Change Animator State to Pressed
+        /// </summary>
         protected virtual void ChangeToPressed()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.PRESSED);
         }
 
+        /// <summary>
+        /// Change Animator State to Selection
+        /// </summary>
         protected virtual void ChangeToOnSelection()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.ONSELECTION);
         }
 
+        /// <summary>
+        /// Change Animator State to Selection Hover
+        /// </summary>
         protected virtual void ChangeToOnSelectionHover()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.ONHOVERSELECTION);
         }
 
+        /// <summary>
+        /// Change Animator State to Selection Hover Click
+        /// </summary>
         protected virtual void ChangeToOnselectionHoverClick()
         {
             jmrThemeAnimator.SetTrigger(JMRConstantThemeSystem.JMRButtonStates.ONHOVERSELECTIONCLICK);

@@ -74,6 +74,10 @@ namespace JMRSDK.Toolkit
             prevRadioButton = currentRadioButton;
         }
 
+        /// <summary>
+        /// Handles Group of radio buttons
+        /// </summary>
+        /// <param name="isInteractable"></param>
         public override void OnInteractableChange(bool isInteractable)
         {
             base.OnInteractableChange(isInteractable);

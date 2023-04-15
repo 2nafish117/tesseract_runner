@@ -13,9 +13,13 @@ public class JMRDiveBackButtonHandler : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 100, 100), backButtonTexture))
+        if (Application.platform == RuntimePlatform.Android)
         {
-            JMRSystemActions.Instance.OnExitCardboardMode();
+
+            if (GUI.Button(new Rect(10, 10, 100, 100), backButtonTexture))
+            {
+                JMRSystemActions.Instance.OnExitCardboardMode();
+            }
         }
     }
 }

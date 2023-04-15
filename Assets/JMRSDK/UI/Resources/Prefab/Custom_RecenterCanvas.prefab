@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6263026171363680004}
   - component: {fileID: 8628329174274396235}
   - component: {fileID: 5543453284969917518}
-  - component: {fileID: 640319004553474233}
+  - component: {fileID: 5289131832221362133}
   m_Layer: 5
   m_Name: PrimaryButton
   m_TagString: Untagged
@@ -149,7 +149,7 @@ MonoBehaviour:
   primaryText: {fileID: 0}
   primaryTextTMP: {fileID: 6457422245094830632}
   toggleText: {fileID: 0}
---- !u!114 &640319004553474233
+--- !u!114 &5289131832221362133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 168360965253309926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 384036464, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &340967692408283880
@@ -864,7 +864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3671481611993685654
 RectTransform:
   m_ObjectHideFlags: 0

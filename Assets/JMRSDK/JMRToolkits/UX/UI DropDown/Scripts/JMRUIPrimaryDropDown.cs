@@ -47,6 +47,10 @@ namespace JMRSDK.Toolkit.UI
             prevInteractState = dropdown.interactable;
         }
 
+        /// <summary>
+        /// Handle Interactable Change
+        /// </summary>
+        /// <param name="isInteractable"></param>
         public override void OnInteractableChange(bool isInteractable)
         {
             base.OnInteractableChange(isInteractable);
@@ -55,8 +59,13 @@ namespace JMRSDK.Toolkit.UI
 
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
+            if (JMRAnalyticsManager.Instance != null)
+                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_DROPDOWNINPUT);
         }
 
+        /// <summary>
+        /// Handle Focus Enter
+        /// </summary>
         public override void OnFocusEnter()
         {
             isLocalFocused = true;
@@ -69,6 +78,9 @@ namespace JMRSDK.Toolkit.UI
                 base.ChangeToHover();
         }
 
+        /// <summary>
+        /// Handle Focus Exit
+        /// </summary>
         public override void OnFocusExit()
         {
             isLocalFocused = false;

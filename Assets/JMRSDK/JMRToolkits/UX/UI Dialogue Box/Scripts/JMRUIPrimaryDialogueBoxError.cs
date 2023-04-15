@@ -18,6 +18,10 @@ namespace JMRSDK.Toolkit
         [SerializeField]
         private UnityEvent onClose;
         private UnityEvent OnCloseEvent;
+
+        /// <summary>
+        /// On Close Event Listner
+        /// </summary>
         public UnityEvent OnClose { get { if (OnCloseEvent == null) { OnCloseEvent = new UnityEvent(); }return OnCloseEvent;   }  private set { OnCloseEvent = value; } }
 
         public override void Awake()
@@ -27,12 +31,21 @@ namespace JMRSDK.Toolkit
             closeButton.OnDeselect.AddListener(() => { onClose?.Invoke();OnClose?.Invoke(); gameObject.SetActive(false); });
         }
 
+        /// <summary>
+        /// Handle Interactable Change
+        /// </summary>
+        /// <param name="isInteractable"></param>
         public override void OnInteractableChange(bool isInteractable)
         {
             base.OnInteractableChange(isInteractable);
             closeButton.interactable = isInteractable;
         }
 
+        /// <summary>
+        /// Show Error Dialogue Box
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
         public void Show(string title,string message)
         {
             titleText.text = title;

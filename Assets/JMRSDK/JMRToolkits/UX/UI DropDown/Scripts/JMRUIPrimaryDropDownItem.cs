@@ -38,6 +38,9 @@ namespace JMRSDK.Toolkit.UI
         {
         }
 
+        /// <summary>
+        /// Handle Focus Enter Event
+        /// </summary>
         public override void OnFocusEnter()
         {
             jmrThemeAnimator.Rebind();
@@ -51,6 +54,9 @@ namespace JMRSDK.Toolkit.UI
             }
         }
 
+        /// <summary>
+        /// Handle Focus Exit Event
+        /// </summary>
         public override void OnFocusExit()
         {
             if (toggle.isOn)

@@ -204,8 +204,7 @@ namespace ScreenCasting
             NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_OFF);
             CancelInvoke();
 
-            JMRCameraManager.OnCameraPreviewStart -= StartScreenShare;
-            JMRCameraManager.OnCameraError -= CameraError;
+            
         }
 
         /// <summary>
@@ -227,7 +226,6 @@ namespace ScreenCasting
 
             if (error.Equals("ERROR_CAMERA_PERMISSION") || error.Equals("ERROR_CAMERA_RECORD_AUDIO_PERMISSION"))
             {
-                //NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_PERMISSION_MISSING);
                 currentScreenBackgroundType.type = JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND;
                 Setup();
 
@@ -235,14 +233,13 @@ namespace ScreenCasting
 
             if (error.Equals("ERROR_CAMERA_PREVIEW") || error.Equals("ERROR_CAMERA_NOT_SUPPORTED"))
             {
-                NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_ERROR);
+                NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR);
             }
 
             if (error.Equals("ERROR_CAMERA_OPEN"))
             {
                 currentScreenBackgroundType.type = JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND;
                 Setup();
-                //NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_NOT_OPEN_OR_NOT_CONNECTED);
             }
 
             if (error.Equals("ERROR_CAMERA_BUSY"))
@@ -293,13 +290,7 @@ namespace ScreenCasting
 
                     if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA )
                     {
-                        if (castCamera != null)
-                        {
-                            castCamera.fieldOfView = CameraFOV;
-                        }
-                        if (isDebug)
-                            Debug.Log("ScreenCastV2: StartCameraPreview");
-                        StartCameraPreview();
+                        Debug.LogError("Error: BG_TYPE_CAMERA is deprecated");
                     }
                     else
                     {
@@ -452,7 +443,7 @@ namespace ScreenCasting
             {
                 if (isDebug)
                     Debug.LogError("Camera Preview Image/RawImage is null");
-                NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_ERROR);
+                NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR);
             }
         }
 
@@ -539,7 +530,7 @@ namespace ScreenCasting
 
             if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
             {
-                cameraFeed.enabled = true;
+                Debug.LogError("Error: BG_TYPE_CAMERA is deprecated");
             }
             if (isDebug)
                 Debug.Log("ScreenCastV2: StartShareScreen Completed");
@@ -551,9 +542,7 @@ namespace ScreenCasting
                 Debug.Log("ScreenCastV2: OnScreenCastingRequested");
             Background = background;
             currentScreenBackgroundType = JMRScreenCastManager.Instance.GetCurrentBackground();
-
-            JMRCameraManager.OnCameraPreviewStart += StartScreenShare;
-            JMRCameraManager.OnCameraError += CameraError;
+            
             
 
             if (rc != null)
@@ -678,19 +667,24 @@ namespace ScreenCasting
                             StartScreenShare();
                         }
                         else
-                        {
-                            if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
+                        {                            
+                            if(currentScreenBackgroundType != null)
                             {
-                                CheckCastingStateIfInternet();
-                            }
-                            else if (!isScreenSharing && JMRScreenCastManager.Instance.GetCastingState() == JMRScreenCastManager.Instance.STATE_CASTING_ERROR)
-                            {
-                                if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND)
+                                if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
                                 {
-                                    cameraFeed.enabled = false;
-                                }
+                                    Debug.LogError("Error: BG_TYPE_CAMERA is deprecated");
 
-                                StartScreenShare();
+                                    //CheckCastingStateIfInternet();
+                                }
+                                else if (!isScreenSharing && JMRScreenCastManager.Instance.GetCastingState() == JMRScreenCastManager.Instance.STATE_CASTING_ERROR)
+                                {
+                                    if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_NO_BACKGROUND)
+                                    {
+                                        cameraFeed.enabled = false;
+                                    }
+
+                                    StartScreenShare();
+                                }
                             }
                         }
                     }
@@ -701,9 +695,10 @@ namespace ScreenCasting
 
                         LeaveChanel(Background);
                         StopCameraPreview(Background);
-                    //NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_NO_INTERNET);
 
-                }
+                        //NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_NO_INTERNET);
+
+                    }
 
                 }));
             }

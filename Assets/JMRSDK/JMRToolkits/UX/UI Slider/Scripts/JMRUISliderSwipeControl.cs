@@ -36,12 +36,22 @@ namespace JMRSDK.Toolkit.UI
 
         }
 
+        /// <summary>
+        /// Set swipe step value
+        /// </summary>
+        /// <param name="value"></param>
         public void SetStep(int value)
         {
             j_StepOffset = value;
         }
 
         float cntrl = 0.75f;
+
+        /// <summary>
+        /// Handle On Swipe Up Event
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="value"></param>
         public void OnSwipeUp(SwipeEventData eventData, float value)
         {
             if (!j_Slider.interactable || (supportStep && j_Timer < j_SwipeDelay))
@@ -60,6 +70,11 @@ namespace JMRSDK.Toolkit.UI
             }
         }
 
+        /// <summary>
+        /// Handle Swipe Down Event
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="value"></param>
         public void OnSwipeDown(SwipeEventData eventData, float value)
         {
             if (!j_Slider.interactable || (supportStep && j_Timer < j_SwipeDelay))
@@ -78,6 +93,11 @@ namespace JMRSDK.Toolkit.UI
             }
         }
 
+        /// <summary>
+        /// Handle On Swipe Left Event
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="value"></param>
         public void OnSwipeLeft(SwipeEventData eventData, float value)
         {
             if (!j_Slider.interactable || (supportStep && j_Timer < j_SwipeDelay))
@@ -97,6 +117,11 @@ namespace JMRSDK.Toolkit.UI
 
         }
 
+        /// <summary>
+        /// Handle On Swipe Right Event
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="value"></param>
         public void OnSwipeRight(SwipeEventData eventData, float value)
         {
             if (!j_Slider.interactable || (supportStep && j_Timer < j_SwipeDelay))
@@ -144,6 +169,10 @@ namespace JMRSDK.Toolkit.UI
             }
         }
 
+        /// <summary>
+        /// Handle Interactable Change to true or false
+        /// </summary>
+        /// <param name="isInteractable"></param>
         public override void OnInteractableChange(bool isInteractable)
         {
             base.OnInteractableChange(isInteractable);
@@ -177,7 +206,8 @@ namespace JMRSDK.Toolkit.UI
 
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
-
+            if (JMRAnalyticsManager.Instance != null)
+                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_SLIDER);
         }
 
         private void CalculateNewStep()

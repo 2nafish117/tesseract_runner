@@ -130,7 +130,10 @@ namespace JMRSDK.Toolkit.UI
         }
 
 
-
+        /// <summary>
+        /// Handle Multi line input from user
+        /// </summary>
+        /// <param name="input"></param>
         private void HandleMultiLine(IKeyboardInput input)
         {
             if (input.isMultiLineSupported())
@@ -149,6 +152,9 @@ namespace JMRSDK.Toolkit.UI
         #endregion
         #region PRIVATE METHODS
 
+        /// <summary>
+        /// Handle Clear button Event
+        /// </summary>
         private void OnClearButtonClicked()
         {
             suggestedText.text = cachedTex = prevText = j_input.Text = "";
@@ -164,6 +170,10 @@ namespace JMRSDK.Toolkit.UI
         /// 
         private string cachedTex = "";
 
+        /// <summary>
+        /// Handle On Select Clicked Event 
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnSelectClicked(SelectClickEventData eventData)
         {
             if (!gameObject.activeInHierarchy)
@@ -180,6 +190,7 @@ namespace JMRSDK.Toolkit.UI
                 }
             }
         }
+
         private void EnableKeyBoard(IKeyboardInput j_InputField)
         {
             if (j_InputField.isVirtualKeyBoard())
@@ -194,8 +205,14 @@ namespace JMRSDK.Toolkit.UI
                 VirtualKeyboardNotification.SetActive(false);
             }
         }
+
+        /// <summary>
+        /// Use to display keyboard
+        /// </summary>
+        /// <param name="j_InputField"></param>
         public void ShowKeyBoard(IKeyboardInput j_InputField)
         {
+            JMRPointerManager.Instance.ExecuteClickEventGazeAndClick = true;
             if (j_InputField == j_input)
             {
 
@@ -310,10 +327,15 @@ namespace JMRSDK.Toolkit.UI
             HandleMessage(Constants.CASE_TAP);
         }
 
+        /// <summary>
+        /// Reset Keyboard position of the keyboard
+        /// </summary>
+        /// <param name="inputField"></param>
         public void ResetPosition(MonoBehaviour inputField)
         {
             Debug.LogError(inputField.GetComponent<RectTransform>().rect.width);
         }
+
         /// <summary>
         /// Hide Keyboard.
         /// </summary>sdf
@@ -321,6 +343,7 @@ namespace JMRSDK.Toolkit.UI
             bool hideWithoutDeselect = false,
             bool notCheckIsKeyboarActive = false)
         {
+            JMRPointerManager.Instance.ExecuteClickEventGazeAndClick = false;
             if (!notCheckIsKeyboarActive && !gameObject.activeSelf)
                 return;
 
@@ -389,6 +412,7 @@ namespace JMRSDK.Toolkit.UI
         {
             this.j_handler += Key.HandleMessage;
         }
+
         private string ellipsistext = string.Empty;
         /// <summary>
         /// Handle Virtual Keyboard Actions.
@@ -513,11 +537,18 @@ namespace JMRSDK.Toolkit.UI
                 OnKeyPressed?.Invoke(command);
             }
             j_prevButton = command;
+            if (JMRAnalyticsManager.Instance != null)
+                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_KEYBOARD);
         }
 
 
         private IKeyboardInput voiceCommandField = null;
         private bool isListeningForVoiceCommand = false;
+
+        /// <summary>
+        /// Handle On Speech Error Event
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnSpeechError(string obj)
         {
             JMRVoiceManager.Instance.HideVoiceToolkit();
@@ -536,6 +567,11 @@ namespace JMRSDK.Toolkit.UI
             voiceCommandField = null;
         }
 
+        /// <summary>
+        /// Handle On Speech Cancelled Event
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
         private void OnSpeechCancelled(string arg1, long arg2)
         {
             JMRVoiceManager.Instance.HideVoiceToolkit();
@@ -548,6 +584,11 @@ namespace JMRSDK.Toolkit.UI
             voiceCommandField = null;
         }
 
+        /// <summary>
+        /// Handle On Speech Result Event
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="timestamp"></param>
         private void OnSpeechResult(string command, long timestamp)
         {
             JMRVoiceManager.Instance.HideVoiceToolkit();
@@ -561,6 +602,12 @@ namespace JMRSDK.Toolkit.UI
             voiceCommandField = null;
         }
 
+        /// <summary>
+        /// Handle On Controller disconnected event
+        /// </summary>
+        /// <param name="deviceType"></param>
+        /// <param name="id"></param>
+        /// <param name="s"></param>
         private void OnControllerDisconnected(JMRInteractionManager.InteractionDeviceType deviceType, int id, string s)
         {
             if (deviceType == JMRInteractionManager.InteractionDeviceType.VIRTUAL_CONTROLLER)

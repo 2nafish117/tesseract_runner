@@ -78,11 +78,17 @@ namespace JMRSDK.Toolkit.UI
             contentParent.GetComponent<LookAtConstraint>().constraintActive = true;
         }
 
+        /// <summary>
+        /// Shows tooltip
+        /// </summary>
         public void ShowTooltip()
         {
             gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Hides tooltip
+        /// </summary>
         public void HideTooltip()
         {
             gameObject.SetActive(false);
@@ -92,6 +98,12 @@ namespace JMRSDK.Toolkit.UI
 
         #region Private Methods
 
+        /// <summary>
+        /// Returns the point closest to the target point
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="contentRect"></param>
+        /// <returns></returns>
         private Vector3 GetPointClosestToTarget(Transform target,  RectTransform contentRect)
         {
             Vector3 currentPoint;
@@ -116,6 +128,11 @@ namespace JMRSDK.Toolkit.UI
             return nearPoint;
         }
 
+        /// <summary>
+        /// Returns offset position from target position
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
         private Vector2 GetOffsetPosition(Transform target)
         {
             float width = 0;

@@ -503,6 +503,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &5381859298884727151
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +676,7 @@ GameObject:
   - component: {fileID: 5381859299253022214}
   - component: {fileID: 576527705662606984}
   - component: {fileID: 3416861733940830476}
+  - component: {fileID: -7012678138380816712}
   m_Layer: 5
   m_Name: JMRUIPrimarySearchField
   m_TagString: Untagged
@@ -825,13 +828,24 @@ MonoBehaviour:
   textComponent: {fileID: 5381859298884727149}
   placeholder: {fileID: 5381859300151147524}
   supportMultiLine: 0
-  VirtualKeyboardNote: {fileID: 0}
   submit:
     m_PersistentCalls:
       m_Calls: []
   valueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-7012678138380816712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381859299253022208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5381859300000281702
 GameObject:
   m_ObjectHideFlags: 0

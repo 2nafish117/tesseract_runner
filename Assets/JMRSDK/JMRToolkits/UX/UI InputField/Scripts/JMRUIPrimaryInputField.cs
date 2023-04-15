@@ -44,6 +44,9 @@ namespace JMRSDK.Toolkit.UI
             Custom
         }
 
+        /// <summary>
+        /// Input field input type
+        /// </summary>
         public enum InputType
         {
             Standard,
@@ -51,6 +54,9 @@ namespace JMRSDK.Toolkit.UI
             Password,
         }
 
+        /// <summary>
+        /// Character validation type
+        /// </summary>
         public enum CharacterValidation
         {
             None,
@@ -64,6 +70,9 @@ namespace JMRSDK.Toolkit.UI
             CustomValidator
         }
 
+        /// <summary>
+        /// Input field line type
+        /// </summary>
         public enum LineType
         {
             SingleLine,
@@ -71,6 +80,9 @@ namespace JMRSDK.Toolkit.UI
             MultiLineNewline
         }
 
+        /// <summary>
+        /// Input field edit state
+        /// </summary>
         protected enum EditState
         {
             Continue,
@@ -234,6 +246,9 @@ namespace JMRSDK.Toolkit.UI
             }
         }
 
+        /// <summary>
+        /// Should the Soft keyboard Hidden
+        /// </summary>
         public bool HideSoftKeyboard
         {
             get
@@ -1109,6 +1124,8 @@ namespace JMRSDK.Toolkit.UI
         #endregion
         public override void OnSelectClicked(SelectClickEventData eventData)
         {
+            if (JMRAnalyticsManager.Instance != null)
+                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_INPUT);
 
             if (!isSelected)
             {
@@ -3475,7 +3492,7 @@ namespace JMRSDK.Toolkit.UI
 
 
         /// <summary>
-        /// 
+        /// Adjust rect transform of keyboard relative to the viewport
         /// </summary>
         /// <param name="startPosition"></param>
         /// <param name="height"></param>
@@ -3756,6 +3773,11 @@ namespace JMRSDK.Toolkit.UI
                 pos = textComponent.textInfo.characterCount - 1;
         }
 
+        /// <summary>
+        /// Get key press state
+        /// </summary>
+        /// <param name="evt"></param>
+        /// <returns></returns>
         protected EditState KeyPressed(Event evt)
         {
             var currentEventModifiers = evt.modifiers;
@@ -4329,6 +4351,11 @@ namespace JMRSDK.Toolkit.UI
             j_BlinkCoroutine = null;
         }
 
+        /// <summary>
+        /// Handles when mouse drags out of the rect transform
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <returns></returns>
         IEnumerator MouseDragOutsideRect(PointerEventData eventData)
         {
             while (j_UpdateDrag && j_DragPositionOutOfBounds)
@@ -4366,6 +4393,10 @@ namespace JMRSDK.Toolkit.UI
             j_DragCoroutine = null;
         }
 
+        /// <summary>
+        /// Returns if multiline input is supported
+        /// </summary>
+        /// <returns></returns>
         public bool isMultiLineSupported()
         {
             return supportMultiLine;

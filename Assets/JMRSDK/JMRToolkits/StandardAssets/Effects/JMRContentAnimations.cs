@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using JMRSDK.InputModule;
+
 
 namespace JMRSDK.Toolkit
 {
@@ -15,6 +17,8 @@ namespace JMRSDK.Toolkit
         private GameObject contentContainer, hTint;
         [SerializeField]
         private float hScroll_ScaleValue, scaleTime, content_ZPosition, content_MoveTime, content_ScaleValue;
+        [SerializeField]
+        private GameObject[] scrollButtons;
         #endregion
 
         private Sequence j_S;
@@ -50,11 +54,7 @@ namespace JMRSDK.Toolkit
                 j_ParentAnimation = j_CurrentScroll.GetComponent<JMRContentAnimations>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+       
         ScrollRect GetScrollParent(Transform t)
         {
             if (t.parent != null)
@@ -77,6 +77,10 @@ namespace JMRSDK.Toolkit
                 //j_S.Append(hScroll.transform.DOScale(hScroll_ScaleValue, scaleTime));
                 j_S.Append(hScroll.transform.DOLocalMoveZ(-100, scaleTime));
             }
+
+            if (scrollButtons.Length != 0)
+                foreach (GameObject scrollButton in scrollButtons)
+                    scrollButton.SetActive(true);
         }
         public void OnContentRelease()
         {
@@ -90,6 +94,9 @@ namespace JMRSDK.Toolkit
                 //j_S.Append(hScroll.transform.DOScale(1, scaleTime));
                 j_S.Append(hScroll.transform.DOLocalMoveZ(0, scaleTime));
             }
+            if (scrollButtons.Length != 0)
+                foreach (GameObject scrollButton in scrollButtons)
+                    scrollButton.SetActive(false);
         }
         public void OnContentClick()
         {
