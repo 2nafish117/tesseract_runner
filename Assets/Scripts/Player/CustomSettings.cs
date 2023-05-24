@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CustomSettings : MonoBehaviour
@@ -18,13 +16,13 @@ public class CustomSettings : MonoBehaviour
 	{
 		if (left != null)
 		{
-			left.fieldOfView = fov;
+			//left.fieldOfView = fov;
 			left.farClipPlane = 1000.0f;
 		}
 
 		if (right != null)
 		{
-			right.fieldOfView = fov;
+			//right.fieldOfView = fov;
 			right.farClipPlane = 1000.0f;
 		}
 	}
@@ -33,7 +31,7 @@ public class CustomSettings : MonoBehaviour
 	{
 		if (head != null)
 		{
-			head.fieldOfView = fov;
+			//head.fieldOfView = fov;
 			head.farClipPlane = 1000.0f;
 		}
 	}

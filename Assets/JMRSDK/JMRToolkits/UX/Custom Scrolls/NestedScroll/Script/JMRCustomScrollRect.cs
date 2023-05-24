@@ -148,15 +148,20 @@ namespace JMRSDK.Toolkit
         }
 
         IEnumerator WaitToProcessScroll(bool isXAxis, ScrollRect _scrollRect)
-        {            
+        {
             yield return new WaitForEndOfFrame();
-            if (velocity.x <= 0 && velocity.y <= 0)
+
+            if (velocity.x <= 0)
             {
                 SetScrollButtonState(_scrollRect, isXAxis);
                 yield break;
             }
             else
+            {
                 StartCoroutine(WaitToProcessScroll(isXAxis, _scrollRect));
+            }
+
+
         }
 
         public void OnSwipeLeft(SwipeEventData eventData, float value)

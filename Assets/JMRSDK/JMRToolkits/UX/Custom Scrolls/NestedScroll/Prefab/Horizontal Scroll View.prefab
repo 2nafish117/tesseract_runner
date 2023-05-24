@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 601251749656354676}
   - component: {fileID: 5044971353294868176}
   - component: {fileID: 737246483489983956}
+  - component: {fileID: 3794544473631059252}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -222,6 +223,20 @@ MonoBehaviour:
   m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3794544473631059252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687088667906666684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdb1a1248b11c244b95f6f4b957e03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customScrollRect: {fileID: 5329942357685077988}
+  scrollBtnType: 3
 --- !u!1 &3396676577102504758
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,8 +591,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  upScrollButton: {fileID: 6904057268539041453}
-  downScrollButton: {fileID: 5044971353294868176}
+  upScrollButton: {fileID: 5044971353294868176}
+  downScrollButton: {fileID: 6904057268539041453}
 --- !u!114 &3999095124623760079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +708,7 @@ GameObject:
   - component: {fileID: 141847926284547222}
   - component: {fileID: 6904057268539041453}
   - component: {fileID: 1463878012170638112}
+  - component: {fileID: 5431569243504749143}
   m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
@@ -835,6 +851,20 @@ MonoBehaviour:
   m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5431569243504749143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223633815834698094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdb1a1248b11c244b95f6f4b957e03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customScrollRect: {fileID: 5329942357685077988}
+  scrollBtnType: 2
 --- !u!1 &6067510742779373476
 GameObject:
   m_ObjectHideFlags: 0

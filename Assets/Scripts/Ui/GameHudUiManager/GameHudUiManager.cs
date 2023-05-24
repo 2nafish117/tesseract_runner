@@ -16,6 +16,9 @@ public class GameHudUiManager : MonoBehaviour
 
 	public void SetScore(float value)
 	{
-		score.text = value.ToString();
+		if (value == 0)
+			score.text = "";
+		else
+			score.text = value.ToString();
 	}
 }

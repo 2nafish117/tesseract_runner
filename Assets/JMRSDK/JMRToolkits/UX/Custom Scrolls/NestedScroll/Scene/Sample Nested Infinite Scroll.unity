@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 285255792}
   - component: {fileID: 285255791}
   - component: {fileID: 285255794}
+  - component: {fileID: 285255795}
   m_Layer: 5
   m_Name: Up
   m_TagString: Untagged
@@ -395,6 +396,20 @@ MonoBehaviour:
   m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &285255795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285255789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdb1a1248b11c244b95f6f4b957e03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customScrollRect: {fileID: 9026899621623184950}
+  scrollBtnType: 0
 --- !u!20 &290867500 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2113064042153063675, guid: 633a1e3825e2f6e4c81ef8bf448d11cd,
@@ -644,6 +659,7 @@ GameObject:
   - component: {fileID: 2103292721}
   - component: {fileID: 2103292720}
   - component: {fileID: 2103292723}
+  - component: {fileID: 2103292724}
   m_Layer: 5
   m_Name: Down
   m_TagString: Untagged
@@ -775,6 +791,20 @@ MonoBehaviour:
   m_Script: {fileID: -402948742, guid: 39673d13616f37540b9d9521295b12b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2103292724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103292718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdb1a1248b11c244b95f6f4b957e03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customScrollRect: {fileID: 9026899621623184950}
+  scrollBtnType: 1
 --- !u!224 &449176222245584640
 RectTransform:
   m_ObjectHideFlags: 0

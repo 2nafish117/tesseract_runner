@@ -1254,6 +1254,7 @@ MonoBehaviour:
   content_ZPosition: -10
   content_MoveTime: 0.5
   content_ScaleValue: 1.2
+  scrollButtons: []
 --- !u!114 &7295753308267428243
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using JMRSDK.InputModule;
+using JMRSDK;
 
 
 public class JMRDiveBackButtonHandler : MonoBehaviour
@@ -13,7 +14,7 @@ public class JMRDiveBackButtonHandler : MonoBehaviour
 
     void OnGUI()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android && JMRRigManager.Instance.getDeviceID()==(int)JMRRigManager.DeviceType.JioCardboard)
         {
 
             if (GUI.Button(new Rect(10, 10, 100, 100), backButtonTexture))

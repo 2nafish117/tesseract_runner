@@ -162,7 +162,7 @@ public class ObstacleGenerationManager : MonoBehaviour
 	private GameObject PickObstacle()
 	{
 		
-		Debug.Log("sidscore scoreTarget:" + scoreTarget + "CurrentScore:" + PlayerScore.CurrentScore + "obstacleRangeLimit:" + obstacleRangeLimit + "obstaclePrefabs.Length:" + obstaclePrefabs.Length);
+		//Debug.Log("sidscore scoreTarget:" + scoreTarget + "CurrentScore:" + PlayerScore.CurrentScore + "obstacleRangeLimit:" + obstacleRangeLimit + "obstaclePrefabs.Length:" + obstaclePrefabs.Length);
 		if (PlayerScore.CurrentScore > scoreTarget && obstacleRangeLimit < obstaclePrefabs.Length)
         {
 			

@@ -106,6 +106,7 @@ public class UiManager : MonoBehaviour, IBackHandler, IHomeHandler
 		HideAllUi();
 		Time.timeScale = 1f;
 		GamePaused = false;
+		ShowGameHudUi();
 		Debug.LogWarning("sid unpaused");
 	}
 

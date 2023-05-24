@@ -11,11 +11,12 @@ public class MusicManager : MonoBehaviour
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
-	}
-
-	private void Awake()
-	{
-
+		if (!audioSource.isPlaying)
+		{
+			Debug.Log("new clip loaded");
+			audioSource.clip = getRandomClip();
+			audioSource.Play();
+		}
 	}
 
 	private AudioClip getRandomClip()
@@ -33,12 +34,7 @@ public class MusicManager : MonoBehaviour
 	void Update()
 	{
 
-		if (!audioSource.isPlaying)
-		{
-			Debug.Log("new clip loaded");
-			audioSource.clip = getRandomClip();
-			audioSource.Play();
-		}
+		
 
 	}
 }

@@ -21,13 +21,7 @@ namespace ScreenCasting
 
         private Texture defaultEnvironmentModel = null;
 
-        public Camera ScreenCastCameraPreview
-        {
-            get
-            {
-                return GameObject.Find("Screen Share Camera").GetComponent<Camera>();
-            }
-        }
+        public Camera screenCastCameraPreview;
 
         public Camera castCamera;
         public Image cameraFeed = null;
@@ -49,6 +43,9 @@ namespace ScreenCasting
         private string Token = "temp";
         [SerializeField]
         private uint UUID = 999;
+        [SerializeField]
+        private Camera povCam;
+
 
         int fileCounter = 10;
         int skipframes = 0;
@@ -77,13 +74,14 @@ namespace ScreenCasting
         {
             Background = JMRScreenCastManager.Instance.GetCurrentBackground();
 
+            screenCastCameraPreview.enabled = false;
+            povCam.enabled = false;
 
-
-            if (ScreenCastCameraPreview == null)
+            if (screenCastCameraPreview == null)
             {
                 if(isDebug)
                     Debug.LogError("POV CAMERA IS NULL");
-                if (ScreenCastCameraPreview == null)
+                if (screenCastCameraPreview == null)
                 {
                     if (isDebug)
                         Debug.LogError("POV CAMERA IS STILL NULL");
@@ -123,6 +121,7 @@ namespace ScreenCasting
                 if(isDebug)
                     HandleInternetConnection();
             }
+
         }
 
         private void LateUpdate()
@@ -203,8 +202,12 @@ namespace ScreenCasting
         {
             NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_OFF);
             CancelInvoke();
-
-            
+            //Camera Preview to only start for JioGlass Ent
+            if(JMRRigManager.Instance.getDeviceID()==(int)JMRRigManager.DeviceType.JioGlass)
+            {
+                JMRCameraManager.OnCameraPreviewStart -= StartScreenShare;
+                JMRCameraManager.OnCameraError -= CameraError;
+            }
         }
 
         /// <summary>
@@ -233,7 +236,15 @@ namespace ScreenCasting
 
             if (error.Equals("ERROR_CAMERA_PREVIEW") || error.Equals("ERROR_CAMERA_NOT_SUPPORTED"))
             {
-                NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR);
+                if (JMRRigManager.Instance.getDeviceID() == (int)JMRRigManager.DeviceType.JioGlass)
+                {
+                    NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_ERROR);
+                }
+                else
+                {
+                    NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR);
+
+                }
             }
 
             if (error.Equals("ERROR_CAMERA_OPEN"))
@@ -290,7 +301,22 @@ namespace ScreenCasting
 
                     if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA )
                     {
-                        Debug.LogError("Error: BG_TYPE_CAMERA is deprecated");
+
+                        if (JMRRigManager.Instance.getDeviceID() == (int)JMRRigManager.DeviceType.JioGlass)
+                        {
+                            if (castCamera != null)
+                            {
+                                castCamera.fieldOfView = CameraFOV;
+                            }
+                            if (isDebug)
+                                Debug.Log("ScreenCastV2: StartCameraPreview");
+                            StartCameraPreview();
+                        }
+                        else
+                        {
+                            Debug.LogError("JMRSDK->ScreenCasting>: BG_TYPE_CAMERA is not supported for the selected device type");
+
+                        }
                     }
                     else
                     {
@@ -347,6 +373,9 @@ namespace ScreenCasting
         /// </summary>
         void LeaveChanel(JMRScreenCastBackground backgroundID)
         {
+            screenCastCameraPreview.enabled = false;
+            povCam.enabled = false;
+
             if (isDebug)
                 Debug.Log("On Disable leave the channel");
 
@@ -405,12 +434,12 @@ namespace ScreenCasting
         public void Capture()
         {
             RenderTexture activeRenderTexture = RenderTexture.active;
-            RenderTexture.active = ScreenCastCameraPreview.targetTexture;
+            RenderTexture.active = screenCastCameraPreview.targetTexture;
 
-            ScreenCastCameraPreview.Render();
+            screenCastCameraPreview.Render();
 
-            Texture2D image = new Texture2D(ScreenCastCameraPreview.targetTexture.width, ScreenCastCameraPreview.targetTexture.height);
-            image.ReadPixels(new Rect(0, 0, ScreenCastCameraPreview.targetTexture.width, ScreenCastCameraPreview.targetTexture.height), 0, 0);
+            Texture2D image = new Texture2D(screenCastCameraPreview.targetTexture.width, screenCastCameraPreview.targetTexture.height);
+            image.ReadPixels(new Rect(0, 0, screenCastCameraPreview.targetTexture.width, screenCastCameraPreview.targetTexture.height), 0, 0);
             image.Apply();
             RenderTexture.active = activeRenderTexture;
 
@@ -443,7 +472,15 @@ namespace ScreenCasting
             {
                 if (isDebug)
                     Debug.LogError("Camera Preview Image/RawImage is null");
-                NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR);
+                if (JMRRigManager.Instance.getDeviceID() == (int)JMRRigManager.DeviceType.JioGlass)
+                {
+                    NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR, JMRScreenCastManager.Instance.CASTING_ERROR_CAMERA_ERROR);
+                }
+                else
+                {
+                    NotifyStateAndErrorCode(JMRScreenCastManager.Instance.STATE_CASTING_ERROR);
+
+                }
             }
         }
 
@@ -454,6 +491,7 @@ namespace ScreenCasting
         {
             if (JMRCameraManager.Instance != null)
             {
+
                 JMRCameraManager.Instance.StopPreview();
             }
             else
@@ -468,7 +506,10 @@ namespace ScreenCasting
         /// </summary>
         void StartScreenShare()
         {
-            RenderTexture.active = ScreenCastCameraPreview.targetTexture;
+            screenCastCameraPreview.enabled = true;
+            povCam.enabled = true;
+
+            RenderTexture.active = screenCastCameraPreview.targetTexture;
 
             if (isDebug)
                 Debug.Log("ScreenShare Activated");
@@ -485,7 +526,7 @@ namespace ScreenCasting
             mRtcEngine.SetVideoEncoderConfiguration(SetVideoConfiguration());
 
             // Creates a texture of the rectangle you create.
-            mTexture = new Texture2D((int)ScreenCastCameraPreview.targetTexture.width, (int)ScreenCastCameraPreview.targetTexture.height, TextureFormat.RGBA32, false);
+            mTexture = new Texture2D((int)screenCastCameraPreview.targetTexture.width, (int)screenCastCameraPreview.targetTexture.height, TextureFormat.RGBA32, false);
 
             // Sets the output log level of the SDK.
             mRtcEngine.SetLogFilter(LOG_FILTER.DEBUG | LOG_FILTER.INFO | LOG_FILTER.WARNING | LOG_FILTER.ERROR | LOG_FILTER.CRITICAL);
@@ -517,7 +558,7 @@ namespace ScreenCasting
             }
 
             // Creates a texture of the rectangle you create.
-            mTexture = new Texture2D((int)ScreenCastCameraPreview.targetTexture.width, (int)ScreenCastCameraPreview.targetTexture.height, TextureFormat.RGBA32, false);
+            mTexture = new Texture2D((int)screenCastCameraPreview.targetTexture.width, (int)screenCastCameraPreview.targetTexture.height, TextureFormat.RGBA32, false);
 
             externalVideoFrame = new ExternalVideoFrame();
 
@@ -530,7 +571,14 @@ namespace ScreenCasting
 
             if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
             {
-                Debug.LogError("Error: BG_TYPE_CAMERA is deprecated");
+                if (JMRRigManager.Instance.getDeviceID() == (int)JMRRigManager.DeviceType.JioGlass)
+                {
+                    cameraFeed.enabled = true;
+                }
+                else
+                {
+                    Debug.LogError("JMRSDK->ScreenCasting>: BG_TYPE_CAMERA is not supported for the selected device type");
+                }
             }
             if (isDebug)
                 Debug.Log("ScreenCastV2: StartShareScreen Completed");
@@ -542,8 +590,18 @@ namespace ScreenCasting
                 Debug.Log("ScreenCastV2: OnScreenCastingRequested");
             Background = background;
             currentScreenBackgroundType = JMRScreenCastManager.Instance.GetCurrentBackground();
-            
-            
+            //Deprecated
+
+            if (JMRRigManager.Instance.getDeviceID() == (int)JMRRigManager.DeviceType.JioGlass)
+            {
+                JMRCameraManager.OnCameraPreviewStart += StartScreenShare;
+                JMRCameraManager.OnCameraError += CameraError;
+            }
+            else
+            {
+                Debug.LogError("JMRSDK->ScreenCasting>: BG_TYPE_CAMERA is not supported for the selected device type");
+            }
+
 
             if (rc != null)
             {
@@ -602,11 +660,11 @@ namespace ScreenCasting
             await Task.Delay(0, cancellationToken);
 
             //cam.targetTexture = rt;
-            RenderTexture.active = ScreenCastCameraPreview.targetTexture;
-            ScreenCastCameraPreview.Render();
+            RenderTexture.active = screenCastCameraPreview.targetTexture;
+            screenCastCameraPreview.Render();
 
             //Read pixel data
-            mTexture.ReadPixels(new Rect(0, 0, ScreenCastCameraPreview.targetTexture.width, ScreenCastCameraPreview.targetTexture.height), 0, 0);
+            mTexture.ReadPixels(new Rect(0, 0, screenCastCameraPreview.targetTexture.width, screenCastCameraPreview.targetTexture.height), 0, 0);
 
             RenderTexture.active = null;
 
@@ -635,9 +693,9 @@ namespace ScreenCasting
                 // Applies raw data.
                 externalVideoFrame.buffer = bytes;
                 // Sets the width (pixel) of the video frame.
-                externalVideoFrame.stride = (int)ScreenCastCameraPreview.targetTexture.width;
+                externalVideoFrame.stride = (int)screenCastCameraPreview.targetTexture.width;
                 // Sets the height (pixel) of the video frame.
-                externalVideoFrame.height = (int)ScreenCastCameraPreview.targetTexture.height;
+                externalVideoFrame.height = (int)screenCastCameraPreview.targetTexture.height;
                 // Removes pixels from the sides of the frame
                 externalVideoFrame.cropLeft = 10;
                 externalVideoFrame.cropTop = 10;
@@ -672,9 +730,15 @@ namespace ScreenCasting
                             {
                                 if (currentScreenBackgroundType.type == JMRScreenCastManager.Instance.BG_TYPE_CAMERA)
                                 {
-                                    Debug.LogError("Error: BG_TYPE_CAMERA is deprecated");
+                                    if (JMRRigManager.Instance.getDeviceID() == (int)JMRRigManager.DeviceType.JioGlass)
+                                    {
+                                        CheckCastingStateIfInternet();
+                                    }
+                                    else
+                                    {
+                                        Debug.LogError("JMRSDK->ScreenCasting>: BG_TYPE_CAMERA is not supported for the selected device type");
+                                    }
 
-                                    //CheckCastingStateIfInternet();
                                 }
                                 else if (!isScreenSharing && JMRScreenCastManager.Instance.GetCastingState() == JMRScreenCastManager.Instance.STATE_CASTING_ERROR)
                                 {
@@ -722,7 +786,7 @@ namespace ScreenCasting
         /// <returns></returns>
         IEnumerator CheckInternetConnection(Action<bool> action)
         {
-            UnityWebRequest request = new UnityWebRequest("https://app-store-api-sit.tesseract.in/ping");
+            UnityWebRequest request = new UnityWebRequest("https://jiocinema.blob.core.windows.net/cinema/ping.txt");
 
             yield return request.SendWebRequest();
 

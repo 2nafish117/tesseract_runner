@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using JMRSDK;
 using JMRSDK.InputModule;
@@ -8,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 	public AudioClip crashClip;
 	static public float StrafeAcceleration = 600.0f;
-	static public float ForwardAcceleration = 2*1800.0f;
+	static public float ForwardAcceleration = 1.4f*1800.0f;
 	static public float RotationSpeed = 6.0f;
 
 	public TrailRenderer[] trails;
@@ -100,6 +98,7 @@ public class PlayerController : MonoBehaviour
 		return move;
 	}
 
+	public AnimationCurve _AnimationCurve;
 	Vector3 GetHeadOrientationMovement()
 	{
 		// head orientation based movement
@@ -108,8 +107,10 @@ public class PlayerController : MonoBehaviour
 
 		float threasholdDeg = 3.0f;
 		float up = head.rotation.eulerAngles.x;
-		float right = head.rotation.eulerAngles.y;
+		float right = head.rotation.eulerAngles.z;
 
+		float curveValue = _AnimationCurve.Evaluate(right);
+		
 		// remap to -180 to 180 range
 		up = (up > 180.0f) ? up - 360.0f : up;
 		right = (right > 180.0f) ? right - 360.0f : right;
@@ -125,7 +126,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		move.y = -up;
-		move.x = right;
+		move.x = -right;
 
 		Debug.LogWarning("head orientation movement:" + move);
 
@@ -278,9 +279,16 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private float delaytime=4f;
 	private void FixedUpdate()
 	{
 		rigidBody.AddForce(movement * StrafeAcceleration + Vector3.forward * ForwardAcceleration);
+		if (rigidBody.velocity.z < 1)
+		{
+			delaytime -= Time.deltaTime;
+			if(delaytime<=0)
+				GameOver();
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -289,6 +297,18 @@ public class PlayerController : MonoBehaviour
 		GameObject other = collision.gameObject;
 		if (other.CompareTag("Obstacle"))
 		{
+			GameOver();
+		}
+		
+	}
+
+	private bool isGameOver = false;
+	public GameObject destructionObject;
+	void GameOver()
+	{
+		if (!isGameOver)
+		{
+			isGameOver = true;
 			GetComponent<AudioSource>().PlayOneShot(crashClip);
 
 			Rigidbody rigidbody = GetComponent<Rigidbody>();
@@ -298,7 +318,9 @@ public class PlayerController : MonoBehaviour
 			EnableInput = false;
 			OnPlayerDie?.Invoke();
 			explosion?.Play();
-			GameObject.Destroy(gameObject, 01f);
+			EventToolKit.instance.PlayAnySoundWithTag("Explosion");
+			destructionObject.SetActive(true);
+			GameObject.Destroy(gameObject, 3f);
 		}
 		
 	}

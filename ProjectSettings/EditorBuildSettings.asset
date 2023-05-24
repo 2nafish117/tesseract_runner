@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpaceRunner.unity
     guid: 291dbf3ed0c255c4984e91ec35ca6677
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: e307f14be4be37a469b7a06b566eb43a
   m_configObjects: {}

@@ -56,6 +56,9 @@ namespace JMRSDK.Toolkit.UI
 
         #region Static Actions
         public static Action<string> OnKeyPressed = null;
+        public static Action OnKeyboardOpen = null;
+        public static Action OnKeyboardClose = null;
+        public static Action OnKeyboardTextClear = null;
         #endregion
 
         #region MONO METHODS
@@ -159,6 +162,7 @@ namespace JMRSDK.Toolkit.UI
         {
             suggestedText.text = cachedTex = prevText = j_input.Text = "";
             isCleared = true;
+            OnKeyboardTextClear?.Invoke();
         }
         #endregion
         #region PUBLIC METHODS
@@ -213,6 +217,7 @@ namespace JMRSDK.Toolkit.UI
         public void ShowKeyBoard(IKeyboardInput j_InputField)
         {
             JMRPointerManager.Instance.ExecuteClickEventGazeAndClick = true;
+            OnKeyboardOpen?.Invoke();
             if (j_InputField == j_input)
             {
 
@@ -344,6 +349,7 @@ namespace JMRSDK.Toolkit.UI
             bool notCheckIsKeyboarActive = false)
         {
             JMRPointerManager.Instance.ExecuteClickEventGazeAndClick = false;
+            OnKeyboardClose?.Invoke();
             if (!notCheckIsKeyboarActive && !gameObject.activeSelf)
                 return;
 
@@ -537,8 +543,8 @@ namespace JMRSDK.Toolkit.UI
                 OnKeyPressed?.Invoke(command);
             }
             j_prevButton = command;
-            if (JMRAnalyticsManager.Instance != null)
-                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_KEYBOARD);
+//            if (JMRAnalyticsManager.Instance != null)
+//                JMRAnalyticsManager.Instance.WriteEvent(JMRAnalyticsManager.Instance.EVENT_XGLSY_GAZE_KEYBOARD);
         }
 
 

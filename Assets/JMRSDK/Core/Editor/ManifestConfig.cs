@@ -19,6 +19,24 @@ namespace JMRSDK.EditorScript
 
         public static PlatformType currentPlatform = PlatformType.SM;
 
+        private const string interactionTypeControllerPrefKey = "InteractionTypeController";
+        private static bool interactionTypeController {
+            get => EditorPrefs.GetBool(interactionTypeControllerPrefKey);
+            set => EditorPrefs.SetBool(interactionTypeControllerPrefKey, value);
+        }
+        private const string interactionTypeGazeAndClickPrefKey = "InteractionTypeGazeAndClick";
+        private static bool interactionTypeGazeAndClick
+        {
+            get => EditorPrefs.GetBool(interactionTypeGazeAndClickPrefKey);
+            set => EditorPrefs.SetBool(interactionTypeGazeAndClickPrefKey, value);
+        }
+               private const string interactionTypeGazeAndDwellPrefKey = "InteractionTypeGazeAndDwell";
+        private static bool interactionTypeGazeAndDwell {
+            get => EditorPrefs.GetBool(interactionTypeGazeAndDwellPrefKey);
+            set => EditorPrefs.SetBool(interactionTypeGazeAndDwellPrefKey, value);
+        }
+
+
         /// <summary>
         /// Completely Reset Android manifest [All permissions & attributes disabled]
         /// </summary>
@@ -179,6 +197,7 @@ namespace JMRSDK.EditorScript
         private const string xmlMetaDataNotePath = "//manifest/application/meta-data";
         private const string attributeKey_PRO_LITE = "com.jiotesseract.platform";
         private const string attributeKey_CATEGORY = "com.jiotesseract.mr.category";
+        private const string attributeKey_INTERACTIONTYPE = "com.jiotesseract.mr.interactiontype";
         private const string AndroidValue = "android:value";
         private const string AndroidName = "android:name";
         private const string PRO = "PRO";
@@ -186,6 +205,7 @@ namespace JMRSDK.EditorScript
         private const string HOLOBOARD = "HOLOBOARD";
         private const string CARDBOARD = "CARDBOARD";
         private static string[] CATEGORIES = {"0", "1", "2", "3", "4", "5", "6", "7"};
+        private static string[] INTERACTIONTYPE = {"Controller", "GazeAndClick", "GazeAndDwell"};
         private const string ALL = PRO + "|" + LITE  + "|" + HOLOBOARD + "|" + CARDBOARD;
 
         public static void DisableRecentHistoryAttributes()
@@ -200,28 +220,28 @@ namespace JMRSDK.EditorScript
             UpdateXMLNonRecurringAttributes(xmlActivityNodePath, ExcludeFromRecents, "true");
         }
 
-        [MenuItem("JioMixedReality/Manifest/Configure for PRO")]
+        [MenuItem("JioMixedReality/Manifest/Configure Device/Configure for PRO")]
         public static void ConfigForPRO()
         {
             UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, PRO, AndroidName, attributeKey_PRO_LITE);
             CU_Setup();
         }
 
-        [MenuItem("JioMixedReality/Manifest/Configure for LITE")]
+        [MenuItem("JioMixedReality/Manifest/Configure Device/Configure for LITE")]
         public static void ConfigForLITE()
         {
             UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, LITE, AndroidName, attributeKey_PRO_LITE);
             SM_Setup();
         }
 
-        [MenuItem("JioMixedReality/Manifest/Configure for Holoboard")]
+        [MenuItem("JioMixedReality/Manifest/Configure Device/Configure for Holoboard")]
         public static void ConfigForHoloboard()
         {
             UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, HOLOBOARD, AndroidName, attributeKey_PRO_LITE);
             SM_Setup();
         }
 
-        [MenuItem("JioMixedReality/Manifest/Configure for Cardboard")]
+        [MenuItem("JioMixedReality/Manifest/Configure Device/Configure for Cardboard")]
         public static void ConfigForCardboard()
         {
             UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CARDBOARD, AndroidName, attributeKey_PRO_LITE);
@@ -274,6 +294,85 @@ namespace JMRSDK.EditorScript
         public static void ConfigCategory_Miscellaneous()
         {
             UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, CATEGORIES[7], AndroidName, attributeKey_CATEGORY);
+        }
+        
+
+        
+        [MenuItem("JioMixedReality/Manifest/Configure Interaction/Controller", priority =1)]
+        public static void SetControllerCheckBoxBool()
+        {
+            interactionTypeController = !interactionTypeController;
+            ConfigureInteractionAttributeStringValue();
+        }
+                
+        [MenuItem("JioMixedReality/Manifest/Configure Interaction/Controller", true)]
+        public static bool ConfigInteraction_ControllerlInteraction()
+        {
+            Menu.SetChecked("JioMixedReality/Manifest/Configure Interaction/Controller", interactionTypeController);
+            return true;
+        }
+        
+        [MenuItem("JioMixedReality/Manifest/Configure Interaction/Gaze and Click",priority =2)]
+        public static void SetGazeAndClickCheckBoxBool()
+        {
+            interactionTypeGazeAndClick = !interactionTypeGazeAndClick;
+            ConfigureInteractionAttributeStringValue();
+        } 
+                
+        [MenuItem("JioMixedReality/Manifest/Configure Interaction/Gaze and Click",true)]
+        public static bool ConfigInteraction_GazeAndClickInteraction()
+        {
+            Menu.SetChecked("JioMixedReality/Manifest/Configure Interaction/Gaze and Click", interactionTypeGazeAndClick);
+            return true;
+        }
+
+        [MenuItem("JioMixedReality/Manifest/Configure Interaction/Gaze and Dwell",priority =3)]
+        public static void SetGazeAndDwellCheckBoxBool()
+        {
+            interactionTypeGazeAndDwell = !interactionTypeGazeAndDwell;
+            ConfigureInteractionAttributeStringValue();
+        }
+        
+        [MenuItem("JioMixedReality/Manifest/Configure Interaction/Gaze and Dwell",true)]
+        public static bool ConfigInteraction_GazeAndDwellInteraction()
+        {
+            Menu.SetChecked("JioMixedReality/Manifest/Configure Interaction/Gaze and Dwell", interactionTypeGazeAndDwell);
+            return true;
+        }
+
+        private static void ConfigureInteractionAttributeStringValue()
+        {
+
+            string interactionTypeStringVal = "";
+            if (interactionTypeController)
+            {
+                interactionTypeStringVal = INTERACTIONTYPE[0];
+            }
+
+            if (interactionTypeGazeAndClick)
+            {
+                if(string.IsNullOrEmpty(interactionTypeStringVal))
+                {
+                    interactionTypeStringVal = INTERACTIONTYPE[1];
+                }
+                else
+                {
+                    interactionTypeStringVal= string.Concat(interactionTypeStringVal,"|",INTERACTIONTYPE[1]);
+                }
+            }
+            if (interactionTypeGazeAndDwell)
+            {
+                if(string.IsNullOrEmpty(interactionTypeStringVal))
+                {
+                    interactionTypeStringVal = INTERACTIONTYPE[2];
+                }
+                else
+                {
+                    interactionTypeStringVal= string.Concat(interactionTypeStringVal,"|",INTERACTIONTYPE[2]);
+                }
+                Debug.LogWarning("JMRSDK=> Interaction Attribute Key Set =>> " + interactionTypeStringVal);
+                UpdateXMLRecurringAttributes(xmlMetaDataNotePath, AndroidValue, interactionTypeStringVal, AndroidName, attributeKey_INTERACTIONTYPE);
+            }
         }
 
         /// <summary>

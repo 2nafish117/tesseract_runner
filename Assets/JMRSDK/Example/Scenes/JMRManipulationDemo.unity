@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2686,6 +2686,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ab1c574c3837c4796df06a40998558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DragAndDropObjects:
+  - {fileID: 1865499824}
+  - {fileID: 881042261529817987}
+  - {fileID: 1924204641}
+  - {fileID: 525438881}
+  - {fileID: 2101051756}
+  - {fileID: 1697792895}
+  - {fileID: 412496513}
+  RotateAroundObjects:
+  - {fileID: 798995275}
+  - {fileID: 741897992}
+  - {fileID: 264404345}
 --- !u!224 &4034709103990716526
 RectTransform:
   m_ObjectHideFlags: 0
